@@ -27,7 +27,6 @@ async function Page() {
 }
 `;
   const data = await client.fetch(query);
-  console.log(data)
   return (
     <div>
       <section className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden mb-[90px]">

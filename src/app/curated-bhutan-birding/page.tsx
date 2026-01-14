@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SideSelling from './components/slider';
 import { client } from '@/lib/senity';
-import { urlFor } from '@/lib/senity.image';
 
 export default async function Page() {
   const query = `*[_type == "curatedBhutanBirding"][0]{
@@ -80,8 +79,8 @@ export default async function Page() {
   }
 }`;
 const data = await client.fetch(query)
-console.log(data.section1.sliderImages)
-  return (
+
+return (
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden">
         <Image

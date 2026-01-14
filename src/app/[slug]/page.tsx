@@ -56,7 +56,6 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
 }`;
 
   const data = await client.fetch(query, { slug: slug });
-  console.log(data);
   return (
     <main>
       {/* Hero Section */}

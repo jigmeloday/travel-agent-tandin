@@ -34,7 +34,6 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
 }`;
 
  const data = await client.fetch(query, { slug });
- console.log(data.section_slug)
 
  return (
     <main>
