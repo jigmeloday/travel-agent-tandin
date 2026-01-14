@@ -1,3 +1,4 @@
+import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,9 +15,9 @@ function ImageBox({
 }) {
   return (
     <Link href={`/${id}`} className="relative border aspect-square overflow-hidden group cursor-pointer">
-      {/* Image */}
+
       <Image
-        src={image}
+        src={urlFor(image).url()}
         alt="image"
         height={500}
         width={500}

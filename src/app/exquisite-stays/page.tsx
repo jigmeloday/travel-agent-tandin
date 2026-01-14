@@ -201,7 +201,7 @@ function Page() {
       {/* Grid Section */}
       <section className="px-4 lg:px-[32px] mb-[90px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          {IMAGE_BOX.filter((item) => !item.best_sell && !item.other).map(
+          {IMAGE_BOX?.filter((item) => !item.best_sell && !item.other).map(
             ({ image, title, subtitle }, idx) => (
               <Link
                 key={idx}

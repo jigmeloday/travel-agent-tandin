@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,8 +8,9 @@ import { IMAGE_BOX } from '@/lib/dummy-data/dummy-data';
 import Link from 'next/link';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { urlFor } from '@/lib/senity.image';
 
-function BestSelling() {
+function BestSelling({ data }: any) {
   
   return (
     <div className="relative w-full overflow-hidden px-4">      
@@ -30,7 +32,7 @@ function BestSelling() {
         
         className="w-full"
       >
-        {IMAGE_BOX.filter((item) => item.best_sell).map((tour) => (
+        {data?.map((tour: any) => (
           <SwiperSlide
            key={tour.id}>
             <div className="flex-shrink-0 w-full h-[300px] lg:min-h-[400px] border-l-8 border-primary overflow-hidden group">
@@ -39,7 +41,7 @@ function BestSelling() {
                 {/* Image section */}
                 <div className="w-full flex-1 h-64 lg:h-full relative">
                   <Image
-                    src={tour.image}
+                    src={urlFor(tour?.image).url()}
                     alt={tour.title || 'img'}
                     fill
                     className="object-cover"
