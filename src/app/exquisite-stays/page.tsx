@@ -1,38 +1,86 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BestSelling from '@/components/landing-component/best-selling';
 import LetsTalk from '@/components/shared/let-talk';
-import { IMAGE_BOX } from '@/lib/dummy-data/dummy-data';
+import { client } from '@/lib/senity';
+import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function Page() {
+async function Page() {
+  const query = `
+  *[_type == "exquisite"][0]{
+    title,
+    subtitle,
+    herotitle,
+    herosubtitle,
+    "link": link.current,
+    
+    "image1": image1.asset->url,
+    "image2": image2.asset->url,
+    "image3": image3.asset->url,
+    "image4": image4.asset->url,
+
+    section1_title,
+    section1_description,
+    section1_tagline,
+
+    "bgScrollImage": bgScrollImage.asset->url,
+
+    section2Title,
+    section2Description,
+    section2Tagline,
+    "section2Image1": section2Image1.asset->url,
+    "section2Image2": section2Image2.asset->url,
+
+    letsTalkTitle,
+    letsTalkDescription,
+    letsTalkButton,
+
+    section3Title,
+    section3Description,
+    section3Tagline,
+
+    section_slug[]->{
+      title,
+      subtitle,
+      "image": image.asset->url,
+      "link": link.current
+    },
+
+    section_3[]->{
+      title,
+      description,
+      category,
+      "image": image.asset->url,
+     slug
+    }
+  }
+`;
+  const data = await client.fetch(query);
   return (
     <main>
       {/* Hero Section */}
       <section className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden mb-[90px]">
         <Image
-          src="/images/hotel/h5.jpg"
-          alt="Bespoke Journey"
+          src={urlFor(data?.image1).url()}
+          alt="Culture"
           width={1920}
           height={1080}
           className="w-full h-full object-cover"
-          priority
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-white/12 via-white/14 to-black/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-white/12 via-white/14 to-white/50"></div>
 
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex flex-col md:flex-row w-full h-full px-4 md:px-[50px] pb-4 md:pb-[40px]">
             <div className="flex flex-1 items-center justify-center md:justify-start mb-4 md:mb-0">
               <h1 className="text-4xl md:text-[80px] font-bold drop-shadow-lg text-center md:text-left">
-                Six Sense
+                {data.herotitle}
               </h1>
             </div>
             <div className="flex flex-col flex-1 items-center md:items-end justify-center md:justify-end text-center md:text-right">
-              <p className="text-xl md:text-[40px] font-sans">
-                Exclusive Journeys, Inspired by
-              </p>
-              <p className="text-xl md:text-[40px] font-sans">
-                Bhutan’s Spirit
+              <p className="text-xl md:text-[40px] font-sans w-[80%]">
+                {data.herosubtitle}
               </p>
             </div>
           </div>
@@ -44,7 +92,7 @@ function Page() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
           <div className="aspect-square bg-gray-200">
             <Image
-              src="/images/hotel/h2.jpg"
+              src={urlFor(data?.image1).url()}
               alt="Exquisite Stays"
               width={800}
               height={800}
@@ -53,7 +101,7 @@ function Page() {
           </div>
           <div className="aspect-square bg-gray-200">
             <Image
-              src="/images/hotel/h1.jpg"
+              src={urlFor(data?.image2).url()}
               alt="Exquisite Stays"
               width={800}
               height={800}
@@ -67,7 +115,7 @@ function Page() {
           <div className="flex flex-1 gap-2 flex-col md:flex-row">
             <div className="w-full h-64 md:h-[440px] bg-gray-200">
               <Image
-                src="/images/hotel/h4.jpg"
+                src={urlFor(data?.image3).url()}
                 alt="Exquisite Stays"
                 width={800}
                 height={800}
@@ -76,7 +124,7 @@ function Page() {
             </div>
             <div className="w-full h-64 md:h-[440px] bg-gray-200">
               <Image
-                src="/images/hotel/h3.jpg"
+                src={urlFor(data?.image4).url()}
                 alt="Exquisite Stays"
                 width={800}
                 height={800}
@@ -89,17 +137,15 @@ function Page() {
             <div className="flex flex-col justify-between h-full p-2 md:p-4">
               <div className="w-full md:w-[80%]">
                 <h1 className="text-xl md:text-2xl lg:text-3xl">
-                  Enjoy Your Dream Vacation
+                  {data.section1_title}
                 </h1>
                 <p className="text-[14px] md:text-[16px] mt-2">
-                  Nestled in Bhutan’s serene landscapes, Six Senses invites you
-                  to relax, explore, and savor every moment of luxurious,
-                  mindful living.
+                 {data.section1_description}
                 </p>
               </div>
               <div>
                 <p className="text-sm md:text-[18px] font-bold mt-2">
-                  ESCAPE ORDINARY, ENTER EXTRAORDINARY
+                  {data.section1_tagline}
                 </p>
               </div>
             </div>
@@ -114,7 +160,7 @@ function Page() {
           <div className="flex-1 flex items-center justify-center gap-2 mb-6 md:mb-0">
             <div className="transform translate-y-0 md:translate-y-6 w-48 md:w-60 h-64 md:h-[430px]">
               <Image
-                src="/images/hotel/h4.jpg"
+                src={urlFor(data?.section2Image1).url()}
                 alt="Exquisite Stays"
                 fill
                 className="object-cover"
@@ -122,7 +168,7 @@ function Page() {
             </div>
             <div className="transform translate-y-0 md:-translate-y-6 w-48 md:w-60 h-64 md:h-[430px]">
               <Image
-                src="/images/hotel/h3.jpg"
+                src={urlFor(data?.section2Image1).url()}
                 alt="Exquisite Stays"
                 fill
                 className="object-cover"
@@ -131,32 +177,27 @@ function Page() {
           </div>
           <div className="flex flex-col justify-between gap-4 md:gap-6 p-4 md:p-[64px] flex-1 text-center md:text-left">
             <div>
-              <h1 className="mb-0 leading-[1.2] text-2xl md:text-4xl">
-                Luxury Experience You’ll
+              <h1 className="mb-0 leading-[1.2] text-2xl md:text-4xl w-[80%]">
+                {data.section2Title}
               </h1>
-              <h1 className="leading-[1.2] border-b-4 border-white pb-2 w-fit mx-auto md:mx-0 text-2xl md:text-4xl">
-                Remember
-              </h1>
+              <div className='border-b-4 border-white w-[24%]' />
+              
             </div>
             <p className="text-white text-[14px] md:text-[16px]">
-              Combine helicopter journeys with sustainable luxury lodges,
-              curated local cuisine, and intimate cultural experiences for a
-              fully bespoke Bhutanese exploration.
+              {data.section2Description}
             </p>
             <p className="text-white font-bold font-sans text-base md:text-[18px]">
-              YOU ARE BHUTANA AND OTES EHTE
+              {data.section2Tagline}
             </p>
           </div>
         </div>
       </section>
 
       {/* Let’s Talk Section */}
- <section className="flex flex-col items-center justify-center my-12 px-4 md:px-[16px] mb-[90px]">
+      <section className="flex flex-col items-center justify-center my-12 px-4 md:px-[16px] mb-[90px]">
         <div className="h-[84vh] w-full">
           <LetsTalk
-            description=" We love challenges big and small—what’s yours? Let’s craft
-                unique journeys that turn bold ideas into unforgettable travel
-                experiences."
+            description={data.letsTalkDescription}
             images="/images/dummy/img8.jpg"
           />
         </div>
@@ -166,7 +207,7 @@ function Page() {
         <div
           className="absolute inset-0 bg-center bg-cover bg-no-repeat"
           style={{
-            backgroundImage: "url('/images/dummy/img1.jpg')",
+            backgroundImage: `url(${urlFor(data.bgScrollImage).url()})`,
             backgroundAttachment: 'fixed',
           }}
         ></div>
@@ -178,20 +219,16 @@ function Page() {
         <div className="border-[0.5px] border-primary h-[80px] mb-[40px]" />
         <div className="flex flex-col items-center text-center">
           <div className="w-full lg:w-[740px]">
-            <h1>Where Nature Meets Nirvana</h1>
+            <h1>{data.section3Title}</h1>
           </div>
           <div className="lg:w-[920px]">
             <p className="text-[14px] md:text-[16px] text-center my-[24px]">
-              Every journey is crafted entirely around you, blending seamless
-              planning with rare, meaningful encounters. Each experience unfolds
-              with thoughtful detail—from the first welcome to the quiet moments
-              in nature—creating memories that linger long after you return home
-              and leaving a gentle, positive imprint on the places you visit.
+              {data.section3Description}
             </p>
           </div>
           <div className="lg:min-w-[250px]">
             <span className="font-bold">
-              EVERY JOURNEY TELLS A STORY – FIND THE ONE THAT’S YOURS
+            {data.section3Tagline}
             </span>
           </div>
         </div>
@@ -201,8 +238,8 @@ function Page() {
       {/* Grid Section */}
       <section className="px-4 lg:px-[32px] mb-[90px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          {IMAGE_BOX.filter((item) => !item.best_sell && !item.other).map(
-            ({ image, title, subtitle }, idx) => (
+          {data?.section_slug?.map(
+            ({ image, title, subtitle }: any, idx: number) => (
               <Link
                 key={idx}
                 href={`/flagship/${idx}`}
@@ -227,10 +264,9 @@ function Page() {
 
       {/* Flagship Section */}
       <section className="flex flex-col justify-center items-center text-center mb-[90px]">
-        <h1 className='mb-10'>Flagship Signature Journey</h1>
-        <BestSelling />
+        <h1 className="mb-10">Flagship Signature Journey</h1>
+        <BestSelling data={data.section_3} />
       </section>
-     
     </main>
   );
 }

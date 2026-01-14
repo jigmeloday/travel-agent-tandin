@@ -1,22 +1,70 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BestSelling from '@/components/landing-component/best-selling';
 import HeroSwapper from '@/components/landing-component/hero-swapper';
 import LetsTalk from '@/components/shared/let-talk';
 import { Button } from '@/components/ui/button';
+import { client } from '@/lib/senity';
+import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
 
-function Page() {
+async function Page({ params }: any) {
+  const query = `*[_type == "flagship" && slug.current == $slug][0]{
+  title,
+  description,
+  category,
+  "image": image.asset->url,
+  when,
+  price,
+  howlong,
+  hero[]{ title, "image": image.asset->url },
+  section1Title,
+  section1Description,
+  section1Tagline,
+  section2Title,
+  section2Description,
+  section2Btn1,
+  section2Btn2,
+  boutiqueTitle,
+  boutique[]{ title, subtitle },
+  card_items[]{title, description, tagline, image},
+  section_3[]->{title, description, image, slug},
+  section3btn,
+  section3link,
+  section4Title,
+  section4Description,
+  section4Tagline,
+  letsTalkTitle,
+  letsTalkDescription,
+  letsTalkButton,
+   section_last_package[]->{
+      title,
+      category,
+      description,
+      "image": image.asset->url,
+    },
+
+    section_second_last_package[]->{
+      title,
+      category,
+      description,
+      "image": image.asset->url,
+    },
+}`;
+  const { slug } = await params;
+  const data = await client.fetch(query, { slug: slug });
+
   return (
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden mb-[90px]">
         <Image
-          src="/images/dummy/img5.jpg"
+          src={urlFor(data?.image).url()}
           alt="Bespoke Journey"
           width={1920}
           height={1080}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <h1 className="text-white text-center px-4">Her Bhutan, Her Story</h1>
+          <h1 className="text-white text-center px-4">{data.title}</h1>
         </div>
       </section>
       <section className="flex flex-col items-center justify-center px-4 md:px-8 mb-12 md:mb-[90px]">
@@ -24,21 +72,17 @@ function Page() {
         <div className="flex flex-col items-center text-center">
           <div className="w-full md:w-[740px]">
             <h1 className="text-2xl md:text-4xl font-semibold">
-              Where Nature Meets Nirvana
+              {data.section1Title}
             </h1>
           </div>
           <div className="w-full px-0 md:px-[200px]">
             <p className="text-[14px] md:text-[16px] my-6">
-              Every journey is crafted entirely around you, blending seamless
-              planning with rare, meaningful encounters. Each experience unfolds
-              with thoughtful detail—from the first welcome to the quiet moments
-              in nature—creating memories that linger long after you return home
-              and leaving a gentle, positive imprint on the places you visit.{' '}
+              {data.section1Description}
             </p>
           </div>
           <div className="md:min-w-[250px]">
             <span className="font-bold text-lg md:text-xl">
-              EVERY JOURNEY TELLS A STORY – FIND THE ONE THAT’S YOURS
+              {data.section1Tagline}
             </span>
           </div>
         </div>
@@ -48,17 +92,14 @@ function Page() {
             <div className="bg-primary text-white px-[20px] text-center">
               <h4 className="text-white">WHEN</h4>
             </div>
-            <div className="p-[20px] font-bold text-center">
-              <p>February - June &</p>
-              <p>September - November &</p>
-            </div>
+            <div className="p-[20px] font-bold text-center">{data.when}</div>
           </div>
           <div className="w-full bg-gray-100">
             <div className="bg-primary px-[20px] text-center">
               <h4 className="text-white">PRICE</h4>
             </div>
             <div className="p-[20px] font-bold text-center">
-              <p>From £4,615pp excl. flights (based on 2 ppl sharing)</p>
+              <p>{data.price}</p>
             </div>
           </div>
           <div className="w-full bg-gray-100">
@@ -66,46 +107,41 @@ function Page() {
               <h4 className="text-white">HOW LONG</h4>
             </div>
             <div className="p-[20px] font-bold text-center">
-              <p>5 nights ideal length</p>
+              <p>{data.howlong}</p>
             </div>
           </div>
         </div>
       </section>
-      <section className="mb-[90px]">
-        <HeroSwapper />
-      </section>
+      <section className="mb-[90px]"><HeroSwapper swapper={data.hero} /></section>
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px] gap-4">
         <div className="w-full py-[50px] bg-primary h-[420px] flex flex-col md:flex-row justify-center md:space-x-6">
           <div className="md:w-[70%] px-[12px]">
-            <h6 className="text-white">MAKE THIS ITINERARY YOURS</h6>
+            <h6 className="text-white">{data.section2Title}</h6>
             <p className="text-[14px]  md:text-[16px] mt-[14px]">
-              Each and every Born Explorer trip is tailored exactly to who you
-              are and what you want to do So tell us about yourself and we’ll
-              create something that’s entirely you.
+              {data.section2Description}
             </p>
           </div>
           <div className="flex flex-col space-y-4 px-[12px]">
             <Button className="bg-black rounded-none text-white font-bold text-[24px] py-[24px]">
-              {' '}
-              ENQUIRE NOW
+              {data.section2Btn1}
             </Button>
             <Button className="bg-black rounded-none text-white font-bold text-[24px] py-[24px]">
-              DOWNLOAD INTNERARY
+              {data.section2Btn1}
             </Button>
           </div>
         </div>
       </section>
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px] gap-4">
-        {[1, 2, 3, 4].map((item) => (
+        {data?.card_items?.map((item: any, index: number) => (
           <div
-            key={item}
+            key={index}
             className={`flex flex-col md:flex-row w-full justify-center md:space-x-2 ${
-              item % 2 === 0 ? 'md:flex-row-reverse' : ''
+              (index + 1) % 2 === 0 ? 'md:flex-row-reverse' : ''
             }`}
           >
             <div className="md:h-[500px] aspect-square w-full">
               <Image
-                src="/images/dummy/img1.jpg"
+                src={urlFor(item?.image).url()}
                 alt=""
                 className="object-cover h-full w-full"
                 height={500}
@@ -113,38 +149,31 @@ function Page() {
               />
             </div>
             <div className="flex flex-col justify-center md:px-4 md:h-[500px] aspect-square w-full">
-              <h1>Cultural Connection</h1>
-              <p className="text-[14px] md:text-[16px]">
-                Combine helicopter journeys with sustainable luxury lodges,
-                curated local cuisine, and intimate cultural experiences for a
-                fully bespoke Bhutanese exploration.
-              </p>
+              <h1>{item?.title}</h1>
+              <p className="text-[14px] md:text-[16px]">{item?.description}</p>
               <p className="font-bold mt-4 italic text-[18px] text-primary">
-                Where culture isn’t watched — it’s lived
+                {item?.tagline}
               </p>
             </div>
           </div>
         ))}
       </section>
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px] gap-4">
-        <h2>Boutique Hotels</h2>
+        <h2>{data.boutiqueTitle}</h2>
         <div className="my-[32px] flex flex-col md:flex-row gap-2 w-full">
-          <div className="bg-primary flex-1 min-h-[520px] flex flex-col items-center justify-center">
-            <h1 className="text-white">BESPOKE JOURNEYS</h1>
-            <p className="text-[24px] font-bold">
-              Your story, perfectly tailored
-            </p>
-          </div>
-          <div className="bg-primary flex-1 min-h-[520px] flex flex-col items-center justify-center">
-            <h1 className="text-white">ESQUISITE STAYS</h1>
-            <p className="text-[24px] font-bold">
-              Where elegance feels effortless
-            </p>
-          </div>
+          {data.boutique.map((item: any, index: number) => (
+            <div
+              key={index}
+              className="bg-primary flex-1 min-h-[520px] flex flex-col items-center justify-center"
+            >
+              <h1 className="text-white">{item.title}</h1>
+              <p className="text-[24px] font-bold">{item.subtitle}</p>
+            </div>
+          ))}
         </div>
         <div className="w-full flex justify-center">
           <Button className="rounded-none bg-black text-[24px] py-8 px-[32px]">
-            VIEW ALL
+            {data.section3btn}
           </Button>
         </div>
       </section>
@@ -153,21 +182,17 @@ function Page() {
         <div className="flex flex-col items-center text-center">
           <div className="w-full md:w-[740px]">
             <h1 className="text-2xl md:text-4xl font-semibold">
-              Other Holidays
+              {data.section4Title}
             </h1>
           </div>
           <div className="w-full md:w-[920px]">
             <p className="text-[14px] md:text-[16px] my-6">
-              Every journey is crafted entirely around you, blending seamless
-              planning with rare, meaningful encounters. Each experience unfolds
-              with thoughtful detail—from the first welcome to the quiet moments
-              in nature—creating memories that linger long after you return home
-              and leaving a gentle, positive imprint on the places you visit.
+              {data.section4Description}
             </p>
           </div>
           <div className="md:min-w-[250px]">
             <span className="font-bold text-lg md:text-xl">
-              EVERY JOURNEY TELLS A STORY – FIND THE ONE THAT’S YOURS
+              {data.section4Tagline}
             </span>
           </div>
         </div>
@@ -175,33 +200,46 @@ function Page() {
       </section>
       <section className="flex flex-col items-center justify-center px-4 md:px-8 mb-[90px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-          {[1, 2, 3].map((item) => (
-            <div className="bg-gray-100" key={item}>
-              <div className="bg-primary w-full h-[350px]"></div>
-              <div className="flex flex-col items-center justify-center p-[20px] text-center">
-                <h4>Her Bhutan; Her Story</h4>
-                <p className="mb-[18px] text-[18px]">
-                  Combine helicopter journeys with sustainable luxury lodges,
-                  curated local cuisine, and intimate cultural experiences for a
-                  fully bespoke Bhutanese exploration.
-                </p>
-                <Button className="rounded-none bg-black text-[24px]">
-                  View Details
-                </Button>
+          {data.section_second_last_package
+            ?.slice(0, 3)
+            ?.map((item: any, index: number) => (
+              <div className="bg-gray-100" key={index}>
+                <div className="bg-primary w-full h-[350px]">
+                  <Image
+                    src={urlFor(item?.image).url()}
+                    alt="Bespoke Journey"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-col items-center justify-center p-[20px] text-center">
+                  <h4>{item.title}</h4>
+                  <p className="mb-[18px] text-[18px]">{item.description}</p>
+                  <Button className="rounded-none bg-black text-[24px]">
+                    View Details
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 my-4">
-          {[1, 2].map((item) => (
-            <div className="bg-gray-100" key={item}>
-              <div className="bg-primary w-full h-[520px]"></div>
+          {data.section_last_package
+            ?.slice(0, 2)?.map((item: any, index: number) => (
+            <div className="bg-gray-100" key={index}>
+              <div className="bg-primary w-full h-[520px]">
+                <Image
+                    src={urlFor(item?.image).url()}
+                    alt="Bespoke Journey"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full object-cover"
+                  />
+              </div>
               <div className="flex flex-col items-center justify-center p-[20px] text-center">
-                <h4>Her Bhutan; Her Story</h4>
+                <h4>{item.title}</h4>
                 <p className="text-[18px] mb-[18px]">
-                  Combine helicopter journeys with sustainable luxury lodges,
-                  curated local cuisine, and intimate cultural experiences for a
-                  fully bespoke Bhutanese exploration.
+                  {item.description}
                 </p>
                 <Button className="rounded-none bg-black text-[24px]">
                   View Details
@@ -212,7 +250,7 @@ function Page() {
         </div>
       </section>
       <section className="flex flex-col items-center justify-center px-[calc(32px-16px)] mb-[90px]">
-        <BestSelling />
+        <BestSelling data={data.section_3}  />
       </section>
       {/* <section className="bg-[#111820] w-full p-[24px]">
         <div className="flex flex-col lg:flex-row gap-6">
@@ -244,10 +282,7 @@ function Page() {
       <div className="lg:h-[84vh] mb-24 px-[32px]">
         <LetsTalk
           images="/images/dummy/img3.jpg"
-          description="For decades, our team has been crafting journeys that go beyond the
-                        ordinary. Share your dream destination and your passions with us, and
-                        we’ll design a one-of-a-kind adventure that’s truly yours—a journey
-                        you’ll remember for a lifetime."
+          description={data.letsTalkDescription}
         />
       </div>
     </main>

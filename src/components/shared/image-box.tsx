@@ -1,22 +1,24 @@
+import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
 import Link from 'next/link';
 
 function ImageBox({
-  id,
   image,
   label,
-  subtitle
+  subtitle,
+  slug
 }: {
-  id: string | number
   image: string;
   label: string;
   subtitle?: string;
+  slug: { current: string}
 }) {
+
   return (
-    <Link href={`/${id}`} className="relative border aspect-square overflow-hidden group cursor-pointer">
-      {/* Image */}
+    <Link href={`/${slug?.current}`} className="relative border aspect-square overflow-hidden group cursor-pointer">
+
       <Image
-        src={image}
+        src={urlFor(image).url()}
         alt="image"
         height={500}
         width={500}
