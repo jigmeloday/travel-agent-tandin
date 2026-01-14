@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import BestSelling from '@/components/landing-component/best-selling';
 import LetsTalk from '@/components/shared/let-talk';
-import { IMAGE_BOX } from '@/lib/dummy-data/dummy-data';
 import { client } from '@/lib/senity';
 import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
@@ -53,8 +52,7 @@ async function Page() {
       description,
       category,
       "image": image.asset->url,
-      best_sell,
-      other
+     slug
     }
   }
 `;

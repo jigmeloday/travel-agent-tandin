@@ -32,6 +32,7 @@ function BestSelling({ data }: any) {
         
         className="w-full"
       >
+        
         {data?.map((tour: any) => (
           <SwiperSlide
            key={tour.id}>
@@ -66,7 +67,7 @@ function BestSelling({ data }: any) {
 
                   {/* Call to action */}
                   <div className="mt-2 sm:mt-4 self-center">
-                    <Link href={`/flagship/${tour.id}`} className="bg-primary hover:bg-primary/90 text-white font-bold px-4 sm:px-6 py-2 transition-colors duration-200 text-sm sm:text-base">
+                    <Link href={`/flagship/${tour.slug.current}`} className="bg-primary hover:bg-primary/90 text-white font-bold px-4 sm:px-6 py-2 transition-colors duration-200 text-sm sm:text-base">
                       VIEW DETAILS
                     </Link>
                   </div>
