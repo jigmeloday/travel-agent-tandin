@@ -1,78 +1,152 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import LetsTalk from '@/components/shared/let-talk';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import SideSelling from './components/slider';
+import { client } from '@/lib/senity';
+import { urlFor } from '@/lib/senity.image';
 
-export default function Page() {
+export default async function Page() {
+  const query = `*[_type == "curatedBhutanBirding"][0]{
+  // HERO
+  hero{
+    "backgroundImageUrl": backgroundImage.asset->url,
+    title
+  },
+
+  // SECTION 1
+  section1{
+    title,
+    description,
+    buttonLabel,
+    sliderImages[]{ "url": asset->url }
+  },
+
+  // SECTION 2
+  section2{
+    topBlocks[]{
+      title,
+      description
+    },
+    bottomGrid[]{
+      title,
+      description,
+      "imageUrl": image.asset->url
+    }
+  },
+
+  // SECTION 3 – GETAWAYS
+  getaways{
+    title,
+    description,
+    getaways_cards[]->{
+      title,
+      description,
+      "slug": slug.current,
+      facts{
+        bestSeason,
+        highAlt,
+        lowAlt,
+        daysOnTrek,
+        grade
+      },
+      "heroImageUrl": hero.image.asset->url
+    }
+  },
+
+  // SECTION 4 – TRAVEL WITH PURPOSE
+  travelPurpose{
+    "imageUrl": image.asset->url,
+    title,
+    description1,
+    description2,
+    buttonLink
+  },
+
+  // SECTION 5 – BROCHURE
+  brochure{
+    images[]{ "url": asset->url },
+    title,
+    subtitle,
+    description,
+    cta1,
+    cta2
+  },
+
+  // SECTION 6 – LET'S TALK
+  letsTalk{
+    description
+  }
+}`;
+const data = await client.fetch(query)
+console.log(data.section1.sliderImages)
   return (
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden">
         <Image
-          src="/images/dummy/img5.jpg"
+          src={data.hero.backgroundImageUrl}
           alt="Bespoke Journey"
           width={1920}
           height={1080}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <h1 className="text-white text-center px-4">
-            Curated Adventure <br />
-            Multi-day Trekking & Exploration
+          <h1 className="text-white text-center px-4 w-[40%]">
+            {data.hero.title}
           </h1>
         </div>
       </section>
       <section className="flex flex-col lg:flex-row gap-[24px] px-[16px] lg:px-[32px] mt-[90px]">
         <div className="flex-2">
           <h1 className="leading-[52px]">
-            Journey Through Nature Culture and Serenity in Every Step
+            {data.section1.title}
           </h1>
           <p className="my-[24px] font-medium">
-            Every journey is crafted entirely around you, blending seamless
-            planning with rare, meaningful encounters. Each experience unfolds
-            with thoughtful detail—from the first welcome to the quiet moments
-            in nature—creating memories that linger long after you return home
-            and leaving a gentle, positive imprint on the places you visit.{' '}
+           {data.section1.description}
           </p>
-          <Button className="rounded-none">SPEAK TO AN EXPERT </Button>
+         <Link href='/contact-us'>
+          <Button className="rounded-none">
+             {data.section1.buttonLabel}
+          </Button>
+          </Link>
         </div>
         <div className="flex-1 w-full !h-[400px] lg:w-[422px] lg:h-[500px]">
-          <SideSelling />
+          <SideSelling images={data.section1.sliderImages} />
         </div>
       </section>
       <section className="gap-[50px] px-[16px] lg:px-[32px] mt-[90px]">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
-          {[1, 2, 3].map((item) => (
+          {data.section2.topBlocks.slice(0,3).map((item: any, index: number) => (
             <Link
               href="/curated-bhutan-birding/birding"
-              key={item}
+              key={index}
               className={`aspect-square border cursor-pointer flex flex-col items-center justify-center px-[42px] text-center ${
-                item % 2 !== 0 ? 'bg-primary ' : 'bg-black text-white'
+                index % 2 === 0 ? 'bg-primary ' : 'bg-black text-white'
               }`}
             >
               <h1
                 className={`leading-[52px] ${
-                  item % 2 !== 0 ? 'text-black' : 'text-white'
+                  index % 2 === 0 ? 'text-black' : 'text-white'
                 }`}
               >
-                A Bird’s-Eye View of Majesty
+                {item.title}
               </h1>
               <div
                 className={`border w-[50%] my-[24px] ${
-                  item % 2 !== 0 ? 'border-black' : 'border-white'
+                  index % 2 === 0 ? 'border-black' : 'border-white'
                 }`}
               />
               <p className="font-medium">
-                Marvel at Bhutan’s towering peaks, emerald valleys, and sacred
-                monasteries from the comfort of a spacious, private
+               {item.description}
               </p>
             </Link>
           ))}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 mt-2">
-          {[1, 2, 3].map((item) =>
-            item <= 2 ? (
-              <div key={item} className="relative lg:aspect-square border">
+          {data.section2.bottomGrid?.map((item: any, index: number) =>
+            index <= 1 ? (
+              <div key={index} className="relative lg:aspect-square border">
                 <Image
                   src="/images/slide.jpg"
                   alt="bg"
@@ -81,10 +155,9 @@ export default function Page() {
                   className="h-full w-full object-cover opacity-[0.8]"
                 />
                 <div className="absolute bottom-0 px-[24px] text-white">
-                  <h3>A Bird’s-Eye View of Majesty</h3>
+                  <h3>{item?.title}</h3>
                   <p>
-                    Marvel at Bhutan’s towering peaks, emerald valleys, and
-                    sacred monasteries from the comfort of a spacious, private{' '}
+                   {item?.description}
                   </p>
                 </div>
               </div>
@@ -94,15 +167,10 @@ export default function Page() {
                 key={item}
               >
                 <h1 className="leading-[52px]">
-                  Journey Through Nature Culture and
+                 {item?.title}
                 </h1>
                 <p className="my-6 text-[18px] font-medium">
-                  Every journey is crafted entirely around you, blending
-                  seamless planning with rare, meaningful encounters. Each
-                  experience unfolds with thoughtful detail—from the first
-                  welcome to the quiet moments in nature—creating memories that
-                  linger long after you return home and leaving a gentle,
-                  positive imprint on the places you visit.
+                {item?.description}
                 </p>
               </div>
             )
@@ -110,18 +178,16 @@ export default function Page() {
         </div>
       </section>
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mt-[90px]">
-        <h1 className="text-center">Getaways Crafted For You</h1>
+        <h1 className="text-center">{data.getaways.title}</h1>
         <p className="lg:px-[240px] text-center font-medium">
-          Exclusive itineraries thoughtfully designed to immerse you in unique
-          experiences, local culture, and unforgettable adventures, creating
-          memories that last forever.
+          {data.getaways.description}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full mt-6">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <div key={item} className="w-full border">
+          {data?.getaways.getaways_cards?.map((item: any, index: number) => (
+            <div key={index} className="w-full border">
               <div className="h-[500px]">
                 <Image
-                  src="/images/dummy/img3.jpg"
+                  src={item.heroImageUrl}
                   height={500}
                   width={500}
                   className="h-full w-full object-cover"
@@ -129,14 +195,11 @@ export default function Page() {
                 />
               </div>
               <div className="bg-primary p-4 lg:p-[24px] flex flex-col items-center justify-center">
-                <h2 className="text-white text-center">Gangkar Puensum Trek</h2>
+                <h2 className="text-white text-center">{item.title}</h2>
                 <p className="text-center font-medium lg:px-[46px] my-6">
-                  Marvel at Bhutan’s towering peaks, emerald valleys, and sacred
-                  monasteries from the comfort of a spacious, private Marvel at
-                  Bhutan’s towering peaks, emerald valleys, and sacred
-                  monasteries from the comfort of a spacious, private{' '}
+                  {item.description}
                 </p>
-                <Link href={`/curated-bhutan-birding/trekking/${item}`}>
+                <Link href={`/curated-bhutan-birding/trekking/${item.slug}`}>
                   <Button className="bg-black rounded-none text-primary font-bold hover:bg-black/60">
                     View Details
                   </Button>
@@ -150,10 +213,10 @@ export default function Page() {
         {/* LEFT IMAGE SECTION */}
         <div className="w-full lg:w-[70%] min-h-[40vh] lg:min-h-[80vh] bg-black/70">
           <Image
-            src="/images/dummy/img4.jpg"
+            src={data.travelPurpose.imageUrl}
             alt="img"
-            height={1000}
-            width={1000}
+            height={500}
+            width={500}
             className="h-full w-full object-cover"
           />
         </div>
@@ -161,18 +224,14 @@ export default function Page() {
         {/* RIGHT CONTENT SECTION */}
         <div className="w-full lg:w-[34.5%] bg-[#111820] p-[24px] flex flex-col justify-between">
           <div>
-            <h2>TRAVEL WITH PURPOSE</h2>
+            <h2>{data.travelPurpose.title}</h2>
 
             <p className="text-white text-[16px] mt-[32px]">
-              At Born Explorer, we believe every journey should enrich both
-              traveler and destination. By embracing sustainable practices,
-              respecting local cultures, and supporting communities, we ensure
-              your Bhutan experience leaves a positive footprint.
+              {data.travelPurpose.description1}
             </p>
 
             <p className="text-white text-[16px] mt-[32px]">
-              Travel consciously, discover authentically, and create memories
-              that honor the land, its people, and its timeless traditions.
+              {data.travelPurpose.description2}
             </p>
           </div>
 
@@ -189,24 +248,43 @@ export default function Page() {
       <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] mt-[90px] gap-2">
         <div className="bg-[#111820] w-full py-10 flex flex-col lg:flex-row">
           <div className="flex lg:w-[50%] p-8">
-            <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[25%] border">image</div>
-            <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[30%] scale-y-110 border">image</div>
-            <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[25%] border">image</div>
+            <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[25%] border">
+               <Image
+            src={data.brochure.images[0]?.url}
+            alt="img"
+            height={500}
+            width={500}
+            className="h-full w-full object-cover"
+          />
+            </div>
+            <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[30%] scale-y-110 border">
+               <Image
+            src={data.brochure.images[1]?.url}
+            alt="img"
+            height={500}
+            width={500}
+            className="h-full w-full object-cover"
+          />
+            </div>
+            <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[25%] border">
+               <Image
+            src={data.brochure.images[2]?.url}
+            alt="img"
+            height={500}
+            width={500}
+            className="h-full w-full object-cover"
+          />
+            </div>
           </div>
           <div className="lg:w-[50%] px-8">
-            <h4 className='text-white'>TRAVEL BROCHURE</h4>
-            <h3>Curated Journeys for the Discerning Traveler</h3>
+            <h4 className='text-white'>{data.brochure.title}</h4>
+            <h3>{data.brochure.subtitle}</h3>
             <p className='text-white'>
-              Discover your next extraordinary journey with our Tailormade
-              Journeys guide, featuring meticulously curated itineraries. Each
-              experience is designed to inspire, ignite your imagination, and
-              reveal Bhutan in its most authentic and luxurious form. Let this
-              guide be your gateway to unforgettable adventures, crafted
-              exclusively for discerning travelers.
+             {data.brochure.description}
             </p>
             <div className='flex text-white space-x-8 font-bold mt-4'>
-              <span className='border-b'>REQUEST BROCHURE</span>
-              <span className='border-b'>VIEW ALL BROCHURES</span>
+              <span className='border-b'>{data.brochure.cta1}</span>
+              <span className='border-b'>{data.brochure.cta2}</span>
             </div>
           </div>
         </div>
@@ -215,10 +293,7 @@ export default function Page() {
         <div className="h-[84vh]">
           <LetsTalk
             images="/images/dummy/img2.jpg"
-            description="For decades, our team has been crafting journeys that go beyond the
-                        ordinary. Share your dream destination and your passions with us, and
-                        we’ll design a one-of-a-kind adventure that’s truly yours—a journey
-                        you’ll remember for a lifetime."
+            description={data.letsTalk.description}
           />
         </div>
       </section>
