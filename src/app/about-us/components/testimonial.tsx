@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -5,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-function Testimonial() {
+function Testimonial({ data }: any) {
   const slides = [
     {
       id: 1,
@@ -36,14 +37,14 @@ function Testimonial() {
         slidesPerView={1}
         className="w-full"
       >
-        {slides.map((slide) => (
+        {data?.map((slide: any) => (
           <SwiperSlide key={slide.id}>
             <div className="flex flex-col items-center justify-center py-10 px-4 md:px-8">
               <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-black">
-                {slide.title}
+                {slide.author}
               </h1>
               <p className="text-center text-base md:text-[14] lg:text-[16] font-bold text-black/70 mt-4">
-                {slide.description}
+                {slide.quote}
               </p>
               <p className="font-bold mt-3 text-sm md:text-base">
                 {slide.date}
