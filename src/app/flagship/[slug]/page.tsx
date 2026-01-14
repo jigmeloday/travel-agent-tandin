@@ -6,30 +6,7 @@ import { Button } from '@/components/ui/button';
 import { client } from '@/lib/senity';
 import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
-interface FlagshipPackage {
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  when: string;
-  price: string;
-  howlong: string;
-  hero: { title: string; image: string }[];
-  section2Title: string;
-  section2Description: string;
-  section2Btn1: string;
-  section2Btn2: string;
-  boutiqueTitle: string;
-  boutique: { title: string; subtitle: string }[];
-  section3btn: string;
-  section3link: string;
-  section4Title: string;
-  section4Description: string;
-  section4Tagline: string;
-  letsTalkTitle: string;
-  letsTalkDescription: string;
-  letsTalkButton: string;
-}
+
 async function Page({ params }: any) {
   const query = `*[_type == "flagship" && slug.current == $slug][0]{
   title,

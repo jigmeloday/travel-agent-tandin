@@ -20,9 +20,9 @@ export default async function Home() {
     section_22-> { title, subtitle, link, cover },
     section_3[]->{title, description, image, slug},
     section_4{ title, description, items[]{ title, description, icon }, button_text, button_link },
-    section_5[]->{title, description, image, category},
+    section_5[]->{title, description, image, category, slug},
     section_6_background_scroll{ title, description, image },
-    section_slug[]->{title, subtitle, image},
+    section_slug[]->{title, subtitle, image, slug},
     section_7{ title, description },
     section_9{ title, description_1, description_2, btn, image },
     section_10_slider[]{ title, subtitle, description, cta, img },
@@ -209,7 +209,7 @@ export default async function Home() {
               </span>
             </div>
             <Link
-              href={`/packages/${12}`}
+              href={`/packages/${data.section_5[0].slug.current}`}
               className="bg-primary w-fit px-[16px] py-[8px] cursor-pointer"
             >
               VIEW DETAILS
@@ -235,7 +235,7 @@ export default async function Home() {
                 <h3>{data.section_5[1].title}</h3>
                 <p className="text-[16px]">{data.section_5[1].description}</p>
                 <Link
-                  href={`/packages/${13}`}
+                  href={`/packages/${data.section_5[1].slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -259,7 +259,7 @@ export default async function Home() {
                 <h3>{data.section_5[2].title}</h3>
                 <p className="text-[16px]">{data.section_5[2].description}</p>
                 <Link
-                  href={`/packages/${14}`}
+                  href={`/packages/${data.section_5[2].slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -288,7 +288,7 @@ export default async function Home() {
                 </h3>
                 <p className="text-[16px]">{data.section_5[3]?.description}</p>
                 <Link
-                  href={`/packages/${15}`}
+                  href={`/packages/${data.section_5[3].slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -310,11 +310,11 @@ export default async function Home() {
                   {data.section_5[4].category}
                 </p>
                 <h3 className="leading-6 my-[12px]">
-                  {data.section_5[4].category}
+                  {data.section_5[4].title}
                 </h3>
-                <p className="text-[16px]">{data.section_5[3].description}</p>
+                <p className="text-[16px]">{data.section_5[4].description}</p>
                 <Link
-                  href={`/packages/${16}`}
+                  href={`/packages/${data.section_5[4].slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -366,10 +366,10 @@ export default async function Home() {
       </section>
       <section className="grid lg:grid-cols-3 px-[16px] lg:px-[32px] gap-2 mb-[90px]">
         {data.section_slug?.map(
-          ({ image, title, subtitle }: any, index: number) => (
+          ({ image, title, subtitle, slug }: any, index: number) => (
             <ImageBox
-              id={index}
               key={index}
+              slug={slug}
               image={image}
               label={title || ''}
               subtitle={subtitle}

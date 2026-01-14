@@ -1,4 +1,5 @@
-import { MailOpen, MapPin, Phone } from 'lucide-react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Mail, MailOpen, MapPin, Phone } from 'lucide-react';
 
 export const CONTACT_US=[
   {
@@ -17,3 +18,10 @@ export const CONTACT_US=[
     icon: Phone
   }
 ]
+
+
+export const IconMap: Record<string, any> = {
+  mail: MailOpen,
+  phone: Phone,
+  location: MapPin,
+};
