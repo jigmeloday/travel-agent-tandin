@@ -4,7 +4,6 @@ import HeroSwapper from '@/components/landing-component/hero-swapper';
 import SliderComponent from '@/components/landing-component/slider';
 import ImageBox from '@/components/shared/image-box';
 import LetsTalk from '@/components/shared/let-talk';
-import { IMAGE_BOX } from '@/lib/dummy-data/dummy-data';
 import { Headphones, Mail, Plane, Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -33,7 +32,7 @@ export default async function Home() {
 `;
 
   const data = await client.fetch(query);
-  console.log(data.section_5);
+
   return (
     <main>
       <section className="h-screen w-full overflow-hidden">
