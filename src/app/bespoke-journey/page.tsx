@@ -19,17 +19,13 @@ async function Page() {
       category,
       description,
       "image": image.asset->url,
-      best_sell,
-      other
     },
 
     section_othere_package[]->{
       title,
       category,
       description,
-      "image": image.asset->url,
-      best_sell,
-      other
+      "image": image.asset->url,      
     },
 
     section_last_package[]->{
@@ -64,7 +60,7 @@ async function Page() {
 `;
 
   const data = await client.fetch(query);
-  console.log(data.section_last_package);
+
   return (
     <main>
       {/* Hero */}
