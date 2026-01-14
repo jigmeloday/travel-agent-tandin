@@ -8,7 +8,7 @@ import { Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
-export default function TripSlider({ images }: { images: string[] }) {
+export default function TripSlider({ images }: { images: any[] }) {
   const swiperRef = useRef<any>(null);
 
   const updateScales = () => {
@@ -61,10 +61,11 @@ export default function TripSlider({ images }: { images: string[] }) {
           <SwiperSlide key={i} className="flex justify-center">
             <div className="w-[340px] h-[450px] max-md:w-[260px] max-md:h-[360px] max-sm:w-[220px] max-sm:h-[300px]">
               <Image
-                src={img}
+                src={img.asset.url}
                 alt="slider"
                 width={300}
                 height={450}
+                unoptimized
                 className="w-full h-full object-cover"
               />
             </div>
