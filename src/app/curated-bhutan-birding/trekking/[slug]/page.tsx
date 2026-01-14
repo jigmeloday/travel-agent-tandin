@@ -105,7 +105,7 @@ relatedTreks[]->{
   const { slug } = await params;
 
   const data = await client.fetch(query, { slug });
-console.log(data)
+
   return (
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden mb-[90px]">
