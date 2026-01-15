@@ -6,7 +6,6 @@ import Link from 'next/link';
 import SideSelling from '../../components/slider';
 import { client } from '@/lib/senity';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function Page({ params }: any) {
   const query = `*[_type == "trek" && slug.current == $slug][0]{
   title,

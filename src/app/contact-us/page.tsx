@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
-import { CONTACT_US, IconMap } from './constant/contact-us.constant';
+import { IconMap } from './constant/contact-us.constant';
 import ContactForm from './components/form';
 import { client } from '@/lib/senity';
 import { urlFor } from '@/lib/senity.image';
@@ -70,22 +70,6 @@ async function Page() {
           );
         })}
       </section>
-      {/* <section className="flex flex-col md:flex-row justify-center gap-[54px] mb-[90px]">
-        {CONTACT_US.map(({ title, description, icon }) => {
-          const Icon = icon;
-          return (
-            <div className="flex flex-col items-center md:w-[220px]" key={title}>
-              <div className="size-[80px] rounded-full flex items-center justify-center bg-primary text-white">
-                <Icon size={32} />
-              </div>
-              <p className="text-[32px] my-[32px] font-sans text-black/70">
-                {title}
-              </p>
-              <p className="text-[18px] text-center font-sans">{description}</p>
-            </div>
-          );
-        })}
-      </section> */}
     </main>
   );
 }
