@@ -50,7 +50,7 @@ function Header() {
   // function to close Sheet on link click
   const handleLinkClick = () => setOpen(false);
   if (!data) return null;
-  console.log(data);
+
   return (
     <div
       className={`fixed w-full px-[16px] py-[24px] flex justify-between items-center 
