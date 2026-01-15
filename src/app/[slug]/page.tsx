@@ -55,7 +55,7 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
   letsTalkDescription
 }`;
 
-  const data = await client.fetch(query, { slug: slug });
+  const data = await client.fetch(query, { slug: slug }, { next: { revalidate: 0 } });
   return (
     <main>
       {/* Hero Section */}

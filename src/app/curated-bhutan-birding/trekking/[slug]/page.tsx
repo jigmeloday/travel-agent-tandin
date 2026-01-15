@@ -104,7 +104,7 @@ relatedTreks[]->{
 }`;
   const { slug } = await params;
 
-  const data = await client.fetch(query, { slug });
+  const data = await client.fetch(query, { slug }, { next: { revalidate: 0 } });
 
   return (
     <main>

@@ -51,7 +51,7 @@ async function Page({ params }: any) {
     },
 }`;
   const { slug } = await params;
-  const data = await client.fetch(query, { slug: slug });
+  const data = await client.fetch(query, { slug: slug }, { next: { revalidate: 0 } });
 
   return (
     <main>

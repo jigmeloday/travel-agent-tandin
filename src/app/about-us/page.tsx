@@ -7,37 +7,6 @@ import { client } from '@/lib/senity';
 import VideoPlayer from './components/video-player';
 
 async function Page() {
-  const steps = [
-    {
-      id: 1,
-      title: 'Enquiry',
-      description:
-        'From global event planners to submersible specialists, our in-house team of experts make authoritative recommendations and facilitate your interests from the first conversation.',
-      icon: '/icons/search.svg', // replace with your image path
-    },
-    {
-      id: 2,
-      title: 'Planning stage',
-      description:
-        'After identifying a project together, an initial deposit lets us mobilise the resources for a dedicated project manager and the consultation of world-leading authorities to conceptualise your perfect trip with you.',
-      icon: '/icons/chat.svg',
-    },
-    {
-      id: 3,
-      title: 'Recce and detailing',
-      description:
-        'Dance floors in the African bush, desert-island access and world-first wildlife encounters – on-the-ground recces and the engagement of global or local bodies let us fine-tune truly unique experiences, all tailored to you.',
-      icon: '/icons/map.svg',
-    },
-    {
-      id: 4,
-      title: 'On-trip',
-      description:
-        'Backed by our full support team in London, on-the-ground experts and specialist guides will guarantee the seamless delivery of your project, able to adapt on the fly to your preferences.',
-      icon: '/icons/helicopter.svg',
-    },
-  ];
-
   const query = `
 *[_type == "aboutPage"][0]{
   // HERO SECTION
@@ -95,7 +64,7 @@ async function Page() {
   letsTalkDescription
 }
 `;
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
   
   return (
     <main>

@@ -26,7 +26,7 @@ async function Page() {
   footer_tagline
 }
 `;
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
   return (
     <div>
       <section className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden mb-[90px]">

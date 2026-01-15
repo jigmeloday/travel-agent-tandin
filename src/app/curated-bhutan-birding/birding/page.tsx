@@ -57,7 +57,7 @@ export default async function Page() {
   }
 `;
 
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
   console.log(data.sliderImages);
   return (
     <main>

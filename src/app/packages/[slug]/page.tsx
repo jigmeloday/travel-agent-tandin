@@ -33,7 +33,7 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
   }
 }`;
 
- const data = await client.fetch(query, { slug });
+ const data = await client.fetch(query, { slug }, { next: { revalidate: 0 } });
 
  return (
     <main>

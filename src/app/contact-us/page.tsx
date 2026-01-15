@@ -19,7 +19,7 @@ async function Page() {
     }
   }`;
 
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
   return (
     <main>
       <section className="h-[calc(100vh-20vh)] w-full overflow-hidden relative mb-[90px]">
