@@ -158,7 +158,7 @@ function Header() {
                       )
                     )}
                   </div>
-                  {data.otherLink?.map(({ label, link }) => (
+                  {data.otherLink?.map(({ label, link }: { link: string, label: string }) => (
                     <Link
                       key={label}
                       href={link ?? '/'}

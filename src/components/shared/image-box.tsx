@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,11 +12,11 @@ function ImageBox({
   image: string;
   label: string;
   subtitle?: string;
-  slug: { current: string}
+  slug: any
 }) {
 
   return (
-    <Link href={`/${slug?.current}`} className="relative border aspect-square overflow-hidden group cursor-pointer">
+    <Link href={`/${slug?.current ?? slug }`} className="relative border aspect-square overflow-hidden group cursor-pointer">
 
       <Image
         src={urlFor(image).url()}

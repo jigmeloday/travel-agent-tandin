@@ -58,7 +58,7 @@ export default async function Page() {
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-  console.log(data.sliderImages);
+
   return (
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden mb-[90px]">

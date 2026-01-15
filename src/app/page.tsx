@@ -463,7 +463,7 @@ export default async function Home() {
         {data.section_12.map((item: any, index: number) => (
           <Link
             key={index}
-            href="/curated-bhutan-birding"
+            href={item.links}
             className="w-[50%] border relative flex items-center justify-center"
           >
             <Image

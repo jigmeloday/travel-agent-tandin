@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { client } from '@/lib/senity';
 import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
+import Link from 'next/link';
 
 async function Page({ params }: any) {
   const query = `*[_type == "flagship" && slug.current == $slug][0]{
@@ -39,6 +40,7 @@ async function Page({ params }: any) {
    section_last_package[]->{
       title,
       category,
+      slug,
       description,
       "image": image.asset->url,
     },
@@ -46,12 +48,17 @@ async function Page({ params }: any) {
     section_second_last_package[]->{
       title,
       category,
+      slug,
       description,
       "image": image.asset->url,
     },
 }`;
   const { slug } = await params;
-  const data = await client.fetch(query, { slug: slug }, { next: { revalidate: 0 } });
+  const data = await client.fetch(
+    query,
+    { slug: slug },
+    { next: { revalidate: 0 } }
+  );
 
   return (
     <main>
@@ -112,7 +119,10 @@ async function Page({ params }: any) {
           </div>
         </div>
       </section>
-      <section className="mb-[90px]"><HeroSwapper swapper={data.hero} /></section>
+      <section className="mb-[90px]">
+        <HeroSwapper swapper={data.hero} />
+      </section>
+
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px] gap-4">
         <div className="w-full py-[50px] bg-primary h-[420px] flex flex-col md:flex-row justify-center md:space-x-6">
           <div className="md:w-[70%] px-[12px]">
@@ -122,12 +132,16 @@ async function Page({ params }: any) {
             </p>
           </div>
           <div className="flex flex-col space-y-4 px-[12px]">
-            <Button className="bg-black rounded-none text-white font-bold text-[24px] py-[24px]">
-              {data.section2Btn1}
-            </Button>
-            <Button className="bg-black rounded-none text-white font-bold text-[24px] py-[24px]">
-              {data.section2Btn1}
-            </Button>
+            <Link href="/contact-us">
+              <Button className="bg-black hover:bg-black/60 rounded-none text-white font-bold text-[24px] py-[24px]">
+                {data.section2Btn1}
+              </Button>
+            </Link>
+            <Link href="/contact-us">
+              <Button className="bg-black rounded-none hover:bg-black/60 text-white font-bold text-[24px] py-[24px]">
+                {data.section2Btn2}
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -172,9 +186,11 @@ async function Page({ params }: any) {
           ))}
         </div>
         <div className="w-full flex justify-center">
-          <Button className="rounded-none bg-black text-[24px] py-8 px-[32px]">
-            {data.section3btn}
-          </Button>
+          <Link href="/">
+            <Button className="rounded-none bg-black text-[24px] py-8 px-[32px]">
+              {data.section3btn}
+            </Button>
+          </Link>
         </div>
       </section>
       <section className="flex flex-col items-center justify-center px-4 md:px-8 mb-[90px]">
@@ -216,41 +232,44 @@ async function Page({ params }: any) {
                 <div className="flex flex-col items-center justify-center p-[20px] text-center">
                   <h4>{item.title}</h4>
                   <p className="mb-[18px] text-[18px]">{item.description}</p>
-                  <Button className="rounded-none bg-black text-[24px]">
-                    View Details
-                  </Button>
+                  <Link href={`/packages/${item.slug.current}`}>
+                    <Button className="rounded-none bg-black text-[24px]">
+                      View Details
+                    </Button>
+                  </Link>
                 </div>
               </div>
             ))}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 my-4">
           {data.section_last_package
-            ?.slice(0, 2)?.map((item: any, index: number) => (
-            <div className="bg-gray-100" key={index}>
-              <div className="bg-primary w-full h-[520px]">
-                <Image
+            ?.slice(0, 2)
+            ?.map((item: any, index: number) => (
+              <div className="bg-gray-100" key={index}>
+                <div className="bg-primary w-full h-[520px]">
+                  <Image
                     src={urlFor(item?.image).url()}
                     alt="Bespoke Journey"
                     width={1920}
                     height={1080}
                     className="w-full h-full object-cover"
                   />
+                </div>
+                <div className="flex flex-col items-center justify-center p-[20px] text-center">
+                  <h4>{item.title}</h4>
+                  <p className="text-[18px] mb-[18px]">{item.description}</p>
+                  <Link href={`/packages/${item.slug.current}`}>
+                    <Button className="rounded-none bg-black text-[24px]">
+                      View Details
+                    </Button>
+                  </Link>
+                </div>
               </div>
-              <div className="flex flex-col items-center justify-center p-[20px] text-center">
-                <h4>{item.title}</h4>
-                <p className="text-[18px] mb-[18px]">
-                  {item.description}
-                </p>
-                <Button className="rounded-none bg-black text-[24px]">
-                  View Details
-                </Button>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
       </section>
       <section className="flex flex-col items-center justify-center px-[calc(32px-16px)] mb-[90px]">
-        <BestSelling data={data.section_3}  />
+        <BestSelling data={data.section_3} />
       </section>
       {/* <section className="bg-[#111820] w-full p-[24px]">
         <div className="flex flex-col lg:flex-row gap-6">

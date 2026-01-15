@@ -43,6 +43,7 @@ async function Page() {
     section_slug[]->{
       title,
       subtitle,
+      slug,
       "image": image.asset->url,
       "link": link.current
     },
@@ -239,10 +240,10 @@ async function Page() {
       <section className="px-4 lg:px-[32px] mb-[90px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
           {data?.section_slug?.map(
-            ({ image, title, subtitle }: any, idx: number) => (
+            ({ image, title, subtitle, slug }: any, idx: number) => (
               <Link
                 key={idx}
-                href={`/flagship/${idx}`}
+                href={`/${slug.current}`}
                 className="relative flex flex-col items-center justify-center w-full aspect-square text-center overflow-hidden group cursor-pointer"
               >
                 <div

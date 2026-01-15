@@ -19,12 +19,14 @@ async function Page() {
       category,
       description,
       "image": image.asset->url,
+      slug
     },
 
     section_othere_package[]->{
       title,
       category,
       description,
+      slug,
       "image": image.asset->url,      
     },
 
@@ -32,6 +34,7 @@ async function Page() {
       title,
       category,
       description,
+      slug,
       "image": image.asset->url,
     },
 
@@ -39,6 +42,7 @@ async function Page() {
       title,
       category,
       description,
+      slug,
       "image": image.asset->url,
     },
 
@@ -79,38 +83,42 @@ async function Page() {
 
       {/* Packages */}
       <section className="flex flex-col gap-[50px] px-[16px] lg:px-[32px] mb-[90px]">
-        {data.section_package.map(({ title, description, image }: any, index: number) => (
-          <div
-            key={index}
-            className={`flex flex-col lg:flex-row items-center gap-[32px] ${
-              index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
-            }`}
-          >
-            {/* Image */}
-            <div className="w-full lg:w-1/2 h-[240px] sm:h-[320px] lg:h-[480px]">
-             <Image
-          src={urlFor(image).url()}
-          alt="Bespoke Journey"
-          width={1920}
-          height={1080}
-          className="w-full h-full object-cover"
-        />
-            </div>
-
-            {/* Text */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
-              <h1>{title}</h1>
-              <div className="w-full lg:w-[80%] mx-auto lg:mx-0">
-                <p className="text-base lg:text-[16px] text-gray-700 mb-6">
-                  {description}
-                </p>
+        {data.section_package.map(
+          ({ title, description, image, slug }: any, index: number) => (
+            <div
+              key={index}
+              className={`flex flex-col lg:flex-row items-center gap-[32px] ${
+                index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
+              }`}
+            >
+              {/* Image */}
+              <div className="w-full lg:w-1/2 h-[240px] sm:h-[320px] lg:h-[480px]">
+                <Image
+                  src={urlFor(image).url()}
+                  alt="Bespoke Journey"
+                  width={1920}
+                  height={1080}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <button className="mx-auto lg:mx-0 w-[180px] cursor-pointer bg-black text-white px-6 py-3 font-semibold hover:bg-gray-800 transition">
-                View Detail
-              </button>
+
+              {/* Text */}
+              <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
+                <h1>{title}</h1>
+                <div className="w-full lg:w-[80%] mx-auto lg:mx-0">
+                  <p className="text-base lg:text-[16px] text-gray-700 mb-6">
+                    {description}
+                  </p>
+                </div>
+                <Link href={`/packages/${slug.current}`}>
+                  <button className="mx-auto lg:mx-0 w-[180px] cursor-pointer bg-black text-white px-6 py-3 font-semibold hover:bg-gray-800 transition">
+                    View Detail
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        )}
       </section>
 
       {/* Grid Cards */}
@@ -118,7 +126,7 @@ async function Page() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full mb-5">
           {data.section_othere_package
             ?.slice(0, 3)
-            ?.map(({ image, title, description }: any, index: number) => (
+            ?.map(({ image, title, description, slug }: any, index: number) => (
               <div
                 key={index}
                 className="bg-[#f7f7f7] flex flex-col items-center text-center shadow-sm"
@@ -141,7 +149,7 @@ async function Page() {
                     {description}
                   </p>
                   <Link
-                    href={'/'}
+                    href={`/packages/${slug.current}`}
                     className="w-[160px] bg-black text-white font-semibold py-3 text-center hover:bg-gray-800 transition"
                   >
                     View Detail
@@ -183,9 +191,11 @@ async function Page() {
             <div className="w-[60px] h-[2px] bg-white mb-6" />
             <p className="text-base mb-4">{data.travelPurposeParagraph1}</p>
             <p className="text-base mb-6">{data.travelPurposeParagraph2}</p>
-            <button className="bg-[#7b1c32] text-white px-6 py-3 font-semibold hover:bg-[#611627] transition w-fit">
-              {data.travelPurposeButton}
-            </button>
+            <Link href="/travel-purpose">
+              <button className="bg-[#7b1c32] cursor-pointer text-white px-6 py-3 font-semibold hover:bg-[#611627] transition w-fit">
+                {data.travelPurposeButton}
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -224,9 +234,11 @@ async function Page() {
                 <div className="flex flex-col items-center justify-center p-[20px] text-center">
                   <h4>{item?.title}</h4>
                   <p className="mb-[18px] text-[18px]">{item?.description}</p>
-                  <Button className="rounded-none bg-black text-[24px]">
-                    View Details
-                  </Button>
+                  <Link href={`/packages/${item.slug.current}`}>
+                    <Button className="rounded-none bg-black text-[24px]">
+                      View Details
+                    </Button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -248,9 +260,11 @@ async function Page() {
                 <div className="flex flex-col items-center justify-center p-[20px] text-center">
                   <h4>{item?.title}</h4>
                   <p className="mb-[18px] text-[18px]">{item?.description}</p>
-                  <Button className="rounded-none bg-black text-[24px]">
-                    View Details
-                  </Button>
+                  <Link href={`/packages/${item.slug.current}`}>
+                    <Button className="rounded-none bg-black text-[24px]">
+                      View Details
+                    </Button>
+                  </Link>
                 </div>
               </div>
             ))}

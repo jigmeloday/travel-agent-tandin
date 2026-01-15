@@ -4,7 +4,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
-import { IMAGE_BOX } from '@/lib/dummy-data/dummy-data';
 import Link from 'next/link';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -21,6 +20,7 @@ function BestSelling({ data }: any) {
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
+           pauseOnMouseEnter: true,
         }}
          pagination={{
           clickable: true,
