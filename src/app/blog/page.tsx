@@ -5,11 +5,7 @@ import Link from 'next/link';
 import { client } from '@/lib/senity';
 import { getBlogPostsQuery, getTotalCountQuery } from '@/lib/query';
 
-interface PageProps {
-  searchParams: { page?: string };
-}
-
-export default async function Page({ searchParams }: PageProps) {
+export default async function Page({ searchParams }: any) {
   const page = parseInt(searchParams.page || '1', 10);
   const limit = 6; // posts per page
 

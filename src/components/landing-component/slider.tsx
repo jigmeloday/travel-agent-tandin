@@ -8,7 +8,6 @@ import 'swiper/css/pagination';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function SliderComponent({data}: any) {
 
   return (

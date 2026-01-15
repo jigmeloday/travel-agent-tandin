@@ -4,12 +4,8 @@ import { client } from '@/lib/senity'; // your Sanity client
 import { PortableText } from '@portabletext/react';
 import { ComponentsBlock } from '../component/PortableText';
 
-interface PageProps {
-  params: { slug: string };
-}
-
-export default async function Page({ params }: PageProps) {
-  const { slug } = params;
+export default async function Page({ params }: any) {
+  const { slug } = await params;
 
   // GROQ query to fetch the blog by slug
   const query = `*[_type == "blogPost" && slug.current == $slug][0]{
