@@ -14,10 +14,10 @@ export default async function Page({ searchParams }: PageProps) {
   const limit = 6; // posts per page
 
   // Fetch posts for current page
-  const slides = await client.fetch(getBlogPostsQuery(page, limit));
+  const slides = await client.fetch(getBlogPostsQuery(page, limit), {}, {next: { revalidate: 0 }});
 
   // Fetch total count to calculate total pages
-  const totalPosts: number = await client.fetch(getTotalCountQuery);
+  const totalPosts: number = await client.fetch(getTotalCountQuery, {}, {next: { revalidate: 0 }});
   const totalPages = Math.ceil(totalPosts / limit);
 
   return (

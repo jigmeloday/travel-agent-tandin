@@ -28,7 +28,7 @@ export default async function Page({ params }: PageProps) {
     blockContent
   }`;
 
-  const blogPost: any = await client.fetch(query, { slug });
+  const blogPost: any = await client.fetch(query, { slug }, {next: { revalidate: 0 } });
 
   if (!blogPost) {
     return <p>Blog post not found</p>;
