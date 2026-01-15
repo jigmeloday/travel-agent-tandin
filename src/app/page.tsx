@@ -26,13 +26,25 @@ export default async function Home() {
     section_7{ title, description },
     section_9{ title, description_1, description_2, btn, image },
     section_10_slider[]{ title, subtitle, description, cta, img },
+    blogTitle,
+    blogSubtitle,
+   blog[]->{
+    title,
+    slug,
+    image{
+      asset->{
+        _id,
+        url
+      }
+    }
+  },
     section_12[]{ title, image, links },
     section_13{ title, description, btn_text },
   }
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-
+  console.log(data);
   return (
     <main>
       <section className="h-screen w-full overflow-hidden">
@@ -414,37 +426,17 @@ export default async function Home() {
         <SliderComponent data={data.section_10_slider} />
       </section>
       <section className="flex flex-col items-center justify-center my-[90px] lg:px-[32px] px-[16px]">
-        <h1 className="text-3xl font-bold">Travel Blogs</h1>
-        <p className="font-bold mt-2">
-          FRESHLY DISCOVERED, EXCLUSIVELY FOR YOU
-        </p>
+        <h1 className="text-3xl font-bold">{data.blogTitle}</h1>
+        <p className="font-bold mt-2">{data.blogSubtitle}</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-2 mt-[40px]">
-          {[
-            {
-              id: 1,
-              image: '/images/dummy/img6.jpg',
-              label: 'MONASTIC SERENITY',
-              subtitle: 'Above the ordinary',
-            },
-            {
-              id: 2,
-              image: '/images/dummy/img5.jpg',
-              label: 'FESTIVALS IN FULL COLOR',
-              subtitle: 'Capture the extraordinary',
-            },
-            {
-              id: 3,
-              image: '/images/dummy/img3.jpg',
-              label: 'HIDDEN WILDERNESS',
-              subtitle: 'Savor the sublime',
-            },
-          ].map(({ id, image, label }) => (
-            <div
-              key={id}
+          {data.blog.map(({ image, title, slug }: any, index: number) => (
+            <Link
+              href={`/blog/${slug.current}`}
+              key={index}
               className="relative w-full aspect-square flex items-center justify-center overflow-hidden group cursor-pointer"
               style={{
-                backgroundImage: `url(${image})`,
+                backgroundImage: `url(${image.asset.url})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
@@ -452,10 +444,10 @@ export default async function Home() {
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
               <div className="relative text-center text-white">
                 <h4 className="text-xl font-bold text-white relative inline-block after:content-[''] after:block after:h-[2px] after:w-0 after:bg-primary after:mx-auto after:transition-all after:duration-500 delay-75 group-hover:after:w-full">
-                  {label}
+                  {`${title.slice(0, 30)}...`}
                 </h4>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
