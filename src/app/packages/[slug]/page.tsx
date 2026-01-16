@@ -62,12 +62,12 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
           </div>
           <div className="w-full lg:w-[920px]">
             <p className="text-[14px] lg:text-[16px] text-center my-[16px] lg:my-[24px]">
-             {data.section_1_description}
+             {data?.section_1_description}
             </p>
           </div>
           <div className="lg:min-w-[250px]">
             <span className="font-bold text-sm lg:text-lg">
-              {data.section_1_tagline}        
+              {data?.section_1_tagline}        
               </span>
           </div>
         </div>
@@ -77,7 +77,7 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
       {/* Full Image Section */}
       <section className="h-[300px] lg:h-[90vh] mb-[90px]">
         <Image
-          src={urlFor(data.image_section).url()}
+          src={urlFor(data?.image_section).url()}
           alt="img"
           height={700}
           width={700}
@@ -153,7 +153,7 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
         </div> */}
          <div className="h-[84vh] w-full">
                   <LetsTalk
-                    description={data.letsTalkDescription}
+                    description={data?.letsTalkDescription}
                     images="/images/dummy/img8.jpg"
                   />
                 </div>
