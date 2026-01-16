@@ -237,42 +237,47 @@ relatedTreks[]->{
         ></div>
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
       </section>
-      <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] gap-2 mb-[90px]">
-        {/* LEFT IMAGE SECTION */}
-        <div className="w-full lg:w-[70%] min-h-[40vh] lg:min-h-[80vh] bg-black/70">
-          <Image
-            src={data.purpose.imageUrl}
-            alt="img"
-            height={1000}
-            width={1000}
-            className="h-full w-full object-cover"
-          />
-        </div>
 
-        {/* RIGHT CONTENT SECTION */}
-        <div className="w-full lg:w-[34.5%] bg-[#111820] p-[24px] flex flex-col justify-between">
-          <div>
-            <h2>{data.purpose.title}</h2>
+     <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] gap-2 mb-[90px] items-stretch">
 
-            <p className="text-white text-[16px] mt-[32px]">
-              {data.purpose.description1}
-            </p>
+  {/* LEFT IMAGE SECTION */}
+  <div className="w-full lg:w-[70%] bg-black/70 flex h-auto">
+    <div className="relative w-full h-full">
+      <Image
+        src={data.purpose?.imageUrl}
+        alt="img"
+        fill
+        className="object-cover"
+      />
+    </div>
+  </div>
 
-            <p className="text-white text-[16px] mt-[32px]">
-              {data.purpose.description2}
-            </p>
-          </div>
+  {/* RIGHT CONTENT SECTION */}
+  <div className="w-full lg:w-[34.5%] bg-[#111820] p-[24px] flex flex-col justify-between">
+    <div>
+      <h2>{data.purpose.title}</h2>
 
-          <div className="mt-[32px] flex">
-            <Link
-              className="bg-primary py-2 px-3 text-[20px] font-bold text-white"
-              href="/travel-purpose"
-            >
-              VIEW DETAILS
-            </Link>
-          </div>
-        </div>
-      </section>
+      <p className="text-white text-[16px] mt-[32px]">
+        {data.purpose.description1}
+      </p>
+
+      <p className="text-white text-[16px] mt-[32px]">
+        {data.purpose.description2}
+      </p>
+    </div>
+
+    <div className="mt-[32px] flex">
+      <Link
+        className="bg-primary py-2 px-3 text-[20px] font-bold text-white"
+        href="/travel-purpose"
+      >
+        VIEW DETAILS
+      </Link>
+    </div>
+  </div>
+
+</section>
+
       <section className="flex flex-col text-center px-[16px] lg:px-[32px] items-center justify-center gap-2 mb-[90px]">
         <h2>{data.relatedTreksSection?.title}</h2>
         <p className="my-[24px] text-center lg:px-[142px]">
