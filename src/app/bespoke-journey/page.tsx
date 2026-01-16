@@ -59,6 +59,8 @@ async function Page() {
 
     letsTalkTitle,
     letsTalkDescription,
+    "letTalkImage": letsTalk.asset->url, // ← get URL directly
+
     letsTalkButton
   }
 `;
@@ -274,8 +276,8 @@ async function Page() {
       <section className="flex flex-col items-center justify-center mb-[90px] px-[16px] lg:px-[32px]">
         <div className="h-[84vh]">
           <LetsTalk
-            images="/images/dummy/img2.jpg"
-            description={data.letsTalkDescription}
+            images={data.letsTalkImage ?? "/images/dummy/img2.jpg"}
+            description={data.letTalkDescription}
           />
         </div>
       </section>

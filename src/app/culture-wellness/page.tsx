@@ -45,11 +45,13 @@ async function Page() {
     },
     letsTalkTitle,
     letsTalkDescription,
-    letsTalkButton
+    letsTalkButton,
+    "letTalkImage": letsTalk.asset->url, // ← get URL directly
+
   }
 `;
-  const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
 
+  const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
   return (
     <main>
       {/* Hero Section */}
@@ -262,7 +264,7 @@ async function Page() {
        <section className="flex flex-col items-center justify-center mb-[90px] px-[16px] lg:px-[32px] w-full">
               <div className="h-[84vh] w-full">
                 <LetsTalk
-                  images="/images/dummy/img2.jpg"
+                  images={data.letTalkImage ?? "/images/dummy/img2.jpg"}
                   description={data.letsTalkDescription}
                 />
               </div>

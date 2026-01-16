@@ -35,7 +35,7 @@ async function Page() {
     letsTalkTitle,
     letsTalkDescription,
     letsTalkButton,
-
+    "letTalkImage": letsTalk.asset->url,
     section3Title,
     section3Description,
     section3Tagline,
@@ -199,7 +199,7 @@ async function Page() {
         <div className="h-[84vh] w-full">
           <LetsTalk
             description={data.letsTalkDescription}
-            images="/images/dummy/img8.jpg"
+            images={data.letTalkImage ?? "/images/dummy/img2.jpg"}
           />
         </div>
       </section>

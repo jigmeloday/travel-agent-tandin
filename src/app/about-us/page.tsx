@@ -61,11 +61,13 @@ async function Page() {
   tagline,
 
   // LETS TALK
-  letsTalkDescription
+  letsTalkDescription,
+  "letTalkImage": letsTalk.asset->url, // ← get URL directly
+
 }
 `;
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-  
+
   return (
     <main>
       <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden mb-[90px]">
@@ -217,7 +219,7 @@ async function Page() {
         <div className="border-[0.5px] border-primary h-[80px] mt-[40px]" />
       </section>
       <section className="flex flex-col items-center justify-center mb-[90px] px-[16px] lg:px-[32px] h-[84vh]">
-        <LetsTalk images="/images/dummy/img1.jpg" description={data.letsTalkDescription} />
+        <LetsTalk images={data.letTalkImage ?? "/images/dummy/img1.jpg" }description={data.letsTalkDescription} />
       </section>
     </main>
   );

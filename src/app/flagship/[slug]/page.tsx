@@ -37,6 +37,8 @@ async function Page({ params }: any) {
   letsTalkTitle,
   letsTalkDescription,
   letsTalkButton,
+  "letTalkImage": letsTalk.asset->url,
+
    section_last_package[]->{
       title,
       category,
@@ -60,6 +62,7 @@ async function Page({ params }: any) {
     { next: { revalidate: 0 } }
   );
 
+  
   return (
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden mb-[90px]">
@@ -300,7 +303,7 @@ async function Page({ params }: any) {
       </section> */}
       <div className="lg:h-[84vh] mb-24 px-[32px]">
         <LetsTalk
-          images="/images/dummy/img3.jpg"
+          images={data.letTalkImage ?? "/images/dummy/img2.jpg"}
           description={data.letsTalkDescription}
         />
       </div>

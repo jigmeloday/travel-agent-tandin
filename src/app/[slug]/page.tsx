@@ -52,7 +52,9 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
   section_6_taglin,
 
   // Lets Talk section
-  letsTalkDescription
+  letsTalkDescription,
+      "letTalkImage": letsTalk.asset->url, // ← get URL directly
+
 }`;
 
   const data = await client.fetch(query, { slug: slug }, { next: { revalidate: 0 } });
@@ -226,7 +228,7 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] my-[50px]">
         <div className="h-[84vh]">
           <LetsTalk
-            images="/images/dummy/img1.jpg"
+            images={data.letTalkImage ?? "/images/dummy/img1.jpg"}
             description={data.letsTalkDescription}
           />
         </div>

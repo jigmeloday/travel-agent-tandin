@@ -11,7 +11,6 @@ type ContactFormValues = {
 function ContactForm(){
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ContactFormValues>();
 const onSubmit: SubmitHandler<ContactFormValues> = async (data) => {
-    console.log("Form submitted:", data);
 
     // Example: send data to API
     try {
@@ -21,7 +20,6 @@ const onSubmit: SubmitHandler<ContactFormValues> = async (data) => {
         body: JSON.stringify(data),
       });
       const result = await res.json();
-      console.log(result);
     } catch (err) {
       console.error(err);
     }

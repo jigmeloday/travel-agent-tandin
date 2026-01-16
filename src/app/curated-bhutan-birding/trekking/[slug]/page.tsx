@@ -63,7 +63,7 @@ export default async function Page({ params }: any) {
 
   // ============ LET'S TALK ============
   letsTalk{
-    "imageUrl": image.asset->url,
+    "imageUrl": letsTalk.asset->url,
     description
   },
 
@@ -230,10 +230,10 @@ relatedTreks[]->{
       </section>
 
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px]">
-        <div className="h-[84vh]">
+        <div className="h-[84vh] w-full">
           <LetsTalk
-            images="/images/dummy/img2.jpg"
-            description={data.letsTalk.description}
+             images={data?.letsTalk?.imageUrl ?? "/images/dummy/img2.jpg"}
+            description={data?.letsTalk?.description}
           />
         </div>
       </section>

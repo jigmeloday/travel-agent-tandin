@@ -75,7 +75,9 @@ export default async function Page() {
 
   // SECTION 6 – LET'S TALK
   letsTalk{
-    description
+    description,
+    "letTalkImage": letsTalk.asset->url, // ← get URL directly
+
   }
 }`;
 const data = await client.fetch(query, {}, { next: { revalidate: 0 } })
@@ -291,7 +293,8 @@ return (
       <section className="flex flex-col items-center justify-center my-[90px] px-[16px] lg:px-[32px]">
         <div className="h-[84vh]">
           <LetsTalk
-            images="/images/dummy/img2.jpg"
+          
+            images={data.letsTalk.letTalkImage ?? "/images/dummy/img2.jpg"}
             description={data.letsTalk.description}
           />
         </div>

@@ -26,6 +26,8 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
     description
   },
   letsTalkDescription,
+        "letTalkImage": letsTalk.asset->url,
+
   section_slug[]->{
     title,
     "slug": slug.current,
@@ -34,7 +36,6 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
 }`;
 
  const data = await client.fetch(query, { slug }, { next: { revalidate: 0 } });
-
  return (
     <main>
       {/* Hero Section */}
@@ -154,7 +155,7 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
          <div className="h-[84vh] w-full">
                   <LetsTalk
                     description={data?.letsTalkDescription}
-                    images="/images/dummy/img8.jpg"
+                     images={data.letTalkImage ?? "/images/dummy/img2.jpg"}
                   />
                 </div>
       </section>

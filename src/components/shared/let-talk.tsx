@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 export default function LetsTalk({ images, description }: { images: string, description: string }) {
+
   return (
     <div
       className="w-full h-full relative flex items-center justify-end px-[32px]"

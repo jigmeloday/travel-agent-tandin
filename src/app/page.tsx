@@ -39,12 +39,17 @@ export default async function Home() {
     }
   },
     section_12[]{ title, image, links },
-    section_13{ title, description, btn_text },
+    section_13{ title, description, btn_text, image{
+      asset->{
+        _id,
+        url
+      }
+    } },
   }
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-  console.log(data);
+
   return (
     <main>
       <section className="h-screen w-full overflow-hidden">
@@ -473,7 +478,7 @@ export default async function Home() {
       <section className="mb-[90px] px-[32px]">
         <div className="h-[84vh] ">
           <LetsTalk
-            images="/images/dummy/img1.jpg"
+            images={data.section_13.image.asset.url}
             description={data.section_13.description}
           />
         </div>

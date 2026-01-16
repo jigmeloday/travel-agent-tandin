@@ -23,6 +23,7 @@ export default async function Page() {
     essentialsLeft[]{ type, title, description, tagline,  "imageUrl": image.asset->url },
     essentialsRight[]{ type, title, description, tagline,  "imageUrl": image.asset->url },
     letsTalkDescription,
+    "letTalkImage": letsTalk.asset->url, // ← get URL directly
 
     parallaxImage,
 
@@ -147,7 +148,7 @@ export default async function Page() {
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px]">
         <div className="h-[84vh]">
           <LetsTalk
-            images="/images/dummy/img2.jpg"
+            images={data.letTalkImage ?? "/images/dummy/img2.jpg"}
             description={data.letsTalkDescription}
           />
         </div>
