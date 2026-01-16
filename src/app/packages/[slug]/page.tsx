@@ -39,13 +39,13 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
  return (
     <main>
       {/* Hero Section */}
-      <section className="h-[60vh] lg:h-screen w-full relative overflow-hidden mb-[90px]">
+      <section className="h-[60vh] lg:h-[86vh] w-full relative overflow-hidden mb-[90px]">
         <Image
           src={data?.image || ''}
           alt={data?.title || 'img'}
           width={1920}
           height={1080}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
           <h1 className="text-white text-center px-4">

@@ -396,12 +396,12 @@ export default async function Home() {
       </section>
       <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] mb-[90px] gap-2">
         {/* LEFT IMAGE SECTION */}
-        <div className="w-full lg:w-[70%] min-h-[40vh] lg:min-h-[80vh] bg-black/70">
+        <div className="w-full lg:w-[70%] h-full bg-black/70">
           <Image
             src="/images/dummy/img4.jpg"
             alt="img"
-            height={1000}
-            width={1000}
+            height={500}
+            width={500}
             className="h-full w-full object-cover"
           />
         </div>
