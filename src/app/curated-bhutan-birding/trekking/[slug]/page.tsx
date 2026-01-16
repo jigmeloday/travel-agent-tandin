@@ -291,7 +291,7 @@ relatedTreks[]->{
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="p-[24px] bg-primary text-center">
+              <div className="p-[12px] lg:p-[24px] bg-primary text-center">
                 <h3 className="text-white">{item.title}</h3>
                 <p className="my-4">{item.description}</p>
                 <Link href="#" className="text-black font-bold underline">
@@ -306,8 +306,7 @@ relatedTreks[]->{
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mt-2">
           {data.relatedTreks2.slice(0, 2)?.map((item: any, index: number) => (
             <div key={index} className="w-full">
-              <div className="w-full border h-[540px]">
-                {' '}
+              <div className="w-full border h-[340px] lg:h-[540px]">
                 <Image
                   src={item.hero.imageUrl}
                   alt="img"
@@ -317,7 +316,7 @@ relatedTreks[]->{
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="p-[24px] bg-primary text-center">
+              <div className="p-[12px] lg:p-[24px bg-primary text-center">
                 <h3 className="text-white">{item.title}</h3>
                 <p className="my-4">{item.description}</p>
                 <Link href="/" className="text-black font-bold underline">
