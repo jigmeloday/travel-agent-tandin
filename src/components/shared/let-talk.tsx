@@ -4,7 +4,7 @@ export default function LetsTalk({ images, description }: { images: string, desc
 
   return (
     <div
-      className="w-full h-full relative flex items-center justify-end px-[32px]"
+      className="w-full h-full relative flex items-center justify-end px-[32px] py-[16px]"
       style={{
         backgroundImage: `url(${images})`,
         backgroundSize: 'cover',
