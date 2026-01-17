@@ -4,11 +4,13 @@ import HeroSwapper from '@/components/landing-component/hero-swapper';
 import SliderComponent from '@/components/landing-component/slider';
 import ImageBox from '@/components/shared/image-box';
 import LetsTalk from '@/components/shared/let-talk';
-import { Headphones, Mail, Plane, Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { client } from '@/lib/senity';
 import { urlFor } from '@/lib/senity.image';
+import * as Icons from "lucide-react";
+type IconName = keyof typeof Icons;
+
 
 export default async function Home() {
   const query = `
@@ -49,7 +51,6 @@ export default async function Home() {
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-
   return (
     <main>
       <section className="h-screen w-full overflow-hidden">
@@ -147,47 +148,19 @@ export default async function Home() {
           <p>{data.section_4.description}</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 items-start justify-center  my-[40px] gap-4">
-          {[
-            {
-              id: 1,
-              icon: Search,
-              title: 'Make an Enquiry',
-              description:
-                'Submit your travel request online or by phone—let us know your dreams, preferences, and travel dates.',
-            },
-            {
-              id: 2,
-              icon: Headphones,
-              title: 'Speak to an Expert',
-              description:
-                'Connect with your dedicated Travel Specialist to discuss your vision, fine-tune details, and craft your personalized itinerary.',
-            },
-            {
-              id: 3,
-              icon: Mail,
-              title: 'Receive a Quote',
-              description:
-                'We design your bespoke holiday and provide a detailed quote, ensuring every experience meets your expectations.',
-            },
-            {
-              id: 4,
-              icon: Plane,
-              title: 'Book Your Trip',
-              description:
-                'Once everything is perfectly tailored to your wishes, we confirm your booking and prepare you for an unforgettable journey.',
-            },
-          ].map(({ id, title, description, icon }) => {
-            const IconCoponent = icon;
+          {data.section_4.items.map(({ title, description, icon }: any, index: number) => {
+              const IconComponent = Icons[icon as IconName] as React.ComponentType<{ className?: string }>
+
             return (
               <div
-                key={id}
+                key={index}
                 className="flex flex-col items-center justify-center"
               >
                 <div className="flex items-center justify-center size-[60px] rounded-full bg-primary">
-                  <IconCoponent className="text-white" />
+                  {IconComponent && <IconComponent className="text-white" />}
                 </div>
                 <p className="mt-4 text-[16px] text-primary font-bold">
-                  0{id}. {title}
+                  0{index+1}. {title}
                 </p>
                 <div className="md:w-[300px]">
                   <p>{description}</p>
