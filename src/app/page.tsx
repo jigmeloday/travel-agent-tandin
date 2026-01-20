@@ -26,7 +26,12 @@ export default async function Home() {
     section_6_background_scroll{ title, description, image },
     section_slug[]->{title, subtitle, image, slug},
     section_7{ title, description },
-    section_9{ title, description_1, description_2, btn, image },
+    section_9{ title, description_1, description_2, btn, image{
+      asset->{
+        _id,
+        url
+      }
+    } },
     section_10_slider[]{ title, subtitle, description, cta, img },
     blogTitle,
     blogSubtitle,
@@ -51,6 +56,7 @@ export default async function Home() {
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
+
   return (
     <main>
       <section className="h-screen w-full overflow-hidden">
@@ -371,7 +377,7 @@ export default async function Home() {
         {/* LEFT IMAGE SECTION */}
         <div className="w-full lg:w-[70%] min-h-full bg-black/70">
           <Image
-            src="/images/dummy/img4.jpg"
+            src={data.section_9.image.asset.url ?? "/images/dummy/img4.jpg"}
             alt="img"
             height={500}
             width={500}
@@ -429,12 +435,12 @@ export default async function Home() {
           ))}
         </div>
       </section>
-      <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] mb-[90px] gap-2 h-[80vh]">
+      <section className="grid grid-cols-1 lg:grid-cols-2 px-[16px] lg:px-[32px] mb-[90px] gap-2 h-[80vh]">
         {data.section_12.map((item: any, index: number) => (
           <Link
             key={index}
             href={item.links}
-            className="w-[50%] border relative flex items-center justify-center"
+            className="lg:w-[50%] border relative flex items-center justify-center"
           >
             <Image
               src={urlFor(item.image).url()}
