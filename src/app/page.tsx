@@ -440,7 +440,7 @@ export default async function Home() {
           <Link
             key={index}
             href={item.links}
-            className="lg:w-[50%] border relative flex items-center justify-center"
+            className="border relative flex items-center justify-center"
           >
             <Image
               src={urlFor(item.image).url()}
