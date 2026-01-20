@@ -80,9 +80,9 @@ export default async function Page() {
 
   }
 }`;
-const data = await client.fetch(query, {}, { next: { revalidate: 0 } })
+  const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
 
-return (
+  return (
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden">
         <Image
@@ -100,16 +100,12 @@ return (
       </section>
       <section className="flex flex-col lg:flex-row gap-[24px] px-[16px] lg:px-[32px] mt-[90px]">
         <div className="flex-2">
-          <h1 className="leading-[52px]">
-            {data.section1.title}
-          </h1>
-          <p className="my-[24px] font-medium">
-           {data.section1.description}
-          </p>
-         <Link href='/contact-us'>
-          <Button className="rounded-none">
-             {data.section1.buttonLabel}
-          </Button>
+          <h1 className="leading-[52px]">{data.section1.title}</h1>
+          <p className="my-[24px] font-medium">{data.section1.description}</p>
+          <Link href="/contact-us">
+            <Button className="rounded-none">
+              {data.section1.buttonLabel}
+            </Button>
           </Link>
         </div>
         <div className="flex-1 w-full !h-[400px] lg:w-[422px] lg:h-[500px]">
@@ -118,31 +114,31 @@ return (
       </section>
       <section className="gap-[50px] px-[16px] lg:px-[32px] mt-[90px]">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
-          {data.section2.topBlocks.slice(0,3).map((item: any, index: number) => (
-            <Link
-              href="/curated-bhutan-birding/birding"
-              key={index}
-              className={`aspect-square border cursor-pointer flex flex-col items-center justify-center px-[42px] text-center ${
-                index % 2 === 0 ? 'bg-primary ' : 'bg-black text-white'
-              }`}
-            >
-              <h1
-                className={`leading-[52px] ${
-                  index % 2 === 0 ? 'text-black' : 'text-white'
+          {data.section2.topBlocks
+            .slice(0, 3)
+            .map((item: any, index: number) => (
+              <Link
+                href="/curated-bhutan-birding/birding"
+                key={index}
+                className={`aspect-square border cursor-pointer flex flex-col items-center justify-center px-[42px] text-center ${
+                  index % 2 === 0 ? 'bg-primary ' : 'bg-black text-white'
                 }`}
               >
-                {item.title}
-              </h1>
-              <div
-                className={`border w-[50%] my-[24px] ${
-                  index % 2 === 0 ? 'border-black' : 'border-white'
-                }`}
-              />
-              <p className="font-medium">
-               {item.description}
-              </p>
-            </Link>
-          ))}
+                <h1
+                  className={`leading-[52px] ${
+                    index % 2 === 0 ? 'text-black' : 'text-white'
+                  }`}
+                >
+                  {item.title}
+                </h1>
+                <div
+                  className={`border w-[50%] my-[24px] ${
+                    index % 2 === 0 ? 'border-black' : 'border-white'
+                  }`}
+                />
+                <p className="font-medium">{item.description}</p>
+              </Link>
+            ))}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 mt-2">
           {data.section2.bottomGrid?.map((item: any, index: number) =>
@@ -157,9 +153,7 @@ return (
                 />
                 <div className="absolute bottom-0 px-[24px] text-white">
                   <h3>{item?.title}</h3>
-                  <p>
-                   {item?.description}
-                  </p>
+                  <p>{item?.description}</p>
                 </div>
               </div>
             ) : (
@@ -167,14 +161,12 @@ return (
                 className="flex flex-col items-center justify-center lg:px-4 "
                 key={item}
               >
-                <h1 className="leading-[52px]">
-                 {item?.title}
-                </h1>
+                <h1 className="leading-[52px]">{item?.title}</h1>
                 <p className="my-6 text-[18px] font-medium">
-                {item?.description}
+                  {item?.description}
                 </p>
               </div>
-            )
+            ),
           )}
         </div>
       </section>
@@ -210,15 +202,14 @@ return (
           ))}
         </div>
       </section>
-      <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] mt-[90px] gap-2">
+      <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] mt-[90px] gap-2 items-stretch">
         {/* LEFT IMAGE SECTION */}
-        <div className="w-full lg:w-[70%] min-h-[40vh] lg:min-h-[80vh] bg-black/70">
+        <div className="w-full lg:w-[70%] relative bg-black/70 flex">
           <Image
             src={data.travelPurpose.imageUrl}
             alt="img"
-            height={500}
-            width={500}
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
           />
         </div>
 
@@ -246,46 +237,45 @@ return (
           </div>
         </div>
       </section>
+
       <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] mt-[90px] gap-2">
         <div className="bg-[#111820] w-full py-10 flex flex-col lg:flex-row">
           <div className="flex lg:w-[50%] p-8">
             <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[25%] border">
-               <Image
-            src={data.brochure.images[0]?.url}
-            alt="img"
-            height={500}
-            width={500}
-            className="h-full w-full object-cover"
-          />
+              <Image
+                src={data.brochure.images[0]?.url}
+                alt="img"
+                height={500}
+                width={500}
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[30%] scale-y-110 border">
-               <Image
-            src={data.brochure.images[1]?.url}
-            alt="img"
-            height={500}
-            width={500}
-            className="h-full w-full object-cover"
-          />
+              <Image
+                src={data.brochure.images[1]?.url}
+                alt="img"
+                height={500}
+                width={500}
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="h-[240px] lg:h-full bg-primary w-full lg:w-[25%] border">
-               <Image
-            src={data.brochure.images[2]?.url}
-            alt="img"
-            height={500}
-            width={500}
-            className="h-full w-full object-cover"
-          />
+              <Image
+                src={data.brochure.images[2]?.url}
+                alt="img"
+                height={500}
+                width={500}
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
           <div className="lg:w-[50%] px-8">
-            <h4 className='text-white'>{data.brochure.title}</h4>
+            <h4 className="text-white">{data.brochure.title}</h4>
             <h3>{data.brochure.subtitle}</h3>
-            <p className='text-white'>
-             {data.brochure.description}
-            </p>
-            <div className='flex text-white space-x-8 font-bold mt-4'>
-              <span className='border-b'>{data.brochure.cta1}</span>
-              <span className='border-b'>{data.brochure.cta2}</span>
+            <p className="text-white">{data.brochure.description}</p>
+            <div className="flex text-white space-x-8 font-bold mt-4">
+              <span className="border-b">{data.brochure.cta1}</span>
+              <span className="border-b">{data.brochure.cta2}</span>
             </div>
           </div>
         </div>
@@ -293,8 +283,7 @@ return (
       <section className="flex flex-col items-center justify-center my-[90px] px-[16px] lg:px-[32px]">
         <div className="h-[84vh]">
           <LetsTalk
-          
-            images={data.letsTalk.letTalkImage ?? "/images/dummy/img2.jpg"}
+            images={data.letsTalk.letTalkImage ?? '/images/dummy/img2.jpg'}
             description={data.letsTalk.description}
           />
         </div>
