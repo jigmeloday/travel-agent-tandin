@@ -25,7 +25,24 @@ async function Page() {
     section1_description,
     section1_tagline,
 
-    "bgScrollImage": bgScrollImage.asset->url,
+    // Updated bgScrollImage to support image/video
+    bgScrollImage{
+      type,
+      image{
+        asset->{
+          _id,
+          url
+        }
+      },
+      video{
+        asset->{
+          _id,
+          url
+        }
+      },
+      title,
+      description
+    },
 
     section2Title,
     section2Description,
@@ -54,10 +71,11 @@ async function Page() {
       description,
       category,
       "image": image.asset->url,
-     slug
+      slug
     }
   }
 `;
+
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
   return (
     <main>
@@ -142,7 +160,7 @@ async function Page() {
                   {data.section1_title}
                 </h1>
                 <p className="text-[14px] md:text-[16px] mt-2">
-                 {data.section1_description}
+                  {data.section1_description}
                 </p>
               </div>
               <div>
@@ -182,8 +200,7 @@ async function Page() {
               <h1 className="mb-0 leading-[1.2] text-2xl md:text-4xl w-[80%]">
                 {data.section2Title}
               </h1>
-              <div className='border-b-4 border-white w-[24%]' />
-              
+              <div className="border-b-4 border-white w-[24%]" />
             </div>
             <p className="text-white text-[14px] md:text-[16px]">
               {data.section2Description}
@@ -200,20 +217,50 @@ async function Page() {
         <div className="h-[84vh] w-full">
           <LetsTalk
             description={data.letsTalkDescription}
-            images={data.letTalkImage ?? "/images/dummy/img2.jpg"}
+            images={data.letTalkImage ?? '/images/dummy/img2.jpg'}
           />
         </div>
       </section>
       {/* Parallax Section */}
       <section className="relative w-full h-[80vh] hidden lg:block mb-[90px]">
-        <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat"
-          style={{
-            backgroundImage: `url(${urlFor(data.bgScrollImage).url()})`,
-            backgroundAttachment: 'fixed',
-          }}
-        ></div>
+        {/* Background - Image or Video */}
+        {data?.bgScrollImage?.type === 'video' ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src={data.bgScrollImage.video?.asset?.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <div
+            className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: `url(${urlFor(data.bgScrollImage.image).url()})`,
+              backgroundAttachment: 'fixed',
+            }}
+          />
+        )}
+
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
+
+        {/* Optional Text */}
+        {data?.bgScrollImage?.title || data?.bgScrollImage?.description ? (
+          <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6 lg:px-32">
+            {data.bgScrollImage.title && (
+              <h1 className="text-4xl font-bold mb-4 text-white">
+                {data.bgScrollImage.title}
+              </h1>
+            )}
+            {data.bgScrollImage.description && (
+              <p className="text-lg font-semibold">
+                {data.bgScrollImage.description}
+              </p>
+            )}
+          </div>
+        ) : null}
       </section>
 
       {/* Nature Section */}
@@ -229,9 +276,7 @@ async function Page() {
             </p>
           </div>
           <div className="lg:min-w-[250px]">
-            <span className="font-bold">
-            {data.section3Tagline}
-            </span>
+            <span className="font-bold">{data.section3Tagline}</span>
           </div>
         </div>
         <div className="border-[0.5px] border-primary h-[80px] mt-[40px]" />
@@ -259,7 +304,7 @@ async function Page() {
                   {subtitle}
                 </p>
               </Link>
-            )
+            ),
           )}
         </div>
       </section>

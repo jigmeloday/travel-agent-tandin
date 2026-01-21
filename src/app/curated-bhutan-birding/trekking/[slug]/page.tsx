@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SideSelling from '../../components/slider';
 import { client } from '@/lib/senity';
+import { urlFor } from '@/lib/senity.image';
 
 export default async function Page({ params }: any) {
   const query = `*[_type == "trek" && slug.current == $slug][0]{
@@ -68,7 +69,23 @@ export default async function Page({ params }: any) {
   },
 
   // ============ PARALLAX IMAGE ============
-  "parallaxImageUrl": parallaxImage.asset->url,
+ bgScrollImage{
+      type,
+      image{
+        asset->{
+          _id,
+          url
+        }
+      },
+      video{
+        asset->{
+          _id,
+          url
+        }
+      },
+      title,
+      description
+    },
 
   // ============ TRAVEL WITH PURPOSE ============
   purpose{
@@ -187,12 +204,12 @@ relatedTreks[]->{
                   />
                 </div>
               ) : (
-                <div className="py-10" key={index}>
+                <div className="py-10 lg:min-h-[540px]" key={index}>
                   <h2>{item.title}</h2>
                   <p>{item.description}</p>
                   <p className="font-bold text-primary pt-4">{item.tagline}</p>
                 </div>
-              )
+              ),
             )}
           </div>
           <div className="lg:w-[50%]">
@@ -208,12 +225,12 @@ relatedTreks[]->{
                   />
                 </div>
               ) : (
-                <div className="py-10" key={index}>
+                <div className="py-10 lg:min-h-[540px]" key={index}>
                   <h2>{item.title}</h2>
                   <p>{item.description}</p>
                   <p className="font-bold text-primary pt-4">{item.tagline}</p>
                 </div>
-              )
+              ),
             )}
           </div>
         </div>
@@ -227,56 +244,84 @@ relatedTreks[]->{
           />
         </div>
       </section>
-      <section className="relative w-full h-[80vh] hidden lg:block mb-[90px]">
-        <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat"
-          style={{
-            backgroundImage: `url(${data.parallaxImageUrl})`,
-            backgroundAttachment: 'fixed',
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
+         <section className="relative w-full h-[80vh] hidden lg:block mb-[90px]">
+             {/* Background - Image or Video */}
+             {data?.bgScrollImage?.type === 'video' ? (
+               <video
+                 className="absolute inset-0 w-full h-full object-cover"
+                 src={data.bgScrollImage.video?.asset?.url}
+                 autoPlay
+                 muted
+                 loop
+                 playsInline
+               />
+             ) : (
+               <div
+                 className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+                 style={{
+                   backgroundImage: `url(${urlFor(data.bgScrollImage.image).url()})`,
+                   backgroundAttachment: 'fixed',
+                 }}
+               />
+             )}
+     
+             {/* Overlay */}
+             <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
+     
+             {/* Optional Text */}
+             {data?.bgScrollImage?.title || data?.bgScrollImage?.description ? (
+               <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6 lg:px-32">
+                 {data.bgScrollImage.title && (
+                   <h1 className="text-4xl font-bold mb-4 text-white">
+                     {data.bgScrollImage.title}
+                   </h1>
+                 )}
+                 {data.bgScrollImage.description && (
+                   <p className="text-lg font-semibold">
+                     {data.bgScrollImage.description}
+                   </p>
+                 )}
+               </div>
+             ) : null}
+           </section>
+
+      <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] gap-2 mb-[90px] items-stretch">
+        {/* LEFT IMAGE SECTION */}
+        <div className="w-full lg:w-[70%] bg-black/70 flex h-auto">
+          <div className="relative w-full h-full">
+            <Image
+              src={data.purpose?.imageUrl}
+              alt="img"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        {/* RIGHT CONTENT SECTION */}
+        <div className="w-full lg:w-[34.5%] bg-[#111820] p-[24px] flex flex-col justify-between">
+          <div>
+            <h2>{data.purpose.title}</h2>
+
+            <p className="text-white text-[16px] mt-[32px]">
+              {data.purpose.description1}
+            </p>
+
+            <p className="text-white text-[16px] mt-[32px]">
+              {data.purpose.description2}
+            </p>
+          </div>
+
+          <div className="mt-[32px] flex">
+            <Link
+              className="bg-primary py-2 px-3 text-[20px] font-bold text-white"
+              href="/travel-purpose"
+            >
+              VIEW DETAILS
+            </Link>
+          </div>
+        </div>
       </section>
-
-     <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] gap-2 mb-[90px] items-stretch">
-
-  {/* LEFT IMAGE SECTION */}
-  <div className="w-full lg:w-[70%] bg-black/70 flex h-auto">
-    <div className="relative w-full h-full">
-      <Image
-        src={data.purpose?.imageUrl}
-        alt="img"
-        fill
-        className="object-cover"
-      />
-    </div>
-  </div>
-
-  {/* RIGHT CONTENT SECTION */}
-  <div className="w-full lg:w-[34.5%] bg-[#111820] p-[24px] flex flex-col justify-between">
-    <div>
-      <h2>{data.purpose.title}</h2>
-
-      <p className="text-white text-[16px] mt-[32px]">
-        {data.purpose.description1}
-      </p>
-
-      <p className="text-white text-[16px] mt-[32px]">
-        {data.purpose.description2}
-      </p>
-    </div>
-
-    <div className="mt-[32px] flex">
-      <Link
-        className="bg-primary py-2 px-3 text-[20px] font-bold text-white"
-        href="/travel-purpose"
-      >
-        VIEW DETAILS
-      </Link>
-    </div>
-  </div>
-
-</section>
 
       <section className="flex flex-col text-center px-[16px] lg:px-[32px] items-center justify-center gap-2 mb-[90px]">
         <h2>{data.relatedTreksSection?.title}</h2>
@@ -309,7 +354,7 @@ relatedTreks[]->{
           ))}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mt-2">
-          {data.relatedTreks2.slice(0, 2)?.map((item: any, index: number) => (
+          {data.relatedTreks2?.map((item: any, index: number) => (
             <div key={index} className="w-full">
               <div className="w-full border h-[340px] lg:h-[540px]">
                 <Image

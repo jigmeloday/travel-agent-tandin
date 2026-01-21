@@ -25,7 +25,24 @@ export default async function Page() {
     letsTalkDescription,
     "letTalkImage": letsTalk.asset->url, // ← get URL directly
 
-    parallaxImage,
+   bgScrollImage{
+      type,
+      image{
+        asset->{
+          _id,
+          url
+        }
+      },
+      video{
+        asset->{
+          _id,
+          url
+        }
+      },
+      title,
+      description
+    },
+
 
     purposeTitle,
     purposeDescription1,
@@ -114,7 +131,7 @@ export default async function Page() {
                   />
                 </div>
               ) : (
-                <div className="py-10" key={index}>
+                <div className="py-10 min-h-[540px]" key={index}>
                   <h2>{item.title}</h2>
                   <p>{item.description}</p>
                   <p className="font-bold text-primary pt-4">{item.tagline}</p>
@@ -125,7 +142,7 @@ export default async function Page() {
           <div className="lg:w-[50%]">
             {data.essentialsRight.map((item: any, index: number) =>
               item.type === 'image' ? (
-                <div key={index} className="bg-primary h-[540px]">
+                <div key={index} className="bg-primary h-[540px] ">
                   <Image
                     src={item.imageUrl}
                     alt="Hero image"
@@ -135,7 +152,7 @@ export default async function Page() {
                   />
                 </div>
               ) : (
-                <div className="py-10" key={index}>
+                <div className="py-10 min-h-[540px]" key={index}>
                   <h2>{item.title}</h2>
                   <p>{item.description}</p>
                   <p className="font-bold text-primary pt-4">{item.tagline}</p>
@@ -154,15 +171,45 @@ export default async function Page() {
         </div>
       </section>
       <section className="relative w-full h-[80vh] hidden lg:block mb-[90px]">
-        <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat"
-          style={{
-            backgroundImage: "url('/images/slide.jpg')",
-            backgroundAttachment: 'fixed',
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
-      </section>
+             {/* Background - Image or Video */}
+             {data?.bgScrollImage?.type === 'video' ? (
+               <video
+                 className="absolute inset-0 w-full h-full object-cover"
+                 src={data.bgScrollImage.video?.asset?.url}
+                 autoPlay
+                 muted
+                 loop
+                 playsInline
+               />
+             ) : (
+               <div
+                 className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+                 style={{
+                   backgroundImage: `url(${urlFor(data.bgScrollImage.image).url()})`,
+                   backgroundAttachment: 'fixed',
+                 }}
+               />
+             )}
+     
+             {/* Overlay */}
+             <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
+     
+             {/* Optional Text */}
+             {data?.bgScrollImage?.title || data?.bgScrollImage?.description ? (
+               <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6 lg:px-32">
+                 {data.bgScrollImage.title && (
+                   <h1 className="text-4xl font-bold mb-4 text-white">
+                     {data.bgScrollImage.title}
+                   </h1>
+                 )}
+                 {data.bgScrollImage.description && (
+                   <p className="text-lg font-semibold">
+                     {data.bgScrollImage.description}
+                   </p>
+                 )}
+               </div>
+             ) : null}
+           </section>
       <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] gap-2 mb-[90px]">
         {/* LEFT IMAGE SECTION */}
         <div className="w-full lg:w-[70%] min-h-[40vh] lg:min-h-[80vh] bg-black/70">

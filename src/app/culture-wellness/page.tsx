@@ -31,7 +31,23 @@ async function Page() {
     "section3Image1": section3Image1.asset->url,
     "section3Image2": section3Image2.asset->url,
 
-    "bgScrollImage": bgScrollImage.asset->url,
+     bgScrollImage{
+      type,
+      image{
+        asset->{
+          _id,
+          url
+        }
+      },
+      video{
+        asset->{
+          _id,
+          url
+        }
+      },
+      title,
+      description
+    },
 
     section4Title,
     section4Description,
@@ -172,14 +188,44 @@ async function Page() {
 
       {/* Parallax Section */}
       <section className="relative w-full h-[80vh] hidden lg:block mb-[90px]">
-        <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat"
-          style={{
-            backgroundImage: `url(${urlFor(data.bgScrollImage).url()})`,
-            backgroundAttachment: 'fixed',
-          }}
-        />
+        {/* Background - Image or Video */}
+        {data?.bgScrollImage?.type === 'video' ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src={data.bgScrollImage.video?.asset?.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <div
+            className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: `url(${urlFor(data.bgScrollImage.image).url()})`,
+              backgroundAttachment: 'fixed',
+            }}
+          />
+        )}
+
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
+
+        {/* Optional Text */}
+        {data?.bgScrollImage?.title || data?.bgScrollImage?.description ? (
+          <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6 lg:px-32">
+            {data.bgScrollImage.title && (
+              <h1 className="text-4xl font-bold mb-4 text-white">
+                {data.bgScrollImage.title}
+              </h1>
+            )}
+            {data.bgScrollImage.description && (
+              <p className="text-lg font-semibold">
+                {data.bgScrollImage.description}
+              </p>
+            )}
+          </div>
+        ) : null}
       </section>
 
       {/* Signature Tours Section */}
