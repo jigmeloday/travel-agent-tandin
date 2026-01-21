@@ -25,7 +25,7 @@ const onSubmit: SubmitHandler<ContactFormValues> = async (data) => {
     }
   };
   return(
-     <form onSubmit={handleSubmit(onSubmit)} className="text-white my-[42px] space-y-[24px]">
+     <form onSubmit={handleSubmit(onSubmit)} className="text-white my-[16px] space-y-[16px]">
       <div>
         <Input
           placeholder="Name"

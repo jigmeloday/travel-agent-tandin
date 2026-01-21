@@ -37,7 +37,7 @@ async function Page() {
         </div>
       </section>
       <section className="flex flex-col md:flex-row px-[16px] md:px-[32px] mb-[90px] justify-center w-full">
-        <div className="bg-[#111820] md:w-[40%] p-[32px]">
+        <div className="bg-[#111820] md:w-[42%] p-[24px]">
           <h2>{data.sectionTitle}</h2>
           <p className="text-white text-[14px] lg:text-[16px]">
             {data.sectionDescription}
