@@ -12,7 +12,7 @@ async function Page() {
     title,
     subtitle,
     "cover": cover.asset->url,
-
+    "bImage": bannerImage.asset->url,
     section1_title,
     section1_subtitle,
     section1_tagline,
@@ -57,7 +57,7 @@ async function Page() {
       {/* Hero Section */}
       <section className="h-screen w-full overflow-hidden relative mb-[90px]">
        <Image
-                 src={urlFor(data?.cover).url()}
+                 src={urlFor(data?.bImage).url()}
                  alt="Culture"
                  width={1920}
                  height={1080}

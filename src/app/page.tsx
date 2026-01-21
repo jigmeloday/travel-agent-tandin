@@ -15,7 +15,12 @@ type IconName = keyof typeof Icons;
 export default async function Home() {
   const query = `
   *[_type == "homePage"][0]{
-    hero[]{ title, image },
+    hero[]{ title, image,type, video{
+      asset->{
+        _id,
+        url
+      }
+    } },
     section_1{ title, description, tag_line },
     section_2-> { title, subtitle, link, image },
     section_21-> { title, subtitle, link, image1 },

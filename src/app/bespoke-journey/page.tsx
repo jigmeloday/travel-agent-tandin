@@ -13,7 +13,7 @@ async function Page() {
     subtitle,
     "link": link.current,
     "image": image.asset->url,
-
+    "bImage": bannerImage.asset->url,
     section_package[]->{
       title,
       category,
@@ -72,10 +72,10 @@ async function Page() {
       {/* Hero */}
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden mb-[90px]">
         <Image
-          src={urlFor(data?.image).url()}
+          src={urlFor(data?.bImage).url()}
           alt="Bespoke Journey"
-          width={1920}
-          height={1080}
+          width={600}
+          height={600}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">

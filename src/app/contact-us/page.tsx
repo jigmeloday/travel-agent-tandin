@@ -26,8 +26,8 @@ async function Page() {
         <Image
           src={urlFor(data.heroImage).url()}
           alt="Bespoke Journey"
-          width={1920}
-          height={1080}
+          width={500}
+          height={500}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4">

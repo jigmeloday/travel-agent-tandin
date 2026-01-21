@@ -13,6 +13,7 @@ async function Page() {
     subtitle,
     herotitle,
     herosubtitle,
+    "bImage": bannerImage.asset->url,
     "link": link.current,
     
     "image1": image1.asset->url,
@@ -63,14 +64,14 @@ async function Page() {
       {/* Hero Section */}
       <section className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden mb-[90px]">
         <Image
-          src={urlFor(data?.image1).url()}
+          src={urlFor(data?.bImage).url()}
           alt="Culture"
           width={1920}
           height={1080}
           className="w-full h-full object-cover"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-white/12 via-white/14 to-white/50"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-r from-white/12 via-white/14 to-white/50"></div> */}
 
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex flex-col md:flex-row w-full h-full px-4 md:px-[50px] pb-4 md:pb-[40px]">
