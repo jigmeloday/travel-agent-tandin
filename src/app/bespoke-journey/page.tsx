@@ -8,61 +8,68 @@ import Link from 'next/link';
 
 async function Page() {
   const query = `
-  *[_type == "bespoke"][0]{
+*[_type == "bespoke"][0]{
+  title,
+  subtitle,
+  "link": link.current,
+  "image": image.asset->url,
+  "bImage": bannerImage.asset->url,
+  
+  section_package[]->{
     title,
-    subtitle,
-    "link": link.current,
+    category,
+    description,
     "image": image.asset->url,
-    "bImage": bannerImage.asset->url,
-    section_package[]->{
-      title,
-      category,
-      description,
-      "image": image.asset->url,
-      slug
-    },
+    slug
+  },
 
-    section_othere_package[]->{
-      title,
-      category,
-      description,
-      slug,
-      "image": image.asset->url,      
-    },
+  section_othere_package[]->{
+    title,
+    category,
+    description,
+    slug,
+    "image": image.asset->url,      
+  },
 
-    section_last_package[]->{
-      title,
-      category,
-      description,
-      slug,
-      "image": image.asset->url,
-    },
+  section_last_package[]->{
+    title,
+    category,
+    description,
+    slug,
+    "image": image.asset->url,
+  },
 
-    section_second_last_package[]->{
-      title,
-      category,
-      description,
-      slug,
-      "image": image.asset->url,
-    },
+  section_second_last_package[]->{
+    title,
+    category,
+    description,
+    slug,
+    "image": image.asset->url,
+  },
 
-    "bgScrollImage": bgScrollImage.asset->url,
+  // 🌟 Updated: bgScrollMedia can be image or video
+  bgScrollMedia {
+    type,
+    title,
+    "imageUrl": select(type == "image" => image.asset->url),
+    "videoUrl": select(type == "video" => video.asset->url)
+  },
 
-    travelPurposeTitle,
-    travelPurposeParagraph1,
-    travelPurposeParagraph2,
-    travelPurposeButton,
+  travelPurposeTitle,
+  travelPurposeParagraph1,
+  travelPurposeParagraph2,
+  travelPurposeButton,
 
-    section1Title,
-    section1Description,
-    section1Tagline,
+  section1Title,
+  section1Description,
+  section1Tagline,
 
-    letsTalkTitle,
-    letsTalkDescription,
-    "letTalkImage": letsTalk.asset->url, // ← get URL directly
+  letsTalkTitle,
+  letsTalkDescription,
+  "letTalkImage": letsTalk.asset->url, // get URL directly
 
-    letsTalkButton
-  }
+  letsTalkButton
+}
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
@@ -119,7 +126,7 @@ async function Page() {
                 </Link>
               </div>
             </div>
-          )
+          ),
         )}
       </section>
 
@@ -161,17 +168,54 @@ async function Page() {
             ))}
         </div>
       </section>
-
       {/* Parallax */}
-      <section className="relative w-full h-[50vh] lg:h-[80vh] hidden md:block mb-[90px]">
-        <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat"
-          style={{
-            backgroundImage: `url(${urlFor(data.bgScrollImage).url()})`,
-            backgroundAttachment: 'fixed',
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
+      <section className="relative w-full h-[50vh] lg:h-[80vh] hidden md:block mb-[90px] overflow-hidden">
+        {/* IMAGE */}
+        {data.bgScrollMedia?.type === 'image' && (
+          <div
+            className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: `url(${data.bgScrollMedia.imageUrl ?? '/images/dummy/img1.jpg'})`,
+              backgroundAttachment: 'fixed', // parallax scroll effect
+            }}
+          />
+        )}
+
+        {/* VIDEO */}
+        {data.bgScrollMedia?.type === 'video' && (
+          <div
+            className="absolute inset-0 overflow-hidden"
+            style={{
+              height: '100%',
+              width: '100%',
+              top: 0,
+              left: 0,
+              backgroundAttachment: 'fixed', // SAME as your image
+            }}
+          >
+            <video
+              src={data.bgScrollMedia.videoUrl}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                height: '100%',
+                width: '100%',
+                pointerEvents: 'none',
+              }}
+            />
+          </div>
+        )}
+
+        {/* DARK OVERLAY */}
+        <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+          <h2 className="text-white text-center px-4">{data.bgScrollMedia?.title}</h2>
+        </div>
       </section>
 
       {/* Split Section */}
@@ -274,10 +318,10 @@ async function Page() {
       </section>
       {/* Final CTA */}
       <section className="flex flex-col items-center justify-center mb-[90px] px-[16px] lg:px-[32px]">
-        <div className="h-[84vh]">
+        <div className="h-[84vh] w-full">
           <LetsTalk
-            images={data.letsTalkImage ?? "/images/dummy/img2.jpg"}
-            description={data.letTalkDescription}
+            images={data.letTalkImage ?? '/images/dummy/img2.jpg'}
+            description={data.letsTalkDescription}
           />
         </div>
       </section>

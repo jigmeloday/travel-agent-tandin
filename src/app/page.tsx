@@ -8,60 +8,92 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { client } from '@/lib/senity';
 import { urlFor } from '@/lib/senity.image';
-import * as Icons from "lucide-react";
+import * as Icons from 'lucide-react';
 type IconName = keyof typeof Icons;
-
 
 export default async function Home() {
   const query = `
   *[_type == "homePage"][0]{
-    hero[]{ title, image,type, video{
-      asset->{
-        _id,
-        url
+    hero[]{ 
+      title, 
+      type,
+      image{
+        asset->{
+          _id,
+          url
+        }
+      },
+      video{
+        asset->{
+          _id,
+          url
+        }
       }
-    } },
+    },
     section_1{ title, description, tag_line },
-    section_2-> { title, subtitle, link, image },
-    section_21-> { title, subtitle, link, image1 },
-    section_22-> { title, subtitle, link, cover },
-    section_3[]->{title, description, image, slug},
-    section_4{ title, description, items[]{ title, description, icon }, button_text, button_link },
-    section_5[]->{title, description, image, category, slug},
-    section_6_background_scroll{ title, description, image },
-    section_slug[]->{title, subtitle, image, slug},
-    section_7{ title, description },
-    section_9{ title, description_1, description_2, btn, image{
-      asset->{
-        _id,
-        url
+    section_2-> { title, subtitle, link, image{ asset->{ _id, url } } },
+    section_21-> { title, subtitle, link, image1{ asset->{ _id, url } } },
+    section_22-> { title, subtitle, link, cover{ asset->{ _id, url } } },
+    section_3[]->{ title, description, image{ asset->{ _id, url } }, slug },
+    section_4{ 
+      title, 
+      description, 
+      items[]{ title, description, icon }, 
+      button_text, 
+      button_link 
+    },
+    section_5[]->{ title, description, image{ asset->{ _id, url } }, category, slug },
+    section_6_background_scroll{
+      title, 
+      description, 
+      type,
+      image{
+        asset->{
+          _id,
+          url
+        }
+      },
+      video{
+        asset->{
+          _id,
+          url
+        }
       }
-    } },
-    section_10_slider[]{ title, subtitle, description, cta, img },
+    },
+    section_slug[]->{ title, subtitle, image{ asset->{ _id, url } }, slug },
+    section_7{ title, description },
+    section_9{ 
+      title, 
+      description_1, 
+      description_2, 
+      btn, 
+      image{
+        asset->{
+          _id,
+          url
+        }
+      } 
+    },
+    section_10_slider[]{ title, subtitle, description, cta, img{ asset->{ _id, url } } },
     blogTitle,
     blogSubtitle,
-   blog[]->{
-    title,
-    slug,
-    image{
-      asset->{
-        _id,
-        url
+    blog[]->{
+      title,
+      slug,
+      image{
+        asset->{
+          _id,
+          url
+        }
       }
-    }
-  },
-    section_12[]{ title, image, links },
-    section_13{ title, description, btn_text, image{
-      asset->{
-        _id,
-        url
-      }
-    } },
+    },
+    section_12[]{ title, image{ asset->{ _id, url } }, links },
+    section_13{ title, description, btn_text, image{ asset->{ _id, url } } },
   }
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-
+console.log(data)
   return (
     <main>
       <section className="h-screen w-full overflow-hidden">
@@ -159,26 +191,30 @@ export default async function Home() {
           <p>{data.section_4.description}</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 items-start justify-center  my-[40px] gap-4">
-          {data.section_4.items.map(({ title, description, icon }: any, index: number) => {
-              const IconComponent = Icons[icon as IconName] as React.ComponentType<{ className?: string }>
+          {data.section_4.items.map(
+            ({ title, description, icon }: any, index: number) => {
+              const IconComponent = Icons[
+                icon as IconName
+              ] as React.ComponentType<{ className?: string }>;
 
-            return (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center"
-              >
-                <div className="flex items-center justify-center size-[60px] rounded-full bg-primary">
-                  {IconComponent && <IconComponent className="text-white" />}
+              return (
+                <div
+                  key={index}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <div className="flex items-center justify-center size-[60px] rounded-full bg-primary">
+                    {IconComponent && <IconComponent className="text-white" />}
+                  </div>
+                  <p className="mt-4 text-[16px] text-primary font-bold">
+                    0{index + 1}. {title}
+                  </p>
+                  <div className="md:w-[300px]">
+                    <p>{description}</p>
+                  </div>
                 </div>
-                <p className="mt-4 text-[16px] text-primary font-bold">
-                  0{index+1}. {title}
-                </p>
-                <div className="md:w-[300px]">
-                  <p>{description}</p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            },
+          )}
         </div>
         <Link
           href="/contact-us"
@@ -326,26 +362,37 @@ export default async function Home() {
         </div>
       </section>
       <section className="relative w-full h-[80vh] hidden lg:block mb-[90px] border">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat z-0"
-          style={{
-            backgroundImage: `url(${urlFor(
-              data.section_6_background_scroll.image
-            ).url()})`,
-            backgroundAttachment: 'fixed',
-          }}
-        />
+        {/* Background - Image or Video */}
+        {data?.section_6_background_scroll?.type === 'video' ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover z-0"
+            src={data.section_6_background_scroll.video?.asset?.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <div
+            className="absolute inset-0 bg-center bg-cover bg-no-repeat z-0"
+            style={{
+              backgroundImage: `url(${urlFor(
+                data.section_6_background_scroll.image,
+              ).url()})`,
+              backgroundAttachment: 'fixed',
+            }}
+          />
+        )}
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 z-10" />
 
         {/* Text content */}
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-white">
+          <h1 className="text-white text-4xl font-bold text-center">
             {data?.section_6_background_scroll?.title}
           </h1>
-          <p className="px-[112px] text-center font-bold">
+          <p className="px-[112px] text-center font-semibold mt-4">
             {data?.section_6_background_scroll?.description}
           </p>
         </div>
@@ -375,14 +422,14 @@ export default async function Home() {
               label={title || ''}
               subtitle={subtitle}
             />
-          )
+          ),
         )}
       </section>
       <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] mb-[90px] gap-2">
         {/* LEFT IMAGE SECTION */}
         <div className="w-full lg:w-[70%] min-h-full bg-black/70">
           <Image
-            src={data.section_9.image.asset.url ?? "/images/dummy/img4.jpg"}
+            src={data.section_9.image.asset.url ?? '/images/dummy/img4.jpg'}
             alt="img"
             height={500}
             width={500}
