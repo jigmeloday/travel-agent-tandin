@@ -67,9 +67,9 @@ const query = `
   }
 `;
 
-
+const slug = await params.slug;
   const data = await client.fetch(query, {
-    slug: params.slug
+    slug: slug
   }, { next: { revalidate: 0 } });
   return (
     <main>
