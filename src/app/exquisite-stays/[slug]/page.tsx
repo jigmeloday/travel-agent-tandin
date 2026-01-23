@@ -6,16 +6,16 @@ import { urlFor } from '@/lib/senity.image';
 import Image from 'next/image';
 import Link from 'next/link';
 
-async function Page() {
-  const query = `
-  *[_type == "exquisite"][0]{
+async function Page({ params }: { params: any }) {
+const query = `
+  *[_type == "hotels" && slug.current == $slug][0]{
     title,
     subtitle,
     herotitle,
     herosubtitle,
     "bImage": bannerImage.asset->url,
     "link": link.current,
-    
+
     "image1": image1.asset->url,
     "image2": image2.asset->url,
     "image3": image3.asset->url,
@@ -25,21 +25,10 @@ async function Page() {
     section1_description,
     section1_tagline,
 
-    // Updated bgScrollImage to support image/video
     bgScrollImage{
       type,
-      image{
-        asset->{
-          _id,
-          url
-        }
-      },
-      video{
-        asset->{
-          _id,
-          url
-        }
-      },
+      image{asset->{_id, url}},
+      video{asset->{_id, url}},
       title,
       description
     },
@@ -47,6 +36,7 @@ async function Page() {
     section2Title,
     section2Description,
     section2Tagline,
+
     "section2Image1": section2Image1.asset->url,
     "section2Image2": section2Image2.asset->url,
 
@@ -54,6 +44,7 @@ async function Page() {
     letsTalkDescription,
     letsTalkButton,
     "letTalkImage": letsTalk.asset->url,
+
     section3Title,
     section3Description,
     section3Tagline,
@@ -76,8 +67,10 @@ async function Page() {
   }
 `;
 
-  const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-  console.log('Exquisite Stays Data:', data);
+
+  const data = await client.fetch(query, {
+    slug: params.slug
+  }, { next: { revalidate: 0 } });
   return (
     <main>
       {/* Hero Section */}
@@ -290,7 +283,7 @@ async function Page() {
             ({ image, title, subtitle, slug }: any, idx: number) => (
               <Link
                 key={idx}
-                href={`/exquisite-stays/${slug.current}`}
+                href={`/${slug.current}`}
                 className="relative flex flex-col items-center justify-center w-full aspect-square text-center overflow-hidden group cursor-pointer"
               >
                 <div
