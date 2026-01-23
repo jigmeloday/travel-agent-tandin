@@ -154,7 +154,7 @@ async function Page() {
           </div>
 
           <div className="relative flex-1 mt-4 md:mt-0">
-            <div className="flex flex-col justify-between h-full p-2 md:p-4">
+            <div className="flex flex-col h-full p-2 md:p-4">
               <div className="w-full md:w-[80%]">
                 <h1 className="text-xl md:text-2xl lg:text-3xl">
                   {data.section1_title}
@@ -163,13 +163,13 @@ async function Page() {
                   {data.section1_description}
                 </p>
               </div>
-              <div>
+              <div className='mt-[42px]'>
                 <p className="text-sm md:text-[18px] font-bold mt-2">
                   {data.section1_tagline}
                 </p>
+                <div className="absolute mt-4 right-0 w-[64%] border-b-4 border-primary rounded-full" />
               </div>
             </div>
-            <div className="absolute -bottom-2 right-0 w-[64%] border-b-4 border-primary rounded-full" />
           </div>
         </div>
       </section>
