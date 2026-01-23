@@ -188,7 +188,7 @@ async function Page() {
             </div>
             <div className="transform translate-y-0 md:-translate-y-6 w-48 md:w-60 h-64 md:h-[430px]">
               <Image
-                src={urlFor(data?.section2Image1).url()}
+                src={urlFor(data?.section2Image2).url()}
                 alt="Exquisite Stays"
                 fill
                 className="object-cover"
