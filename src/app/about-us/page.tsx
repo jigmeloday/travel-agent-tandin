@@ -124,7 +124,7 @@ async function Page() {
           <p className="text-primary text-[24px] font-bold mt-[16px]">
             Founder & Chairman
           </p>
-          {data.introParagraphs.map((item: any, index: number) => (
+          {data.founder.introParagraphs.map((item: any, index: number) => (
             <p key={index} className="text-[14px] md:text-[16px] mt-[32px]">
               {item}
             </p>
