@@ -93,7 +93,7 @@ export default async function Home() {
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-console.log(data)
+
   return (
     <main>
       <section className="h-screen w-full overflow-hidden">

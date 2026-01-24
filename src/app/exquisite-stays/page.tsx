@@ -77,7 +77,7 @@ async function Page() {
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-  console.log('Exquisite Stays Data:', data);
+
   return (
     <main>
       {/* Hero Section */}
