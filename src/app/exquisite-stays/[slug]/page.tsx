@@ -129,7 +129,7 @@ const slug = await params.slug;
           <div className="flex flex-1 gap-2 flex-col md:flex-row">
             <div className="w-full h-64 md:h-[440px] bg-gray-200">
               <Image
-                src={urlFor(data?.image3)?.url()}
+                src={data.image3 ? urlFor(data?.image3)?.url() : '/images/dummy/img3.jpg'}
                 alt="Exquisite Stays"
                 width={500}
                 height={500}
@@ -232,7 +232,7 @@ const slug = await params.slug;
           <div
             className="absolute inset-0 bg-center bg-cover bg-no-repeat"
             style={{
-              backgroundImage: `url(${urlFor(data.bgScrollImage?.image)?.url()})`,
+              backgroundImage: `url(${data.bgScrollImage?.image ? urlFor(data.bgScrollImage?.image)?.url() : '/images/dummy/img1.jpg'})`,
               backgroundAttachment: 'fixed',
             }}
           />
