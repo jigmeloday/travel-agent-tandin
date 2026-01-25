@@ -45,6 +45,7 @@ function BestSelling({ data }: any) {
                     src={urlFor(tour?.image).url()}
                     alt={tour.title || 'img'}
                     fill
+                    unoptimized
                     className="object-cover"
                   />
                   {/* Optional overlay */}

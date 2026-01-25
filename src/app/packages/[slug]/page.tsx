@@ -13,7 +13,7 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
   slug,
   category,
   description,
-  "image": image.asset->url,
+  "image": bannerImage.asset->url,
   btn,
 
   // Section 1
@@ -58,8 +58,8 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
         <Image
           src={data?.image || ''}
           alt={data?.title || 'img'}
-          width={1920}
-          height={1080}
+          width={720}
+          height={780}
           className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">

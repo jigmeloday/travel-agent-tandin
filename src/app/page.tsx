@@ -230,8 +230,8 @@ export default async function Home() {
             <Image
               src={urlFor(data.section_5[0]?.image).url()}
               alt="img"
-              height={1000}
-              width={1000}
+              height={600}
+              width={600}
               className="h-full w-full object-cover"
             />
           </div>
@@ -260,8 +260,8 @@ export default async function Home() {
                 <Image
                   src={urlFor(data.section_5[1]?.image).url()}
                   alt="img"
-                  height={1000}
-                  width={1000}
+                  height={600}
+                  width={600}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -284,8 +284,8 @@ export default async function Home() {
                 <Image
                   src={urlFor(data.section_5[2]?.image).url()}
                   alt="img"
-                  height={1000}
-                  width={1000}
+                  height={600}
+                  width={600}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -311,8 +311,8 @@ export default async function Home() {
                 <Image
                   src={urlFor(data.section_5[3]?.image).url()}
                   alt="img"
-                  height={1000}
-                  width={1000}
+                  height={600}
+                  width={600}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -337,8 +337,8 @@ export default async function Home() {
                 <Image
                   src={urlFor(data.section_5[4]?.image).url()}
                   alt="img"
-                  height={1000}
-                  width={1000}
+                  height={500}
+                  width={500}
                   className="h-full w-full object-cover"
                 />
               </div>

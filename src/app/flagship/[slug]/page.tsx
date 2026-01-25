@@ -13,7 +13,7 @@ async function Page({ params }: any) {
   title,
   description,
   category,
-  "image": image.asset->url,
+  "image": bannerImage.asset->url,
   when,
   price,
   howlong,
@@ -69,8 +69,8 @@ async function Page({ params }: any) {
         <Image
           src={urlFor(data?.image).url()}
           alt="Bespoke Journey"
-          width={1920}
-          height={1080}
+          width={620}
+          height={680}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">

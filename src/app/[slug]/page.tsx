@@ -11,7 +11,7 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
   title,
   "slug": slug.current,
   subtitle,
-  "image": image.asset->url,
+  "image": bannerImage.asset->url,
 
   // Section 1 (Array)
   section_1[]{
