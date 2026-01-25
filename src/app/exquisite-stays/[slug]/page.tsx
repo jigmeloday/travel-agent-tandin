@@ -88,12 +88,12 @@ const slug = await params.slug;
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex flex-col md:flex-row w-full h-full px-4 md:px-[50px] pb-4 md:pb-[40px]">
             <div className="flex flex-1 items-center justify-center md:justify-start mb-4 md:mb-0">
-              <h1 className="text-4xl md:text-[80px] font-bold drop-shadow-lg text-center md:text-left">
+              <h1 className="text-4xl md:text-[60px] font-bold drop-shadow-lg text-center md:text-left text-white">
                 {data.herotitle}
               </h1>
             </div>
             <div className="flex flex-col flex-1 items-center md:items-end justify-center md:justify-end text-center md:text-right">
-              <p className="text-xl md:text-[40px] font-sans w-[80%]">
+              <p className="text-xl md:text-[30px] font-sans w-[80%] text-white">
                 {data.herosubtitle}
               </p>
             </div>
