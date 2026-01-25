@@ -76,10 +76,10 @@ const slug = await params.slug;
       {/* Hero Section */}
       <section className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden mb-[90px]">
         <Image
-          src={urlFor(data?.bImage).url()}
+          src={urlFor(data?.bImage)?.url()}
           alt="Culture"
-          width={1920}
-          height={1080}
+          width={520}
+          height={580}
           className="w-full h-full object-cover"
         />
 
@@ -106,19 +106,19 @@ const slug = await params.slug;
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
           <div className="aspect-square bg-gray-200">
             <Image
-              src={urlFor(data?.image1).url()}
+              src={urlFor(data?.image1)?.url()}
               alt="Exquisite Stays"
-              width={800}
-              height={800}
+              width={500}
+              height={500}
               className="w-full h-full object-cover"
             />
           </div>
           <div className="aspect-square bg-gray-200">
             <Image
-              src={urlFor(data?.image2).url()}
+              src={urlFor(data?.image2)?.url()}
               alt="Exquisite Stays"
-              width={800}
-              height={800}
+              width={500}
+              height={500}
               className="w-full h-full object-cover"
             />
           </div>
@@ -129,19 +129,20 @@ const slug = await params.slug;
           <div className="flex flex-1 gap-2 flex-col md:flex-row">
             <div className="w-full h-64 md:h-[440px] bg-gray-200">
               <Image
-                src={urlFor(data?.image3).url()}
+                src={urlFor(data?.image3)?.url()}
                 alt="Exquisite Stays"
-                width={800}
-                height={800}
+                width={500}
+                height={500}
+                unoptimized
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="w-full h-64 md:h-[440px] bg-gray-200">
               <Image
-                src={urlFor(data?.image4).url()}
+                src={urlFor(data?.image4)?.url()}
                 alt="Exquisite Stays"
-                width={800}
-                height={800}
+                width={500}
+                height={500}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -149,11 +150,11 @@ const slug = await params.slug;
 
           <div className="relative flex-1 mt-4 md:mt-0">
             <div className="flex flex-col h-full p-2 md:p-4">
-              <div className="w-full md:w-[80%]">
-                <h1 className="text-xl md:text-2xl lg:text-3xl">
+              <div className="w-full">
+                <h1 className="text-xl md:text-2xl lg:text-3xl leading-[40px]">
                   {data.section1_title}
                 </h1>
-                <p className="text-[14px] md:text-[16px] mt-2">
+                <p className="text-[14px] md:text-[16px] mt-8">
                   {data.section1_description}
                 </p>
               </div>
@@ -174,7 +175,7 @@ const slug = await params.slug;
           <div className="flex-1 flex items-center justify-center gap-2 mb-6 md:mb-0">
             <div className="transform translate-y-0 md:translate-y-6 w-48 md:w-60 h-64 md:h-[430px]">
               <Image
-                src={urlFor(data?.section2Image1).url()}
+                src={data.section2Image1 ? urlFor(data?.section2Image1)?.url() : '/images/dummy/img1.jpg'}
                 alt="Exquisite Stays"
                 fill
                 className="object-cover"
@@ -182,7 +183,7 @@ const slug = await params.slug;
             </div>
             <div className="transform translate-y-0 md:-translate-y-6 w-48 md:w-60 h-64 md:h-[430px]">
               <Image
-                src={urlFor(data?.section2Image2).url()}
+                src={data.section2Image2 ? urlFor(data?.section2Image2)?.url() : '/images/dummy/img2.jpg'}
                 alt="Exquisite Stays"
                 fill
                 className="object-cover"
@@ -231,7 +232,7 @@ const slug = await params.slug;
           <div
             className="absolute inset-0 bg-center bg-cover bg-no-repeat"
             style={{
-              backgroundImage: `url(${urlFor(data.bgScrollImage.image).url()})`,
+              backgroundImage: `url(${urlFor(data.bgScrollImage?.image)?.url()})`,
               backgroundAttachment: 'fixed',
             }}
           />
@@ -250,7 +251,7 @@ const slug = await params.slug;
             )}
             {data.bgScrollImage.description && (
               <p className="text-lg font-semibold">
-                {data.bgScrollImage.description}
+                {data?.bgScrollImage?.description}
               </p>
             )}
           </div>
@@ -262,15 +263,15 @@ const slug = await params.slug;
         <div className="border-[0.5px] border-primary h-[80px] mb-[40px]" />
         <div className="flex flex-col items-center text-center">
           <div className="w-full lg:w-[740px]">
-            <h1>{data.section3Title}</h1>
+            <h1>{data?.section3Title}</h1>
           </div>
           <div className="lg:w-[920px]">
             <p className="text-[14px] md:text-[16px] text-center my-[24px]">
-              {data.section3Description}
+              {data?.section3Description}
             </p>
           </div>
           <div className="lg:min-w-[250px]">
-            <span className="font-bold">{data.section3Tagline}</span>
+            <span className="font-bold">{data?.section3Tagline}</span>
           </div>
         </div>
         <div className="border-[0.5px] border-primary h-[80px] mt-[40px]" />
