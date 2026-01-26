@@ -156,8 +156,8 @@ async function Page() {
 
           <div className="relative flex-1 mt-4 md:mt-0">
             <div className="flex flex-col h-full p-2 md:p-4">
-              <div className="w-full md:w-[80%]">
-                <h1 className="text-xl md:text-2xl lg:text-3xl">
+              <div className="w-full">
+                <h1 className="text-xl md:text-2xl lg:text-3xl leading-[42px]">
                   {data.section1_title}
                 </h1>
                 <p className="text-[14px] md:text-[16px] mt-2">
