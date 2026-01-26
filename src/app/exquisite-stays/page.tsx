@@ -62,7 +62,7 @@ async function Page() {
       title,
       subtitle,
       slug,
-      "image": bannerImage.asset->url,
+      "image": thumbnailImage.asset->url,
       "link": link.current
     },
 
