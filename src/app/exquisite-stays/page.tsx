@@ -16,7 +16,7 @@ async function Page() {
     "bImage": bannerImage.asset->url,
     "link": link.current,
     
-    "image1": image1.asset->url,
+    "image1": image0.asset->url,
     "image2": image2.asset->url,
     "image3": image3.asset->url,
     "image4": image4.asset->url,
