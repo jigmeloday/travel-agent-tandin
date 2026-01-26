@@ -129,7 +129,7 @@ export default async function Home() {
               unoptimized
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/30 hover:bg-black/50 transition-all duration-500 ease-in-out flex flex-col items-center justify-center">
+            <div className="absolute inset-0 bg-black/30 transition-all duration-500 ease-in-out flex flex-col items-center justify-center">
               <h4 className="relative inline-block text-white after:absolute after:left-1/2 after:bottom-0 after:h-[2px] after:w-0 after:bg-white/80 after:transition-all after:duration-300 after:ease-out group-hover:after:left-0 group-hover:after:w-full">
                 {data.section_2.title}
               </h4>
@@ -149,7 +149,7 @@ export default async function Home() {
               unoptimized
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/30 hover:bg-black/50 transition-all duration-500 ease-in-out flex flex-col items-center justify-center">
+            <div className="absolute inset-0 bg-black/30 transition-all duration-500 ease-in-out flex flex-col items-center justify-center">
               <h4 className="relative inline-block text-white after:absolute after:left-1/2 after:bottom-0 after:h-[2px] after:w-0 after:bg-white/80 after:transition-all after:duration-300 after:ease-out group-hover:after:left-0 group-hover:after:w-full">
                 {data?.section_21?.title}
               </h4>
@@ -169,7 +169,7 @@ export default async function Home() {
               unoptimized
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/30 hover:bg-black/50 transition-all duration-500 ease-in-out flex flex-col items-center justify-center">
+            <div className="absolute inset-0 bg-black/30 transition-all duration-500 ease-in-out flex flex-col items-center justify-center">
               <h4 className="relative inline-block text-white after:absolute after:left-1/2 after:bottom-0 after:h-[2px] after:w-0 after:bg-white/80 after:transition-all after:duration-300 after:ease-out group-hover:after:left-0 group-hover:after:w-full">
                 {data.section_22.title}
               </h4>
@@ -477,7 +477,7 @@ export default async function Home() {
                 backgroundPosition: 'center',
               }}
             >
-              {/* <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div> */}
+              {/* <div className="absolute inset-0 bg-black/40 transition duration-300"></div> */}
               <div className="relative text-center text-white">
                 <h4 className="text-xl font-bold text-white relative inline-block after:content-[''] after:block after:h-[2px] after:w-0 after:bg-primary after:mx-auto after:transition-all after:duration-500 delay-75 group-hover:after:w-full">
                   {`${title.slice(0, 30)}...`}
