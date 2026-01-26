@@ -477,7 +477,7 @@ export default async function Home() {
                 backgroundPosition: 'center',
               }}
             >
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+              {/* <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div> */}
               <div className="relative text-center text-white">
                 <h4 className="text-xl font-bold text-white relative inline-block after:content-[''] after:block after:h-[2px] after:w-0 after:bg-primary after:mx-auto after:transition-all after:duration-500 delay-75 group-hover:after:w-full">
                   {`${title.slice(0, 30)}...`}
@@ -501,7 +501,7 @@ export default async function Home() {
               height={400}
               className="h-full w-full object-cover absolute"
             />
-            <div className="w-full h-full absolute hover:opacity-50 bg-black transition-all duration-300 ease-in-out opacity-20" />
+            {/* <div className="w-full h-full absolute hover:opacity-50 bg-black transition-all duration-300 ease-in-out opacity-20" /> */}
             <h2 className="z-40 text-white">{item.title}</h2>
           </Link>
         ))}

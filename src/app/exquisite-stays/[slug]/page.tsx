@@ -291,7 +291,7 @@ const slug = await params.slug;
                   className="absolute inset-0 bg-center bg-cover transition duration-300"
                   style={{ backgroundImage: `url('${image}')` }}
                 ></div>
-                <div className="absolute inset-0 bg-black/40 transition duration-300 group-hover:bg-black/60"></div>
+                {/* <div className="absolute inset-0 bg-black/40 transition duration-300 group-hover:bg-black/60"></div> */}
                 <h3 className="relative z-10 text-white text-lg md:text-xl font-semibold after:content-[''] after:block after:w-0 after:h-[2px] after:bg-white after:mx-auto after:transition-all after:duration-300 group-hover:after:w-full after:origin-center">
                   {title}
                 </h3>
