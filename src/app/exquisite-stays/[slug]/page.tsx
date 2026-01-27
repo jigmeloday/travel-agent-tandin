@@ -90,12 +90,12 @@ const { slug } = await params;
           <div className="flex flex-col md:flex-row w-full h-full px-4 md:px-[50px] pb-4 md:pb-[40px]">
             <div className="flex flex-1 items-center justify-center md:justify-start mb-4 md:mb-0">
               <h1 className="text-4xl md:text-[60px] font-bold drop-shadow-lg text-center md:text-left text-white">
-                {data.herotitle}
+                {data?.herotitle}
               </h1>
             </div>
             <div className="flex flex-col flex-1 items-center md:items-end justify-center md:justify-end text-center md:text-right">
               <p className="text-xl md:text-[30px] font-sans w-[80%] text-white">
-                {data.herosubtitle}
+                {data?.herosubtitle}
               </p>
             </div>
           </div>
@@ -107,7 +107,7 @@ const { slug } = await params;
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
           <div className="aspect-square bg-gray-200">
             <Image
-              src={urlFor(data?.image1)?.url()}
+              src={data?.image1 ? urlFor(data?.image1)?.url() : '/images/dummy/img1.jpg'}
               alt="Exquisite Stays"
               width={500}
               height={500}
@@ -116,7 +116,7 @@ const { slug } = await params;
           </div>
           <div className="aspect-square bg-gray-200">
             <Image
-              src={urlFor(data?.image2)?.url()}
+              src={data?.image2 ? urlFor(data?.image2)?.url() : '/images/dummy/img2.jpg'}
               alt="Exquisite Stays"
               width={500}
               height={500}
@@ -130,7 +130,7 @@ const { slug } = await params;
           <div className="flex flex-1 gap-2 flex-col md:flex-row">
             <div className="w-full h-64 md:h-[440px] bg-gray-200">
               <Image
-                src={data.image3 ? urlFor(data?.image3)?.url() : '/images/dummy/img3.jpg'}
+                src={data?.image3 ? urlFor(data?.image3)?.url() : '/images/dummy/img3.jpg'}
                 alt="Exquisite Stays"
                 width={500}
                 height={500}
@@ -140,7 +140,7 @@ const { slug } = await params;
             </div>
             <div className="w-full h-64 md:h-[440px] bg-gray-200">
               <Image
-                src={urlFor(data?.image4)?.url()}
+                src={data?.image4 ? urlFor(data?.image4)?.url() : '/images/dummy/img4.jpg'}
                 alt="Exquisite Stays"
                 width={500}
                 height={500}
@@ -153,15 +153,15 @@ const { slug } = await params;
             <div className="flex flex-col h-full p-2 md:p-4">
               <div className="w-full">
                 <h1 className="text-xl md:text-2xl lg:text-3xl leading-[40px]">
-                  {data.section1_title}
+                  {data?.section1_title}
                 </h1>
                 <p className="text-[14px] md:text-[16px] mt-8">
-                  {data.section1_description}
+                  {data?.section1_description}
                 </p>
               </div>
               <div className='mt-[42px]'>
                 <p className="text-sm md:text-[18px] font-bold mt-2">
-                  {data.section1_tagline}
+                  {data?.section1_tagline}
                 </p>
                 <div className="absolute mt-4 right-0 w-[64%] border-b-4 border-primary rounded-full" />
               </div>
@@ -176,7 +176,7 @@ const { slug } = await params;
           <div className="flex-1 flex items-center justify-center gap-2 mb-6 md:mb-0">
             <div className="transform translate-y-0 md:translate-y-6 w-48 md:w-60 h-64 md:h-[430px]">
               <Image
-                src={data.section2Image1 ? urlFor(data?.section2Image1)?.url() : '/images/dummy/img1.jpg'}
+                src={data?.section2Image1 ? urlFor(data?.section2Image1)?.url() : '/images/dummy/img1.jpg'}
                 alt="Exquisite Stays"
                 fill
                 className="object-cover"
@@ -184,7 +184,7 @@ const { slug } = await params;
             </div>
             <div className="transform translate-y-0 md:-translate-y-6 w-48 md:w-60 h-64 md:h-[430px]">
               <Image
-                src={data.section2Image2 ? urlFor(data?.section2Image2)?.url() : '/images/dummy/img2.jpg'}
+                src={data?.section2Image2 ? urlFor(data?.section2Image2)?.url() : '/images/dummy/img2.jpg'}
                 alt="Exquisite Stays"
                 fill
                 className="object-cover"
@@ -194,15 +194,15 @@ const { slug } = await params;
           <div className="flex flex-col justify-between gap-4 md:gap-6 p-4 md:p-[64px] flex-1 text-center md:text-left">
             <div>
               <h1 className="mb-0 leading-[1.2] text-2xl md:text-4xl w-[80%]">
-                {data.section2Title}
+                {data?.section2Title}
               </h1>
               <div className="border-b-4 border-white w-[24%]" />
             </div>
             <p className="text-white text-[14px] md:text-[16px]">
-              {data.section2Description}
+              {data?.section2Description}
             </p>
             <p className="text-white font-bold font-sans text-base md:text-[18px]">
-              {data.section2Tagline}
+              {data?.section2Tagline}
             </p>
           </div>
         </div>
@@ -212,8 +212,8 @@ const { slug } = await params;
       <section className="flex flex-col items-center justify-center my-12 px-4 md:px-[16px] mb-[90px]">
         <div className="h-[84vh] w-full">
           <LetsTalk
-            description={data.letsTalkDescription}
-            images={data.letTalkImage ?? '/images/dummy/img2.jpg'}
+            description={data?.letsTalkDescription}
+            images={data?.letTalkImage ?? '/images/dummy/img2.jpg'}
           />
         </div>
       </section>
@@ -223,7 +223,7 @@ const { slug } = await params;
         {data?.bgScrollImage?.type === 'video' ? (
           <video
             className="absolute inset-0 w-full h-full object-cover"
-            src={data.bgScrollImage.video?.asset?.url}
+            src={data?.bgScrollImage?.video?.asset?.url}
             autoPlay
             muted
             loop
@@ -233,7 +233,7 @@ const { slug } = await params;
           <div
             className="absolute inset-0 bg-center bg-cover bg-no-repeat"
             style={{
-              backgroundImage: `url(${data.bgScrollImage?.image ? urlFor(data.bgScrollImage?.image)?.url() : '/images/dummy/img1.jpg'})`,
+              backgroundImage: `url(${data?.bgScrollImage?.image ? urlFor(data.bgScrollImage?.image)?.url() : '/images/dummy/img1.jpg'})`,
               backgroundAttachment: 'fixed',
             }}
           />
@@ -245,12 +245,12 @@ const { slug } = await params;
         {/* Optional Text */}
         {data?.bgScrollImage?.title || data?.bgScrollImage?.description ? (
           <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6 lg:px-32">
-            {data.bgScrollImage.title && (
+            {data?.bgScrollImage?.title && (
               <h1 className="text-4xl font-bold mb-4 text-white">
-                {data.bgScrollImage.title}
+                {data?.bgScrollImage?.title}
               </h1>
             )}
-            {data.bgScrollImage.description && (
+            {data?.bgScrollImage?.description && (
               <p className="text-lg font-semibold">
                 {data?.bgScrollImage?.description}
               </p>
