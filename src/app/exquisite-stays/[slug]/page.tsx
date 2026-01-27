@@ -67,16 +67,17 @@ const query = `
   }
 `;
 
-const slug = await params.slug;
+const { slug } = await params;
   const data = await client.fetch(query, {
     slug: slug
   }, { next: { revalidate: 0 } });
+
   return (
     <main>
       {/* Hero Section */}
       <section className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden mb-[90px]">
         <Image
-          src={urlFor(data?.bImage)?.url()}
+          src={data?.bImage ? urlFor(data?.bImage)?.url() : '/images/dummy/img1.jpg'}
           alt="Culture"
           width={520}
           height={580}
@@ -284,7 +285,7 @@ const slug = await params.slug;
             ({ image, title, subtitle, slug }: any, idx: number) => (
               <Link
                 key={idx}
-                href={`/${slug.current}`}
+                href={`/exquisite-stays/${slug.current}`}
                 className="relative flex flex-col items-center justify-center w-full aspect-square text-center overflow-hidden group cursor-pointer"
               >
                 <div
