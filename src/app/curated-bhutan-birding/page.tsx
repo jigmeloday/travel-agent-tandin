@@ -99,7 +99,7 @@ export default async function Page() {
         </div>
       </section>
       <section className="flex flex-col lg:flex-row gap-[24px] px-[16px] lg:px-[32px] mt-[90px]">
-        <div className="flex-2">
+        <div className="flex-1">
           <h1 className="leading-[52px]">{data.section1.title}</h1>
           <p className="my-[24px] font-medium">{data.section1.description}</p>
           <Link href="/contact-us">
@@ -108,7 +108,7 @@ export default async function Page() {
             </Button>
           </Link>
         </div>
-        <div className="flex-1 w-full !h-[400px] lg:w-[422px] lg:h-[500px]">
+        <div className="flex-1 w-full !h-[400px] lg:w-[50%] lg:h-[500px]">
           <SideSelling images={data.section1.sliderImages} />
         </div>
       </section>
