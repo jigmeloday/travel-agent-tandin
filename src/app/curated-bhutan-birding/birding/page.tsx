@@ -47,7 +47,7 @@ export default async function Page() {
     purposeTitle,
     purposeDescription1,
     purposeDescription2,
-    purposeImage,
+    "img": purposeImage.asset->url,
 
     relatedTreksSection,
     relatedTreks[]->{
@@ -214,7 +214,7 @@ export default async function Page() {
         {/* LEFT IMAGE SECTION */}
         <div className="w-full lg:w-[70%] min-h-[40vh] lg:min-h-[80vh] bg-black/70">
           <Image
-            src="/images/dummy/img4.jpg"
+            src={data?.img ?? '/images/dummy/img1.jpg'}
             alt="img"
             height={1000}
             width={1000}
