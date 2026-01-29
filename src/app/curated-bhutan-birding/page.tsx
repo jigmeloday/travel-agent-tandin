@@ -10,7 +10,13 @@ export default async function Page() {
   const query = `*[_type == "curatedBhutanBirding"][0]{
   // HERO
   hero{
-    "backgroundImageUrl": backgroundImage.asset->url,
+    "backgroundImageUrl": image.asset->url,
+    video{
+        asset->{
+          _id,
+          url
+        }
+      },
     title
   },
 
@@ -85,15 +91,27 @@ export default async function Page() {
   return (
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden">
-        <Image
-          src={data.hero.backgroundImageUrl}
-          alt="Bespoke Journey"
-          width={1920}
-          height={1080}
-          className="w-full h-full object-cover"
-        />
+        {data.hero.video ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover z-0"
+            src={data.hero.video?.asset?.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <Image
+            src={data.hero.backgroundImageUrl}
+            alt="Bespoke Journey"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover"
+          />
+        )}
+
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <h1 className="text-white text-center px-4 w-[40%]">
+          <h1 className="text-white text-center px-4 w-[60%]">
             {data.hero.title}
           </h1>
         </div>
@@ -145,7 +163,7 @@ export default async function Page() {
             index <= 1 ? (
               <div key={index} className="relative lg:aspect-square border">
                 <Image
-                  src="/images/slide.jpg"
+                  src={item?.imageUrl ?? '/images/slide.jpg'}
                   alt="bg"
                   height={500}
                   width={500}

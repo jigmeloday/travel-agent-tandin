@@ -10,6 +10,16 @@ import { urlFor } from '@/lib/senity.image';
 export default async function Page() {
   const query = `
   *[_type == "birdingTourPage"][0]{
+   hero{
+    "backgroundImageUrl": image.asset->url,
+    video{
+        asset->{
+          _id,
+          url
+        }
+      },
+    title
+  },
     heroImage,
     title,
     introDescription,
@@ -79,7 +89,33 @@ export default async function Page() {
 
   return (
     <main>
-      <section className="relative h-[60vh] md:h-screen w-full overflow-hidden mb-[90px]">
+      <section className="relative h-[60vh] md:h-screen w-full overflow-hidden">
+        {data.hero.video ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover z-0"
+            src={data.hero.video?.asset?.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <Image
+            src={data.hero.backgroundImageUrl}
+            alt="Bespoke Journey"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover"
+          />
+        )}
+
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+          <h1 className="text-white text-center px-4 w-[60%]">
+            {data.hero.title}
+          </h1>
+        </div>
+      </section>
+      {/* <section className="relative h-[60vh] md:h-screen w-full overflow-hidden mb-[90px]">
         <Image
           src={urlFor(data?.heroImage)?.url()}
           alt="Bespoke Journey"
@@ -87,13 +123,7 @@ export default async function Page() {
           height={600}
           className="w-full h-full object-cover"
         />
-        {/* <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <h1 className="text-white text-center px-4">
-            Curated Adventure <br />
-            Multi-day Trekking & Exploration
-          </h1>
-        </div> */}
-      </section>
+      </section> */}
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px]">
         <div className="border-[0.5px] border-primary h-[80px] mb-[40px]" />
         <div className="flex flex-col items-center text-center">
@@ -136,7 +166,7 @@ export default async function Page() {
                   <p>{item.description}</p>
                   <p className="font-bold text-primary pt-4">{item.tagline}</p>
                 </div>
-              )
+              ),
             )}
           </div>
           <div className="lg:w-[50%]">
@@ -157,7 +187,7 @@ export default async function Page() {
                   <p>{item.description}</p>
                   <p className="font-bold text-primary pt-4">{item.tagline}</p>
                 </div>
-              )
+              ),
             )}
           </div>
         </div>
@@ -165,51 +195,51 @@ export default async function Page() {
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px]">
         <div className="h-[84vh]">
           <LetsTalk
-            images={data.letTalkImage ?? "/images/dummy/img2.jpg"}
+            images={data.letTalkImage ?? '/images/dummy/img2.jpg'}
             description={data.letsTalkDescription}
           />
         </div>
       </section>
       <section className="relative w-full h-[80vh] hidden lg:block mb-[90px]">
-             {/* Background - Image or Video */}
-             {data?.bgScrollImage?.type === 'video' ? (
-               <video
-                 className="absolute inset-0 w-full h-full object-cover"
-                 src={data.bgScrollImage.video?.asset?.url}
-                 autoPlay
-                 muted
-                 loop
-                 playsInline
-               />
-             ) : (
-               <div
-                 className="absolute inset-0 bg-center bg-cover bg-no-repeat"
-                 style={{
-                   backgroundImage: `url(${urlFor(data.bgScrollImage.image).url()})`,
-                   backgroundAttachment: 'fixed',
-                 }}
-               />
-             )}
-     
-             {/* Overlay */}
-             <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
-     
-             {/* Optional Text */}
-             {data?.bgScrollImage?.title || data?.bgScrollImage?.description ? (
-               <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6 lg:px-32">
-                 {data.bgScrollImage.title && (
-                   <h1 className="text-4xl font-bold mb-4 text-white">
-                     {data.bgScrollImage.title}
-                   </h1>
-                 )}
-                 {data.bgScrollImage.description && (
-                   <p className="text-lg font-semibold">
-                     {data.bgScrollImage.description}
-                   </p>
-                 )}
-               </div>
-             ) : null}
-           </section>
+        {/* Background - Image or Video */}
+        {data?.bgScrollImage?.type === 'video' ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src={data.bgScrollImage.video?.asset?.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <div
+            className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: `url(${urlFor(data.bgScrollImage.image).url()})`,
+              backgroundAttachment: 'fixed',
+            }}
+          />
+        )}
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40 flex items-center justify-center" />
+
+        {/* Optional Text */}
+        {data?.bgScrollImage?.title || data?.bgScrollImage?.description ? (
+          <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-6 lg:px-32">
+            {data.bgScrollImage.title && (
+              <h1 className="text-4xl font-bold mb-4 text-white">
+                {data.bgScrollImage.title}
+              </h1>
+            )}
+            {data.bgScrollImage.description && (
+              <p className="text-lg font-semibold">
+                {data.bgScrollImage.description}
+              </p>
+            )}
+          </div>
+        ) : null}
+      </section>
       <section className="flex flex-col lg:flex-row px-[16px] lg:px-[32px] gap-2 mb-[90px]">
         {/* LEFT IMAGE SECTION */}
         <div className="w-full lg:w-[70%] min-h-[40vh] lg:min-h-[80vh] bg-black/70">
