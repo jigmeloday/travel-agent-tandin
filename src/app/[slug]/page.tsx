@@ -57,7 +57,11 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
 
 }`;
 
-  const data = await client.fetch(query, { slug: slug }, { next: { revalidate: 0 } });
+  const data = await client.fetch(
+    query,
+    { slug: slug },
+    { next: { revalidate: 0 } },
+  );
   return (
     <main>
       {/* Hero Section */}
@@ -131,47 +135,44 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
         </div>
       </section>
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[302px] my-[50px] text-center">
-        <h1 className="text-center leading-[50px]">
-          {data?.section_3_title}
-        </h1>
-        <p className="mt-[24px]">
-           {data?.section_3_description}
-        </p>
+        <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mb-[20px] lg:mb-[40px]" />
+
+        <h1 className="text-center leading-[50px]">{data?.section_3_title}</h1>
+        <p className="mt-[24px]">{data?.section_3_description}</p>
+               <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
+
       </section>
 
       {/* Other Packages */}
       <section className="flex flex-col lg:px-[32px] px-[16px] my-[30px] lg:my-[50px] gap-2">
-        {data?.section_4_cards?.map(({ image, title, subtitle,description }:any, index: number) => (
-          <div
-            className={`flex flex-col lg:flex-row gap-2 ${
-              index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
-            }`}
-            key={index}
-          >
-            {/* Left Content */}
-            <div className="flex flex-col justify-center items-center w-full lg:w-[50%] bg-[#111820] p-[20px]">
-              <h1>{title}</h1>
-              <p className="text-white font-bold text-[14px] lg:text-[16px] mt-2">
-                {subtitle}
-              </p>
-              <div className="px-[20px] lg:px-[60px] mt-[16px] lg:mt-[24px] pb-[20px] lg:pb-[32px]">
-                <p className="text-white text-center text-[14px] lg:text-[16px]">
-                  {description}
+        {data?.section_4_cards?.map(
+          ({ image, title, subtitle, description }: any, index: number) => (
+            <div
+              className={`flex flex-col lg:flex-row gap-2 ${
+                index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
+              }`}
+              key={index}
+            >
+              {/* Left Content */}
+              <div className="flex flex-col justify-center items-center w-full lg:w-[50%] bg-[#111820] p-[20px]">
+                <h1>{title}</h1>
+                <p className="text-white font-bold text-[14px] lg:text-[16px] mt-2">
+                  {subtitle}
                 </p>
+                <div className="px-[20px] lg:px-[60px] mt-[16px] lg:mt-[24px] pb-[20px] lg:pb-[32px]">
+                  <p className="text-white text-center text-[14px] lg:text-[16px]">
+                    {description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Image */}
+              <div className="w-full lg:w-[50%] relative h-[240px] lg:h-[420px] overflow-hidden">
+                <Image src={image} alt="img" fill className="object-cover" />
               </div>
             </div>
-
-            {/* Right Image */}
-            <div className="w-full lg:w-[50%] relative h-[240px] lg:h-[420px] overflow-hidden">
-              <Image
-                src={image}
-                alt="img"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        ))}
+          ),
+        )}
       </section>
       {/* Intro Section */}
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] my-[50px]">
@@ -182,29 +183,27 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
           </div>
           <div className="w-full lg:w-[920px]">
             <p className="text-[14px] lg:text-[16px] text-center my-[16px] lg:my-[24px]">
-             {data?.section_5_description}
+              {data?.section_5_description}
             </p>
           </div>
           <div className="lg:min-w-[250px]">
             <span className="font-bold text-sm lg:text-lg">
-               {data?.section_5_taglin}
+              {data?.section_5_taglin}
             </span>
           </div>
         </div>
         <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
       </section>
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-[16px] lg:px-[32px] gap-[8px] my-[24px] lg:my-[50px]">
-        {data?.section_slug?.map(
-          ({ image, title, subtitle, slug }: any) => (
-            <ImageBox
-              key={slug.current}
-              slug={slug}
-              image={image}
-              label={title || ''}
-              subtitle={subtitle}
-            />
-          )
-        )}
+        {data?.section_slug?.map(({ image, title, subtitle, slug }: any) => (
+          <ImageBox
+            key={slug.current}
+            slug={slug}
+            image={image}
+            label={title || ''}
+            subtitle={subtitle}
+          />
+        ))}
       </section>
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] my-[50px]">
         <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mb-[20px] lg:mb-[40px]" />
@@ -214,12 +213,12 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
           </div>
           <div className="w-full lg:w-[920px]">
             <p className="text-[14px] lg:text-[16px] text-center my-[16px] lg:my-[24px]">
-               {data?.section_6_description}
+              {data?.section_6_description}
             </p>
           </div>
           <div className="lg:min-w-[250px]">
             <span className="font-bold text-sm lg:text-lg">
-               {data?.section_6_taglin}
+              {data?.section_6_taglin}
             </span>
           </div>
         </div>
@@ -228,7 +227,7 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] my-[50px]">
         <div className="h-[84vh]">
           <LetsTalk
-            images={data?.letTalkImage ?? "/images/dummy/img1.jpg"}
+            images={data?.letTalkImage ?? '/images/dummy/img1.jpg'}
             description={data?.letsTalkDescription}
           />
         </div>
