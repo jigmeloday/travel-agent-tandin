@@ -3,6 +3,7 @@ import ImageBox from '@/components/shared/image-box';
 import LetsTalk from '@/components/shared/let-talk';
 import { client } from '@/lib/senity';
 import Image from 'next/image';
+import Link from 'next/link';
 
 async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = (await params) as { slug: string };
@@ -134,7 +135,7 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
           </div>
         </div>
       </section>
-      <section className="flex flex-col items-center justify-center px-[16px] lg:px-[302px] my-[50px] text-center">
+      <section className="flex flex-col items-center justify-center px-[16px] lg:px-[112px] my-[50px] text-center">
         <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mb-[20px] lg:mb-[40px]" />
 
         <h1 className="text-center leading-[50px]">{data?.section_3_title}</h1>
@@ -187,9 +188,9 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
             </p>
           </div>
           <div className="lg:min-w-[250px]">
-            <span className="font-bold text-sm lg:text-lg">
+            <Link href='/contact-us' className="font-bold text-sm lg:text-lg hover:text-primary transition-all duration-300 ease-in-out">
               {data?.section_5_taglin}
-            </span>
+            </Link>
           </div>
         </div>
         <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
@@ -224,14 +225,14 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
         </div>
         <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
       </section>
-      <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] my-[50px]">
+      {/* <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] my-[50px]">
         <div className="h-[84vh]">
           <LetsTalk
             images={data?.letTalkImage ?? '/images/dummy/img1.jpg'}
             description={data?.letsTalkDescription}
           />
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }
