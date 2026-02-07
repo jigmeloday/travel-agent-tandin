@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ImageBox from '@/components/shared/image-box';
-import LetsTalk from '@/components/shared/let-talk';
 import { client } from '@/lib/senity';
 import Image from 'next/image';
 import Link from 'next/link';
