@@ -259,7 +259,7 @@ relatedTreks[]->{
                <div
                  className="absolute inset-0 bg-center bg-cover bg-no-repeat"
                  style={{
-                   backgroundImage: `url(${urlFor(data.bgScrollImage.image).url()})`,
+                   backgroundImage: `url(${data?.bgScrollImage?.image ? urlFor(data.bgScrollImage.image).url() : '/images/birding.jpg'})`,
                    backgroundAttachment: 'fixed',
                  }}
                />
