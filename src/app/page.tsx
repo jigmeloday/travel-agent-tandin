@@ -465,19 +465,18 @@ export default async function Home() {
         <h1 className="text-3xl font-bold">{data.blogTitle}</h1>
         <p className="font-bold mt-2">{data.blogSubtitle}</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-2 mt-[40px]">
+        <div className="flex w-full gap-4 mt-[40px] overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-transparent">
           {data.blog.map(({ image, title, slug }: any, index: number) => (
             <Link
               href={`/blog/${slug.current}`}
               key={index}
-              className="relative w-full aspect-square flex items-center justify-center overflow-hidden group cursor-pointer"
+              className="relative min-w-[280px] sm:min-w-[320px] lg:min-w-[460px] aspect-square flex items-center justify-center overflow-hidden group cursor-pointer snap-start shrink-0"
               style={{
                 backgroundImage: `url(${image.asset.url})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
             >
-              {/* <div className="absolute inset-0 bg-black/40 transition duration-300"></div> */}
               <div className="relative text-center text-white">
                 <h4 className="text-xl font-bold text-white relative inline-block after:content-[''] after:block after:h-[2px] after:w-0 after:bg-primary after:mx-auto after:transition-all after:duration-500 delay-75 group-hover:after:w-full">
                   {`${title.slice(0, 30)}...`}

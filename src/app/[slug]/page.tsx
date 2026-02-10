@@ -50,11 +50,18 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
   section_6_title,
   section_6_description,
   section_6_taglin,
-
-  // Lets Talk section
-  letsTalkDescription,
-      "letTalkImage": letsTalk.asset->url, // ← get URL directly
-
+  blogTitle,
+    blogSubtitle,
+  blog[]->{
+      title,
+      slug,
+      image{
+        asset->{
+          _id,
+          url
+        }
+      }
+    },
 }`;
 
   const data = await client.fetch(
@@ -139,8 +146,7 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
 
         <h1 className="text-center leading-[50px]">{data?.section_3_title}</h1>
         <p className="mt-[24px]">{data?.section_3_description}</p>
-               <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
-
+        <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
       </section>
 
       {/* Other Packages */}
@@ -187,7 +193,10 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
             </p>
           </div>
           <div className="lg:min-w-[250px]">
-            <Link href='/contact-us' className="font-bold text-sm lg:text-lg hover:text-primary transition-all duration-300 ease-in-out">
+            <Link
+              href="/contact-us"
+              className="font-bold text-sm lg:text-lg hover:text-primary transition-all duration-300 ease-in-out"
+            >
               {data?.section_5_taglin}
             </Link>
           </div>
@@ -223,6 +232,31 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
           </div>
         </div>
         <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
+      </section>
+      <section className="flex flex-col items-center justify-center my-[90px] lg:px-[32px] px-[16px]">
+        <h1 className="text-3xl font-bold">{data.blogTitle}</h1>
+        <p className="font-bold mt-2">{data.blogSubtitle}</p>
+
+        <div className="flex w-full gap-4 mt-[40px] overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-transparent">
+          {data.blog.map(({ image, title, slug }: any, index: number) => (
+            <Link
+              href={`/blog/${slug.current}`}
+              key={index}
+              className="relative min-w-[280px] sm:min-w-[320px] lg:min-w-[460px] aspect-square flex items-center justify-center overflow-hidden group cursor-pointer snap-start shrink-0"
+              style={{
+                backgroundImage: `url(${image.asset.url})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="relative text-center text-white">
+                <h4 className="text-xl font-bold text-white relative inline-block after:content-[''] after:block after:h-[2px] after:w-0 after:bg-primary after:mx-auto after:transition-all after:duration-500 delay-75 group-hover:after:w-full">
+                  {`${title.slice(0, 30)}...`}
+                </h4>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
       {/* <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] my-[50px]">
         <div className="h-[84vh]">
