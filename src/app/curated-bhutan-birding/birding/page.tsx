@@ -325,7 +325,7 @@ export default async function Page() {
                 <h3 className="text-white">{item.title}</h3>
                 <p className="my-4">{item.description}</p>
                 <Link
-                  href={`/curated-bhutan-birding/birding/${item.slug.current}`}
+                  href={`/curated-bhutan-birding/trekking/${item.slug.current}`}
                 >
                   <Button className="bg-black rounded-none text-primary font-bold hover:bg-black/60">
                     View Details

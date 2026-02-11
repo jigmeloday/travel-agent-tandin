@@ -145,43 +145,43 @@ relatedTreks[]->{
         <div className="border-[0.5px] border-primary h-[80px] mb-[40px]" />
         <div className="flex flex-col items-center text-center">
           <div className="w-full lg:w-[740px]">
-            <h1> {data.intro.title}</h1>
+            <h1> {data?.intro?.title}</h1>
           </div>
           <div className="lg:w-[920px]">
-            <p className="text-center my-[24px]">{data.intro.description}</p>
+            <p className="text-center my-[24px]">{data.intro?.description}</p>
           </div>
           <div className="lg:min-w-[250px]">
-            <span className="font-bold">{data.intro.tagline}</span>
+            <span className="font-bold">{data.intro?.tagline}</span>
           </div>
         </div>
         <div className="border-[0.5px] border-primary h-[80px] my-[40px]" />
       </section>
       <section className="flex flex-col lg:flex-row items-center justify-center px-[16px] lg:px-[32px] mb-[90px] gap-2">
         <div className="flex-1 lg:h-[362px] lg:w-[50%] w-full">
-          <SideSelling images={data.sliderImages} />
+          <SideSelling images={data?.sliderImages} />
         </div>
         <div className="flex-1  space-y-2">
           <div className="flex flex-col lg:flex-row gap-2">
             <div className="flex-2 border p-4 bg-primary">
               <h3 className="text-black">Best Season</h3>
-              <p className="text-white font-medium">{data.facts.bestSeason}</p>
+              <p className="text-white font-medium">{data.facts?.bestSeason}</p>
             </div>
             <div className="flex-1 border p-4 bg-primary text-center">
               <h3 className="text-black">Alt.m</h3>
               <p className="text-white font-medium">
-                {data.facts.highAltitude}
+                {data.facts?.highAltitude}
               </p>
-              <p className="text-white font-medium">{data.facts.lowAltitude}</p>
+              <p className="text-white font-medium">{data.facts?.lowAltitude}</p>
             </div>
           </div>
           <div className="flex gap-2">
             <div className="flex-1 border bg-primary py-6 px-4 text-center">
               <h3 className="text-black">On Trek</h3>
-              <p className="text-white font-medium">{data.facts.days}</p>
+              <p className="text-white font-medium">{data.facts?.days}</p>
             </div>
             <div className="flex-1 border bg-primary py-6 px-4 text-center">
               <h3 className="text-black">Grade</h3>
-              <p className="text-white font-medium">{data.facts.grade}</p>
+              <p className="text-white font-medium">{data.facts?.grade}</p>
             </div>
           </div>
         </div>
@@ -214,7 +214,7 @@ relatedTreks[]->{
             )}
           </div>
           <div className="lg:w-[50%]">
-            {data.essentialsRight.map((item: any, index: number) =>
+            {data.essentialsRight?.map((item: any, index: number) =>
               item.type === 'image' ? (
                 <div key={index} className="bg-primary h-[340px] lg:h-[540px]">
                   <Image
