@@ -15,6 +15,7 @@ export default async function Page({ params }: any) {
   // ============ HERO ============
   hero{
     image{asset->{url}},
+    heroImage{asset->{url}},
     title,
     subtitle
   },
@@ -127,7 +128,7 @@ relatedTreks[]->{
     <main>
       <section className="relative h-[60vh] md:h-screen w-full overflow-hidden mb-[90px]">
         <Image
-          src={data.hero.image?.asset?.url}
+          src={data.hero.heroImage?.asset?.url}
           alt="Hero image"
           width={500}
           height={500}
