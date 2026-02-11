@@ -193,7 +193,7 @@ relatedTreks[]->{
         </p>
         <div className="flex flex-col lg:flex-row w-full gap-2 mt-12">
           <div className="lg:w-[50%]">
-            {data.essentialsLeft.map((item: any, index: number) =>
+            {data.essentialsLeft?.map((item: any, index: number) =>
               item.type === 'image' ? (
                 <div key={index} className="bg-primary h-[340px] lg:h-[540px]">
                   <Image
@@ -291,7 +291,7 @@ relatedTreks[]->{
         <div className="w-full lg:w-[70%] bg-black/70 flex h-auto">
           <div className="relative w-full h-full">
             <Image
-              src={data.purpose?.imageUrl}
+              src={data.purpose?.imageUrl ?? '/dummy/images/birding.jpg'}
               alt="img"
               fill
               className="object-cover"
@@ -302,14 +302,14 @@ relatedTreks[]->{
         {/* RIGHT CONTENT SECTION */}
         <div className="w-full lg:w-[34.5%] bg-[#111820] p-[24px] flex flex-col justify-between">
           <div>
-            <h2>{data.purpose.title}</h2>
+            <h2>{data?.purpose?.title}</h2>
 
             <p className="text-white text-[16px] mt-[32px]">
-              {data.purpose.description1}
+              {data?.purpose?.description1}
             </p>
 
             <p className="text-white text-[16px] mt-[32px]">
-              {data.purpose.description2}
+              {data?.purpose?.description2}
             </p>
           </div>
 
@@ -327,14 +327,14 @@ relatedTreks[]->{
       <section className="flex flex-col text-center px-[16px] lg:px-[32px] items-center justify-center gap-2 mb-[90px]">
         <h2>{data.relatedTreksSection?.title}</h2>
         <p className="my-[24px] text-center lg:px-[142px]">
-          {data.relatedTreksSection.description}
+          {data?.relatedTreksSection?.description}
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 w-full">
           {data.relatedTreks?.map((item: any, index: number) => (
             <div key={index} className="w-full">
               <div className="w-full border h-[400px]">
                 <Image
-                  src={item.hero.imageUrl}
+                  src={item.hero.imageUrl ?? '/dummy/images/birding.jpg'}
                   alt="img"
                   height={400}
                   width={400}
