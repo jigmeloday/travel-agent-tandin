@@ -370,7 +370,7 @@ relatedTreks[]->{
               <div className="p-[12px] lg:p-[24px bg-primary text-center">
                 <h3 className="text-white">{item.title}</h3>
                 <p className="my-4">{item.description}</p>
-                <Link href="/" className="text-black font-bold underline">
+                <Link href={`/curated-bhutan-birding/trekking/${item.slug.current}`} className="text-black font-bold underline">
                   <Button className="bg-black rounded-none text-primary font-bold hover:bg-black/80">
                     View Details
                   </Button>
