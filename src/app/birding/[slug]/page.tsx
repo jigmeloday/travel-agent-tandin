@@ -3,9 +3,9 @@ import LetsTalk from '@/components/shared/let-talk';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import SideSelling from '../../components/slider';
 import { client } from '@/lib/senity';
 import { urlFor } from '@/lib/senity.image';
+import SideSelling from '@/app/trekking/components/slider';
 
 export default async function Page({ params }: any) {
   const query = `*[_type == "trek" && slug.current == $slug][0]{
@@ -370,7 +370,7 @@ relatedTreks[]->{
               <div className="p-[12px] lg:p-[24px bg-primary text-center">
                 <h3 className="text-white">{item.title}</h3>
                 <p className="my-4">{item.description}</p>
-                <Link href={`/curated-bhutan-birding/trekking/${item.slug.current}`} className="text-black font-bold underline">
+                <Link href={`/birding/${item.slug.current}`} className="text-black font-bold underline">
                   <Button className="bg-black rounded-none text-primary font-bold hover:bg-black/80">
                     View Details
                   </Button>

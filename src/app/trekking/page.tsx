@@ -136,7 +136,7 @@ export default async function Page() {
             .slice(0, 3)
             .map((item: any, index: number) => (
               <Link
-                href="/curated-bhutan-birding/birding"
+                href="/birding"
                 key={index}
                 className={`aspect-square border cursor-pointer flex flex-col items-center justify-center px-[42px] text-center ${
                   index % 2 === 0 ? 'bg-primary ' : 'bg-black text-white'
@@ -210,7 +210,7 @@ export default async function Page() {
                 <p className="text-center font-medium lg:px-[46px] my-6">
                   {item.description}
                 </p>
-                <Link href={`/curated-bhutan-birding/trekking/${item.slug}`}>
+                <Link href={`/trekking/${item.slug}`}>
                   <Button className="bg-black rounded-none text-primary font-bold hover:bg-black/60">
                     View Details
                   </Button>
