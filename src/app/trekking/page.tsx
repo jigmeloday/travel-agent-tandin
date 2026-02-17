@@ -167,7 +167,7 @@ export default async function Page() {
                   alt="bg"
                   height={500}
                   width={500}
-                  className="h-full w-full object-cover opacity-[0.8]"
+                  className="h-full w-full object-cover"
                 />
                 <div className="absolute bottom-0 px-[24px] text-white">
                   <h3>{item?.title}</h3>
