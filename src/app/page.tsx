@@ -465,12 +465,18 @@ export default async function Home() {
         <h1 className="text-3xl font-bold">{data.blogTitle}</h1>
         <p className="font-bold mt-2">{data.blogSubtitle}</p>
 
-        <div className="flex w-full gap-4 mt-[40px] overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-transparent">
+        <div className="flex w-full scrollbar-hide scrollbar-hide::-webkit-scrollbar  gap-3 mt-[40px] overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-transparent">
           {data.blog.map(({ image, title, slug }: any, index: number) => (
             <Link
               href={`/blog/${slug.current}`}
               key={index}
-              className="relative min-w-[280px] sm:min-w-[320px] lg:min-w-[460px] aspect-square flex items-center justify-center overflow-hidden group cursor-pointer snap-start shrink-0"
+              className="
+        relative 
+        min-w-[280px] sm:min-w-[320px] 
+        lg:basis-1/3 lg:min-w-0       
+        aspect-square flex items-center justify-center 
+        overflow-hidden group cursor-pointer snap-start shrink-0
+      "
               style={{
                 backgroundImage: `url(${image.asset.url})`,
                 backgroundSize: 'cover',
