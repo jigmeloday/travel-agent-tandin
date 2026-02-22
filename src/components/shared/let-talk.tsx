@@ -15,7 +15,7 @@ export default function LetsTalk({ images, description }: { images: string, desc
       <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Slide content */}
-      <div className="flex flex-col items-center justify-center relative border-t-4 border-red-700 bg-white text-black lg:max-w-[32%] p-4 shadow-lg h-[80%]">
+      <div className="flex flex-col items-center justify-center relative border-t-4 border-red-700 bg-white text-black md:max-w-[70%] lg:max-w-[32%] p-4 shadow-lg h-[80%]">
         <h3 className="my-4">Let&apos;s Talk</h3>
         <p className="text-gray-700 mb-6 text-[14px] lg:text-[16px] text-center">
           

@@ -102,8 +102,8 @@ async function Page() {
         <div className="border-[0.5px] border-primary h-[80px] mt-[40px]" />
       </section>
       <section className="flex flex-col items-center justify-center bg-[#d3cecd] px-[16px] lg:px-[32px] w-full py-[100px] mb-[90px]">
-        <h2 className="text-black/70 font-light">{data.testimonialsTitle}</h2>
-        <div className="md:w-[40%] h-fit">
+        <h2 className="text-black/70 text-center font-light">{data.testimonialsTitle}</h2>
+        <div className="w-full md:w-[80%] h-fit">
           <Testimonial data={data.testimonials} />
         </div>
       </section>
@@ -146,7 +146,7 @@ async function Page() {
         <div className="border-[0.5px] border-primary h-[80px] mt-[40px]" />
       </section>
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px]">
-        <div className="grid grid-col-1 md:grid-cols-3 gap-2">
+        <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {data.teamMembers.map((item: any, index: number) => (
             <div key={index} className="flex flex-col items-center w-full">
               <Image

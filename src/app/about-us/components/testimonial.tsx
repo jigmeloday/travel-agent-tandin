@@ -19,7 +19,17 @@ function Testimonial({ data }: any) {
         speed={1500} // fade duration
         loop={true} // infinite loop
         autoplay={{ delay: 3500, disableOnInteraction: false }}
-        slidesPerView={1}
+        slidesPerView={1} // default
+        breakpoints={{
+          // On small devices (<640px) => 1 slide
+          0: { slidesPerView: 1 },
+          // On tablets (≥640px) => 1 slide
+          640: { slidesPerView: 1 },
+          // On medium devices (≥768px) => 1 slide
+          768: { slidesPerView: 1 },
+          // On large devices (≥1024px) => 1 slide
+          1024: { slidesPerView: 1 },
+        }}
         className="w-full"
       >
         {data?.map((slide: any) => (

@@ -38,7 +38,7 @@ export default function SliderComponent({data}: any) {
             <div className="absolute inset-0 bg-black/40"></div>
 
             {/* Slide content */}
-            <div className="relative bg-white text-black w-full lg:max-w-[32%] p-4 shadow-lg h-[94%]">
+            <div className="relative bg-white text-black w-full md:max-w-[60%] lg:max-w-[32%] p-4 shadow-lg h-[94%]">
               <div className="border-t-4 border-red-700 mb-4" />
               <p className="uppercase text-sm font-bold text-[24px]">{slide.subtitle}</p>
               <h3 className="my-4">{slide.title}</h3>

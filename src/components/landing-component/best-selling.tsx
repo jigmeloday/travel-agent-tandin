@@ -10,9 +10,8 @@ import 'swiper/css/navigation';
 import { urlFor } from '@/lib/senity.image';
 
 function BestSelling({ data }: any) {
-  
   return (
-    <div className="relative w-full overflow-hidden px-4">      
+    <div className="relative w-full overflow-hidden px-4">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={10}
@@ -20,23 +19,31 @@ function BestSelling({ data }: any) {
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
-           pauseOnMouseEnter: true,
+          pauseOnMouseEnter: true,
         }}
-         pagination={{
+        pagination={{
           clickable: true,
           el: '.custom-pagination',
           bulletClass: 'custom-bullet',
           bulletActiveClass: 'custom-bullet-active',
         }}
         loop={true}
-        
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 2,
+          },
+        }}
         className="w-full"
       >
-        
         {data?.map((tour: any) => (
-          <SwiperSlide
-           key={tour.id}>
-            <div className="flex-shrink-0 w-full h-[300px] lg:min-h-[400px] border-l-8 border-primary overflow-hidden group">
+          <SwiperSlide key={tour.id}>
+            <div className="flex-shrink-0 w-full h-[500px] lg:min-h-[400px] border-l-8 border-primary overflow-hidden group">
               {/* Card container */}
               <div className="flex flex-col lg:flex-row h-full w-full bg-[#111820] transition-transform duration-300">
                 {/* Image section */}
@@ -46,21 +53,17 @@ function BestSelling({ data }: any) {
                     alt={tour.title || 'img'}
                     fill
                     unoptimized
-                    className="object-cover"
+                    className="object-cover h-full w-full"
                   />
-                  {/* Optional overlay */}
-                  <div className="absolute inset-0 bg-black/20"></div>
                 </div>
                 <div className="flex flex-col justify-between flex-1 px-4 sm:px-6 py-4 sm:py-6 text-white bg-[#111820]">
                   <div className="flex flex-col items-center text-center">
                     <span className="font-extrabold text-xs sm:text-sm tracking-wider uppercase text-white">
                       {tour.category}
                     </span>
-                   <div className='my-[12px]'>
-                     <h3 className='leading-8'>
-                      {tour.title}
-                    </h3>
-                   </div>
+                    <div className="my-[12px]">
+                      <h3 className="leading-8">{tour.title}</h3>
+                    </div>
                     <p className="text-sm sm:text-[14px] lg:text-[16px] font-light text-gray-200 leading-[24px]">
                       {tour.description}
                     </p>
@@ -68,7 +71,10 @@ function BestSelling({ data }: any) {
 
                   {/* Call to action */}
                   <div className="mt-2 sm:mt-4 self-center">
-                    <Link href={`/flagship/${tour.slug.current}`} className="bg-primary hover:bg-primary/90 text-white font-bold px-4 sm:px-6 py-2 transition-colors duration-200 text-sm sm:text-base">
+                    <Link
+                      href={`/flagship/${tour.slug.current}`}
+                      className="bg-primary hover:bg-primary/90 text-white font-bold px-4 sm:px-6 py-2 transition-colors duration-200 text-sm sm:text-base"
+                    >
                       VIEW DETAILS
                     </Link>
                   </div>
@@ -77,7 +83,7 @@ function BestSelling({ data }: any) {
             </div>
           </SwiperSlide>
         ))}
-      </Swiper>      
+      </Swiper>
     </div>
   );
 }
