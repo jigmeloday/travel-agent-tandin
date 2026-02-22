@@ -188,7 +188,7 @@ relatedTreks[]->{
       </section>
       <section className="flex flex-col items-center justify-center px-[16px] lg:px-[32px] mb-[90px]">
         <h1 className="text-center">{data.essentialsHeader?.title}</h1>
-        <p className="lg:px-[240px] text-center font-medium">
+        <p className="lg:px-[90px] text-center font-medium">
           {data.essentialsHeader?.description}
         </p>
         <div className="flex flex-col lg:flex-row w-full gap-2 mt-12">
@@ -302,7 +302,7 @@ relatedTreks[]->{
         {/* RIGHT CONTENT SECTION */}
         <div className="w-full lg:w-[34.5%] bg-[#111820] p-[24px] flex flex-col justify-between">
           <div>
-            <h2>{data?.purpose?.title}</h2>
+            <h2 className='leading-9'>{data?.purpose?.title}</h2>
 
             <p className="text-white text-[16px] mt-[32px]">
               {data?.purpose?.description1}
