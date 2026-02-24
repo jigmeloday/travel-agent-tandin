@@ -110,7 +110,7 @@ export default async function Page() {
           />
         )}
 
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-white text-center px-4 w-[60%]">
             {data.hero.title}
           </h1>

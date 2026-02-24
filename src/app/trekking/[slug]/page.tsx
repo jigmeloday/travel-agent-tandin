@@ -130,11 +130,11 @@ relatedTreks[]->{
         <Image
           src={data.hero.heroImage?.asset?.url}
           alt="Hero image"
-          width={500}
-          height={500}
+          width={1000}
+          height={1800}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/12 flex items-center justify-center">
           <h1 className="text-white text-center px-4">
             {data.hero.title} <br />
             {data.hero.subtitle}
