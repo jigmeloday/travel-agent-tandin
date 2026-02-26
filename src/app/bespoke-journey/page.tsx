@@ -19,6 +19,7 @@ async function Page() {
     title,
     category,
     shortDescription,
+    description,
     "image": image.asset->url,
     slug
   },
@@ -93,7 +94,7 @@ async function Page() {
       {/* Packages */}
       <section className="flex flex-col gap-[50px] px-[16px] lg:px-[32px] mb-[90px]">
         {data.section_package.map(
-          ({ title, shortDescription, image, slug }: any, index: number) => (
+          ({ title, description, image, slug }: any, index: number) => (
             <div
               key={index}
               className={`flex flex-col lg:flex-row items-center gap-[32px] ${
@@ -116,7 +117,7 @@ async function Page() {
                 <h1 className='mb-4'>{title}</h1>
                 <div className="w-full] mx-auto lg:mx-0">
                   <p className="text-base lg:text-[16px] text-gray-700 mb-6">
-                    {shortDescription}
+                    {description}
                   </p>
                 </div>
                 <Link href={`/packages/${slug.current}`}>
