@@ -241,11 +241,11 @@ export default async function Home() {
             />
           </div>
           <div className="flex flex-col justify-between flex-1 px-[24px] py-[42px] text-white bg-[#111820]">
-            <div>
+            <div className='pb-4'>
               <span className="font-extrabold text-[18px]">
                 {data.section_5[0].category}
               </span>
-              <h3>{data.section_5[0].title}</h3>
+              <h3 className='py-3'>{data.section_5[0].title}</h3>
               <span className="text-[14px] lg:text-[16px]">
                 {data.section_5[0].description}
               </span>
