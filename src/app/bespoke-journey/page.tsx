@@ -233,7 +233,7 @@ async function Page() {
           </div>
           {/* Text */}
           <div className="flex-1 bg-[#111820] text-white p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
-            <h2>{data.travelPurposeTitle}</h2>
+            <h2 className='mb-2'>{data.travelPurposeTitle}</h2>
             <div className="w-[60px] h-[2px] bg-white mb-6" />
             <p className="text-base mb-4">{data.travelPurposeParagraph1}</p>
             <p className="text-base mb-6">{data.travelPurposeParagraph2}</p>
