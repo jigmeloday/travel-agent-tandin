@@ -113,8 +113,8 @@ async function Page() {
 
               {/* Text */}
               <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
-                <h1>{title}</h1>
-                <div className="w-full lg:w-[80%] mx-auto lg:mx-0">
+                <h1 className='mb-4'>{title}</h1>
+                <div className="w-full] mx-auto lg:mx-0">
                   <p className="text-base lg:text-[16px] text-gray-700 mb-6">
                     {description}
                   </p>

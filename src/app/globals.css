@@ -124,7 +124,7 @@
   }
 
   h1 {
-    @apply text-[32px] leading-[48px] tracking-[0.25px] lg:text-[42px] lg:leading-[36px] font-medium font-sans text-[#8a1e36];
+    @apply text-[32px] leading-[48px] tracking-[0.25px] lg:text-[42px] lg:leading-[48px] font-medium font-sans text-[#8a1e36];
   }
   h2 {
     @apply text-[28px] leading-[42px] tracking-[0.25px] lg:text-[34px] lg:leading-[36px] font-medium font-sans text-[#8a1e36];

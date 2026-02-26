@@ -88,40 +88,6 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
         <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
       </section>
 
-      {/* Full Image Section */}
-      <section className="relative h-[300px] lg:h-[90vh] mb-[90px] overflow-hidden">
-        {/* Background: Image or Video */}
-        {data.image_section && (
-          <div
-            className="absolute inset-0 bg-center bg-cover bg-no-repeat"
-            style={{
-              backgroundImage: `url(${urlFor(data.image_section).url()})`,
-              backgroundAttachment: 'fixed', // parallax effect
-            }}
-          />
-        )}
-
-        {data.video_section && (
-          <video
-            src={data.video_section}
-            className="absolute top-0 left-0 w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{
-              backgroundAttachment: 'fixed',
-              pointerEvents: 'none',
-            }}
-          />
-        )}
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center z-10">
-          <h1 className="text-white text-center px-4">{data?.imageTitle}</h1>
-        </div>
-      </section>
-
       {/* Other Packages */}
       <section className="flex flex-col lg:px-[32px] px-[16px] my-[90px]">
         {data.section_2_cards.map(
@@ -195,6 +161,40 @@ const query = `*[_type == "packageItem" && slug.current == $slug][0]{
             description={data?.letsTalkDescription}
             images={data.letTalkImage ?? '/images/dummy/img2.jpg'}
           />
+        </div>
+      </section>
+
+        {/* Full Image Section */}
+      <section className="relative h-[300px] lg:h-[90vh] mb-[90px] overflow-hidden">
+        {/* Background: Image or Video */}
+        {data.image_section && (
+          <div
+            className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: `url(${urlFor(data.image_section).url()})`,
+              backgroundAttachment: 'fixed', // parallax effect
+            }}
+          />
+        )}
+
+        {data.video_section && (
+          <video
+            src={data.video_section}
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{
+              backgroundAttachment: 'fixed',
+              pointerEvents: 'none',
+            }}
+          />
+        )}
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center z-10">
+          <h1 className="text-white text-center px-4">{data?.imageTitle}</h1>
         </div>
       </section>
 
