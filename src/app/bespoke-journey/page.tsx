@@ -18,7 +18,7 @@ async function Page() {
   section_package[]->{
     title,
     category,
-    description,
+    shortDescription,
     "image": image.asset->url,
     slug
   },
@@ -26,7 +26,7 @@ async function Page() {
   section_othere_package[]->{
     title,
     category,
-    description,
+    shortDescription,
     slug,
     "image": image.asset->url,      
   },
@@ -34,7 +34,7 @@ async function Page() {
   section_last_package[]->{
     title,
     category,
-    description,
+    shortDescription,
     slug,
     "image": image.asset->url,
   },
@@ -42,7 +42,7 @@ async function Page() {
   section_second_last_package[]->{
     title,
     category,
-    description,
+    shortDescription,
     slug,
     "image": image.asset->url,
   },
@@ -93,7 +93,7 @@ async function Page() {
       {/* Packages */}
       <section className="flex flex-col gap-[50px] px-[16px] lg:px-[32px] mb-[90px]">
         {data.section_package.map(
-          ({ title, description, image, slug }: any, index: number) => (
+          ({ title, shortDescription, image, slug }: any, index: number) => (
             <div
               key={index}
               className={`flex flex-col lg:flex-row items-center gap-[32px] ${
@@ -116,7 +116,7 @@ async function Page() {
                 <h1 className='mb-4'>{title}</h1>
                 <div className="w-full] mx-auto lg:mx-0">
                   <p className="text-base lg:text-[16px] text-gray-700 mb-6">
-                    {description}
+                    {shortDescription}
                   </p>
                 </div>
                 <Link href={`/packages/${slug.current}`}>
@@ -135,7 +135,7 @@ async function Page() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full mb-5">
           {data.section_othere_package
             ?.slice(0, 3)
-            ?.map(({ image, title, description, slug }: any, index: number) => (
+            ?.map(({ image, title, shortDescription, slug }: any, index: number) => (
               <div
                 key={index}
                 className="bg-[#f7f7f7] flex flex-col items-center text-center shadow-sm"
@@ -155,7 +155,7 @@ async function Page() {
                 <div className="p-6 flex flex-col items-center">
                   <h3>{title}</h3>
                   <p className="text-[14px] lg:text-[16px] mb-4">
-                    {description}
+                    {shortDescription}
                   </p>
                   <Link
                     href={`/packages/${slug.current}`}
@@ -279,7 +279,7 @@ async function Page() {
                 </div>
                 <div className="flex flex-col items-center justify-center p-[20px] text-center">
                   <h4>{item?.title}</h4>
-                  <p className="mb-[18px] text-[18px]">{item?.description}</p>
+                  <p className="mb-[18px] text-[18px]">{item?.shortDescription}</p>
                   <Link href={`/packages/${item.slug.current}`}>
                     <Button className="rounded-none bg-black text-[24px]">
                       View Details
@@ -305,7 +305,7 @@ async function Page() {
                 </div>
                 <div className="flex flex-col items-center justify-center p-[20px] text-center">
                   <h4>{item?.title}</h4>
-                  <p className="mb-[18px] text-[18px]">{item?.description}</p>
+                  <p className="mb-[18px] text-[18px]">{item?.shortDescription}</p>
                   <Link href={`/packages/${item.slug.current}`}>
                     <Button className="rounded-none bg-black text-[24px]">
                       View Details

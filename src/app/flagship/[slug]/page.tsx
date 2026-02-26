@@ -43,7 +43,7 @@ async function Page({ params }: any) {
       title,
       category,
       slug,
-      description,
+      shortDescription,
       "image": image.asset->url,
     },
 
@@ -51,7 +51,7 @@ async function Page({ params }: any) {
       title,
       category,
       slug,
-      description,
+      shortDescription,
       "image": image.asset->url,
     },
 }`;
@@ -234,7 +234,7 @@ async function Page({ params }: any) {
                 </div>
                 <div className="flex flex-col items-center justify-center p-[20px] text-center">
                   <h4>{item.title}</h4>
-                  <p className="mb-[18px] text-[18px]">{item.description}</p>
+                  <p className="mb-[18px] text-[18px]">{item.shortDescription}</p>
                   <Link href={`/packages/${item.slug.current}`}>
                     <Button className="rounded-none bg-black text-[24px]">
                       View Details
@@ -260,7 +260,7 @@ async function Page({ params }: any) {
                 </div>
                 <div className="flex flex-col items-center justify-center p-[20px] text-center">
                   <h4>{item.title}</h4>
-                  <p className="text-[18px] mb-[18px]">{item.description}</p>
+                  <p className="text-[18px] mb-[18px]">{item.shortDescription}</p>
                   <Link href={`/packages/${item.slug.current}`}>
                     <Button className="rounded-none bg-black text-[24px]">
                       View Details

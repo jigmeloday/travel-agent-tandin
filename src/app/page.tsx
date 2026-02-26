@@ -42,7 +42,7 @@ export default async function Home() {
       button_text, 
       button_link 
     },
-    section_5[]->{ title, description, image{ asset->{ _id, url } }, category, slug },
+    section_5[]->{ title, shortDescription, image{ asset->{ _id, url } }, category, slug },
     section_6_background_scroll{
       title, 
       description, 
@@ -247,7 +247,7 @@ export default async function Home() {
               </span>
               <h3 className='py-3'>{data.section_5[0].title}</h3>
               <span className="text-[14px] lg:text-[16px]">
-                {data.section_5[0].description}
+                {data.section_5[0].shortDescription}
               </span>
             </div>
             <Link
@@ -275,7 +275,7 @@ export default async function Home() {
                   {data.section_5[1].category}
                 </p>
                 <h3>{data.section_5[1].title}</h3>
-                <p className="text-[16px]">{data.section_5[1].description}</p>
+                <p className="text-[16px]">{data.section_5[1].shortDescription}</p>
                 <Link
                   href={`/packages/${data.section_5[1].slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
@@ -299,7 +299,7 @@ export default async function Home() {
                   {data.section_5[2].category}
                 </p>
                 <h3>{data.section_5[2].title}</h3>
-                <p className="text-[16px]">{data.section_5[2].description}</p>
+                <p className="text-[16px]">{data.section_5[2].shortDescription}</p>
                 <Link
                   href={`/packages/${data.section_5[2].slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
@@ -328,7 +328,7 @@ export default async function Home() {
                 <h3 className="text-2xl lg:text-3xl font-extrabold">
                   {data.section_5[3]?.title}
                 </h3>
-                <p className="text-[16px]">{data.section_5[3]?.description}</p>
+                <p className="text-[16px]">{data.section_5[3]?.shortDescription}</p>
                 <Link
                   href={`/packages/${data.section_5[3].slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
@@ -354,7 +354,7 @@ export default async function Home() {
                 <h3 className="leading-6 my-[12px]">
                   {data.section_5[4].title}
                 </h3>
-                <p className="text-[16px]">{data.section_5[4].description}</p>
+                <p className="text-[16px]">{data.section_5[4].shortDescription}</p>
                 <Link
                   href={`/packages/${data.section_5[4].slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"

@@ -55,7 +55,7 @@ async function Page() {
     packages[]->{
       title,
       category,
-      description,
+      shortDescription,
       slug,
       "image": image.asset->url,
     },
@@ -247,7 +247,7 @@ async function Page() {
       {/* Tours Grid */}
       <section className="px-4 md:px-8 mb-[90px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-2 w-full mb-5">
-          {data?.packages?.map(({ image, title, description, slug }: any, idx: number) => (
+          {data?.packages?.map(({ image, title, shortDescription, slug }: any, idx: number) => (
             <div
               key={idx}
               className="bg-gray-400/20 flex flex-col items-center text-center shadow-sm"
@@ -263,7 +263,7 @@ async function Page() {
               </div>
               <div className="p-4 md:p-6 flex flex-col items-center">
                 <h3 className="text-lg md:text-xl">{title}</h3>
-                <p className="text-[14px] md:text-[16px] mb-4">{description}</p>
+                <p className="text-[14px] md:text-[16px] mb-4">{shortDescription}</p>
                 <Link
                   href={`/packages/${slug.current}`}
                   className="w-[160px] bg-[#111820] text-white font-semibold py-2 md:py-3 text-center hover:bg-gray-800 transition"
