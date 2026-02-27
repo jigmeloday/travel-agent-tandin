@@ -42,7 +42,16 @@ export default async function Home() {
       button_text, 
       button_link 
     },
-    section_5[]->{ title, shortDescription, image{ asset->{ _id, url } }, category, slug },
+    relatedTreks[]->{
+  title,
+  description,
+  slug,
+  hero{
+    "imageUrl": image.asset->url,
+    title,
+    subtitle
+  }
+},
     section_6_background_scroll{
       title, 
       description, 
@@ -93,7 +102,7 @@ export default async function Home() {
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
-
+console.log(data.relatedTreks[0]);
   return (
     <main>
       <section className="h-screen w-full overflow-hidden">
@@ -233,7 +242,7 @@ export default async function Home() {
         <div className="flex flex-col lg:flex-row w-full mt-[40px] mb-2 h-max-[550px]">
           <div className="lg:flex-3">
             <Image
-              src={urlFor(data.section_5[0]?.image).url()}
+              src={urlFor(data.relatedTreks[0]?.hero?.imageUrl).url()}
               alt="img"
               height={600}
               width={600}
@@ -243,15 +252,15 @@ export default async function Home() {
           <div className="flex flex-col justify-between flex-1 px-[24px] py-[42px] text-white bg-[#111820]">
             <div className='pb-4'>
               <span className="font-extrabold text-[18px]">
-                {data.section_5[0].category}
+                {data.relatedTreks[0]?.category}
               </span>
-              <h3 className='py-3'>{data.section_5[0].title}</h3>
+              <h3 className='py-3'>{data.relatedTreks[0]?.title}</h3>
               <span className="text-[14px] lg:text-[16px]">
-                {data.section_5[0].shortDescription}
+                {data.relatedTreks[0]?.description}
               </span>
             </div>
             <Link
-              href={`/packages/${data.section_5[0].slug.current}`}
+              href={`/packages/${data.relatedTreks[0]?.slug.current}`}
               className="bg-primary w-fit px-[16px] py-[8px] cursor-pointer"
             >
               VIEW DETAILS
@@ -263,7 +272,7 @@ export default async function Home() {
             <div className="border w-full lg:flex-[1] flex flex-col">
               <div className="h-[70vh]">
                 <Image
-                  src={urlFor(data.section_5[1]?.image).url()}
+                  src={urlFor(data.relatedTreks[1]?.hero?.imageUrl).url()}
                   alt="img"
                   height={600}
                   width={600}
@@ -272,12 +281,12 @@ export default async function Home() {
               </div>
               <div className="bg-[#111820] text-white p-5 flex flex-col flex-1">
                 <p className="font-extrabold text-[18px]">
-                  {data.section_5[1].category}
+                  {data.relatedTreks[1]?.category}
                 </p>
-                <h3>{data.section_5[1].title}</h3>
-                <p className="text-[16px]">{data.section_5[1].shortDescription}</p>
+                <h3>{data.relatedTreks[1]?.title}</h3>
+                <p className="text-[16px]">{data.relatedTreks[1]?.description}</p>
                 <Link
-                  href={`/packages/${data.section_5[1].slug.current}`}
+                  href={`/packages/${data.relatedTreks[1]?.slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -287,7 +296,7 @@ export default async function Home() {
             <div className="border w-full lg:flex-[2] flex flex-col">
               <div className="h-[70vh]">
                 <Image
-                  src={urlFor(data.section_5[2]?.image).url()}
+                  src={urlFor(data.relatedTreks[2]?.hero?.imageUrl).url()}
                   alt="img"
                   height={600}
                   width={600}
@@ -296,12 +305,12 @@ export default async function Home() {
               </div>
               <div className="bg-[#111820] text-white p-5 flex flex-col flex-1">
                 <p className="font-extrabold text-[18px]">
-                  {data.section_5[2].category}
+                  {data.relatedTreks[2]?.category}
                 </p>
-                <h3>{data.section_5[2].title}</h3>
-                <p className="text-[16px]">{data.section_5[2].shortDescription}</p>
+                <h3>{data.relatedTreks[2]?.title}</h3>
+                <p className="text-[16px]">{data.relatedTreks[2]?.description}</p>
                 <Link
-                  href={`/packages/${data.section_5[2].slug.current}`}
+                  href={`/packages/${data.relatedTreks[2]?.slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -314,7 +323,7 @@ export default async function Home() {
             <div className="border w-full lg:flex-[2] flex flex-col">
               <div className="h-[70vh]">
                 <Image
-                  src={urlFor(data.section_5[3]?.image).url()}
+                  src={urlFor(data.relatedTreks[3]?.hero?.imageUrl).url()}
                   alt="img"
                   height={600}
                   width={600}
@@ -323,14 +332,14 @@ export default async function Home() {
               </div>
               <div className="bg-[#111820] text-white p-5 flex flex-col flex-1">
                 <p className="font-extrabold text-[18px]">
-                  {data.section_5[3]?.category}
+                  {data.relatedTreks[3]?.category}
                 </p>
                 <h3 className="text-2xl lg:text-3xl font-extrabold">
-                  {data.section_5[3]?.title}
+                  {data.relatedTreks[3]?.title}
                 </h3>
-                <p className="text-[16px]">{data.section_5[3]?.shortDescription}</p>
+                <p className="text-[16px]">{data.relatedTreks[3]?.description}</p>
                 <Link
-                  href={`/packages/${data.section_5[3].slug.current}`}
+                  href={`/packages/${data.relatedTreks[3]?.slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -340,7 +349,7 @@ export default async function Home() {
             <div className="border w-full lg:flex-[1] flex flex-col">
               <div className="h-[70vh]">
                 <Image
-                  src={urlFor(data.section_5[4]?.image).url()}
+                  src={urlFor(data.relatedTreks[4]?.hero?.imageUrl).url()}
                   alt="img"
                   height={500}
                   width={500}
@@ -349,14 +358,14 @@ export default async function Home() {
               </div>
               <div className="bg-[#111820] text-white p-5 flex flex-col flex-1">
                 <p className="font-extrabold text-[18px]">
-                  {data.section_5[4].category}
+                  {data.relatedTreks[4]?.category}
                 </p>
                 <h3 className="leading-6 my-[12px]">
-                  {data.section_5[4].title}
+                  {data.relatedTreks[4]?.title}
                 </h3>
-                <p className="text-[16px]">{data.section_5[4].shortDescription}</p>
+                <p className="text-[16px]">{data.relatedTreks[4]?.description}</p>
                 <Link
-                  href={`/packages/${data.section_5[4].slug.current}`}
+                  href={`/packages/${data.relatedTreks[4]?.slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
