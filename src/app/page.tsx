@@ -251,7 +251,7 @@ export default async function Home() {
               alt="img"
               height={600}
               width={600}
-              className="h-[620px] w-full object-cover"
+              className="h-[550px] w-full object-cover"
             />
           </div>
           <div className="flex flex-col justify-between flex-1 px-[24px] py-[42px] text-white bg-[#111820]">
@@ -265,7 +265,7 @@ export default async function Home() {
               </span>
             </div>
             <Link
-              href={`/packages/${data.relatedTreks[0]?.slug.current}`}
+              href={`/trekking/${data.relatedTreks[0]?.slug.current}`}
               className="bg-primary w-fit px-[16px] py-[8px] cursor-pointer"
             >
               VIEW DETAILS
@@ -291,7 +291,7 @@ export default async function Home() {
                 <h3>{data.relatedTreks[1]?.title}</h3>
                 <p className="text-[16px]">{data.relatedTreks[1]?.description}</p>
                 <Link
-                  href={`/packages/${data.relatedTreks[1]?.slug.current}`}
+                  href={`/briding/${data.relatedTreks[1]?.slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -315,7 +315,7 @@ export default async function Home() {
                 <h3>{data.relatedTreks[2]?.title}</h3>
                 <p className="text-[16px]">{data.relatedTreks[2]?.description}</p>
                 <Link
-                  href={`/packages/${data.relatedTreks[2]?.slug.current}`}
+                  href={`/briding/${data.relatedTreks[2]?.slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -344,7 +344,7 @@ export default async function Home() {
                 </h3>
                 <p className="text-[16px]">{data.relatedTreks[3]?.description}</p>
                 <Link
-                  href={`/packages/${data.relatedTreks[3]?.slug.current}`}
+                  href={`/trekking/${data.relatedTreks[3]?.slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
@@ -370,7 +370,7 @@ export default async function Home() {
                 </h3>
                 <p className="text-[16px]">{data.relatedTreks[4]?.description}</p>
                 <Link
-                  href={`/packages/${data.relatedTreks[4]?.slug.current}`}
+                  href={`/trekking/${data.relatedTreks[4]?.slug.current}`}
                   className="py-2 px-4 bg-primary mt-6 w-fit"
                 >
                   VIEW DETAILS
