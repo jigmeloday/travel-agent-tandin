@@ -35,6 +35,8 @@ export default async function Home() {
     section_21-> { title, subtitle, link, image1{ asset->{ _id, url } } },
     section_22-> { title, subtitle, link, cover{ asset->{ _id, url } } },
     section_3[]->{ title, description, image{ asset->{ _id, url } }, slug },
+    flagShipTitle,
+    flagShipdescription,
     section_4{ 
       title, 
       description, 
@@ -193,7 +195,10 @@ export default async function Home() {
       </section>
 
       <section className="flex flex-col justify-center items-center text-center mb-[90px]">
-        <h1 className="mb-8">Flagship Signature Journey</h1>
+        <h1 className="mb-8">{data.flagShipTitle}</h1>
+        <p className='mb-12 max-w-7xl text-[16px] lg:text-[18px] px-4'>
+          {data.flagShipdescription}
+        </p>
         <BestSelling data={data.section_3} />
       </section>
 
@@ -246,7 +251,7 @@ export default async function Home() {
               alt="img"
               height={600}
               width={600}
-              className="h-full w-full object-cover"
+              className="h-[620px] w-full object-cover"
             />
           </div>
           <div className="flex flex-col justify-between flex-1 px-[24px] py-[42px] text-white bg-[#111820]">
