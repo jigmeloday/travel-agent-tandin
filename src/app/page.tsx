@@ -49,7 +49,8 @@ export default async function Home() {
   description,
   slug,
   hero{
-    "imageUrl": image.asset->url,
+    "imageUrl": image2.asset->url,
+    "imageUrl1": image.asset->url,
     title,
     subtitle
   }
@@ -247,7 +248,7 @@ export default async function Home() {
         <div className="flex flex-col lg:flex-row w-full mt-[40px] mb-2 h-max-[550px]">
           <div className="lg:flex-3">
             <Image
-              src={urlFor(data.relatedTreks[0]?.hero?.imageUrl).url()}
+              src={data.relatedTreks[0]?.hero?.imageUrl ? urlFor(data.relatedTreks[0]?.hero?.imageUrl).url() : urlFor(data.relatedTreks[0]?.hero?.imageUrl1).url()}
               alt="img"
               height={600}
               width={600}
@@ -277,7 +278,7 @@ export default async function Home() {
             <div className="border w-full lg:flex-[1] flex flex-col">
               <div className="h-[70vh]">
                 <Image
-                  src={urlFor(data.relatedTreks[1]?.hero?.imageUrl).url()}
+                  src={data.relatedTreks[1]?.hero?.imageUrl ? urlFor(data.relatedTreks[1]?.hero?.imageUrl).url() : urlFor(data.relatedTreks[1]?.hero?.imageUrl1).url()}
                   alt="img"
                   height={600}
                   width={600}
@@ -301,7 +302,7 @@ export default async function Home() {
             <div className="border w-full lg:flex-[2] flex flex-col">
               <div className="h-[70vh]">
                 <Image
-                  src={urlFor(data.relatedTreks[2]?.hero?.imageUrl).url()}
+                  src={data.relatedTreks[2]?.hero?.imageUrl ? urlFor(data.relatedTreks[2]?.hero?.imageUrl).url() : urlFor(data.relatedTreks[2]?.hero?.imageUrl1).url()}
                   alt="img"
                   height={600}
                   width={600}
@@ -328,7 +329,7 @@ export default async function Home() {
             <div className="border w-full lg:flex-[2] flex flex-col">
               <div className="h-[70vh]">
                 <Image
-                  src={urlFor(data.relatedTreks[3]?.hero?.imageUrl).url()}
+                  src={data.relatedTreks[3]?.hero?.imageUrl ? urlFor(data.relatedTreks[3]?.hero?.imageUrl).url() : urlFor(data.relatedTreks[3]?.hero?.imageUrl1).url()}
                   alt="img"
                   height={600}
                   width={600}
@@ -354,7 +355,7 @@ export default async function Home() {
             <div className="border w-full lg:flex-[1] flex flex-col">
               <div className="h-[70vh]">
                 <Image
-                  src={urlFor(data.relatedTreks[4]?.hero?.imageUrl).url()}
+                  src={data.relatedTreks[4]?.hero?.imageUrl ? urlFor(data.relatedTreks[4]?.hero?.imageUrl).url() : urlFor(data.relatedTreks[4]?.hero?.imageUrl1).url()}
                   alt="img"
                   height={500}
                   width={500}
