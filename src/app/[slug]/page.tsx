@@ -234,11 +234,11 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
         <div className="border-[0.5px] border-primary h-[40px] lg:h-[80px] mt-[20px] lg:mt-[40px]" />
       </section>
       <section className="flex flex-col items-center justify-center my-[90px] lg:px-[32px] px-[16px]">
-        <h1 className="text-3xl font-bold">{data.blogTitle}</h1>
-        <p className="font-bold mt-2">{data.blogSubtitle}</p>
+        <h1 className="text-3xl font-bold">{data?.blogTitle}</h1>
+        <p className="font-bold mt-2">{data?.blogSubtitle}</p>
 
         <div className="flex scrollbar-hide scrollbar-hide::-webkit-scrollbar  w-full gap-4 mt-[40px] overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-transparent">
-          {data.blog.map(({ image, title, slug }: any, index: number) => (
+          {data?.blog?.map(({ image, title, slug }: any, index: number) => (
             <Link
               href={`/blog/${slug.current}`}
               key={index}
