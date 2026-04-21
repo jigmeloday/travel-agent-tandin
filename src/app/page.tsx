@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import BestSelling from '@/components/landing-component/best-selling';
 import HeroSwapper from '@/components/landing-component/hero-swapper';
 import SliderComponent from '@/components/landing-component/slider';
 import ImageBox from '@/components/shared/image-box';
@@ -9,99 +8,169 @@ import Link from 'next/link';
 import { client } from '@/lib/senity';
 import { urlFor } from '@/lib/senity.image';
 import * as Icons from 'lucide-react';
+import HotelSlider from '@/components/landing-component/hotel.slider';
 type IconName = keyof typeof Icons;
 
 export default async function Home() {
-  const query = `
-  *[_type == "homePage"][0]{
-    hero[]{ 
-      title, 
-      type,
-      image{
-        asset->{
-          _id,
-          url
-        }
-      },
-      video{
-        asset->{
-          _id,
-          url
-        }
+const query = `
+*[_type == "homePage"][0]{
+  hero[]{ 
+    title, 
+    type,
+    image{
+      asset->{
+        _id,
+        url
       }
     },
-    section_1{ title, description, tag_line },
-    section_2-> { title, subtitle, link, image{ asset->{ _id, url } } },
-    section_21-> { title, subtitle, link, image1{ asset->{ _id, url } } },
-    section_22-> { title, subtitle, link, cover{ asset->{ _id, url } } },
-    section_3[]->{ title, description, image{ asset->{ _id, url } }, slug },
-    flagShipTitle,
-    flagShipdescription,
-    section_4{ 
-      title, 
-      description, 
-      items[]{ title, description, icon }, 
-      button_text, 
-      button_link 
-    },
-    relatedTreks[]->{
-  title,
-  description,
-  slug,
-  hero{
-    "imageUrl": image2.asset->url,
-    "imageUrl1": image.asset->url,
+    video{
+      asset->{
+        _id,
+        url
+      }
+    }
+  },
+
+  section_1{ 
+    title, 
+    description, 
+    tag_line 
+  },
+
+  section_2-> { 
+    title, 
+    subtitle, 
+    link, 
+    image{ asset->{ _id, url } } 
+  },
+
+  section_21-> { 
+    title, 
+    subtitle, 
+    link, 
+    image1{ asset->{ _id, url } } 
+  },
+
+  section_22-> { 
+    title, 
+    subtitle, 
+    link, 
+    cover{ asset->{ _id, url } } 
+  },
+
+  hotels[]->{
     title,
-    subtitle
-  }
-},
-    section_6_background_scroll{
+    slug,
+    thumbnailImage{
+      asset->{
+        _id,
+        url
+      }
+    }
+  },
+
+  section_4{ 
+    title, 
+    description, 
+    items[]{ 
       title, 
       description, 
-      type,
-      image{
-        asset->{
-          _id,
-          url
-        }
-      },
-      video{
-        asset->{
-          _id,
-          url
-        }
-      }
-    },
-    section_slug[]->{ title, subtitle, image{ asset->{ _id, url } }, slug },
-    section_7{ title, description },
-    section_9{ 
-      title, 
-      description_1, 
-      description_2, 
-      btn, 
-      image{
-        asset->{
-          _id,
-          url
-        }
-      } 
-    },
-    section_10_slider[]{ title, subtitle, description, cta, img{ asset->{ _id, url } } },
-    blogTitle,
-    blogSubtitle,
-    blog[]->{
+      icon 
+    }, 
+    button_text, 
+    button_link 
+  },
+
+  relatedTreks[]->{
+    title,
+    description,
+    slug,
+    hero{
+      "imageUrl": image2.asset->url,
+      "imageUrl1": image.asset->url,
       title,
-      slug,
-      image{
-        asset->{
-          _id,
-          url
-        }
+      subtitle
+    }
+  },
+
+  section_6_background_scroll{
+    title, 
+    description, 
+    type,
+    image{
+      asset->{
+        _id,
+        url
       }
     },
-    section_12[]{ title, image{ asset->{ _id, url } }, links },
-    section_13{ title, description, btn_text, image{ asset->{ _id, url } } },
+    video{
+      asset->{
+        _id,
+        url
+      }
+    }
+  },
+
+  section_slug[]->{
+    title, 
+    subtitle, 
+    slug,
+    image{ asset->{ _id, url } }
+  },
+
+  section_7{ 
+    title, 
+    description 
+  },
+
+  section_9{ 
+    title, 
+    description_1, 
+    description_2, 
+    btn, 
+    image{
+      asset->{
+        _id,
+        url
+      }
+    } 
+  },
+
+  section_10_slider[]{ 
+    title, 
+    subtitle, 
+    description, 
+    cta, 
+    img{ asset->{ _id, url } } 
+  },
+
+  blogTitle,
+  blogSubtitle,
+
+  blog[]->{
+    title,
+    slug,
+    image{
+      asset->{
+        _id,
+        url
+      }
+    }
+  },
+
+  section_12[]{ 
+    title, 
+    links,
+    image{ asset->{ _id, url } } 
+  },
+
+  section_13{ 
+    title, 
+    description, 
+    btn_text, 
+    image{ asset->{ _id, url } } 
   }
+}
 `;
 
   const data = await client.fetch(query, {}, { next: { revalidate: 0 } });
@@ -131,7 +200,8 @@ export default async function Home() {
       </section>
 
       <section className="px-4 lg:px-[32px] mb-[90px]">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 lg:gap-2 gap-3 w-full mb-5">
+        <HotelSlider data={data.hotels} />
+        {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 lg:gap-2 gap-3 w-full mb-5">
           <Link
             href={'/bespoke-journey'}
             className="relative w-full aspect-square text-center overflow-hidden group cursor-pointer"
@@ -192,16 +262,16 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-        </div>
+        </div> */}
       </section>
 
-      <section className="flex flex-col justify-center items-center text-center mb-[90px]">
+      {/* <section className="flex flex-col justify-center items-center text-center mb-[90px]">
         <h1 className="mb-8">{data.flagShipTitle}</h1>
         <p className='mb-12 max-w-7xl text-[16px] lg:text-[18px] px-4'>
           {data.flagShipdescription}
         </p>
         <BestSelling data={data.section_3} />
-      </section>
+      </section> */}
 
       <section className="flex flex-col justify-center items-center text-center px-4 lg:px-[32px] scrollbar-hide mb-[90px]">
         <div className="border-[0.5px] border-primary h-[80px] mb-[40px]" />
